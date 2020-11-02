@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const ejs = require('ejs');
 dotenv.config();
-
+const users = require('./Users.json');
+const Lands = require('./Lands.json');
 const port = process.env.PORT || 5000;
 
 const Lands = require('./models/landSale');
@@ -23,17 +24,27 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-app.get("/", (req,res)=>{
+app.get("/users", (req,res)=>{
     Users.find({ })
-    .then((mock_data)=>{
-        console.log('Data', mock_data);
+    .then((users)=>{
+        console.log('Data', users);
     })
     .catch((err)=>{
         console.log('Error', err)
     });
-    res.json(mock_data);
+    res.json(users);
 });
 
+app.get("/lands",(req,res)=>{
+    Lands.find({ })
+    .then((lands)=>{
+        console.log('Lands',lands);
+    })
+    .catch((err)=>{
+        console.log('Error',err);
+    });
+    res.json(lands);
+});
 app.listen(port, ()=>{
     console.log(`Listening on port: ${port}`);
 });
