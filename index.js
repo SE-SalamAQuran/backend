@@ -6,7 +6,7 @@ const app = express();
 const ejs = require('ejs');
 dotenv.config();
 const users = require('./Users.json');
-const Lands = require('./Lands.json');
+const lands = require('./Lands.json');
 const port = process.env.PORT || 5000;
 
 const Lands = require('./models/landSale');

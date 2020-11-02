@@ -28,7 +28,6 @@ const userSchema = mongoose.Schema({
 
 const Users = mongoose.model("UserModel",userSchema);
 
-// Users.deleteMany({});
 
 
 // Users.deleteMany({} ,(err)=>{
@@ -39,16 +38,16 @@ const Users = mongoose.model("UserModel",userSchema);
 //     }
 // });
 
-mock_data.forEach(user => {
-    const newUsers = new Users(user);
-    newUsers.save((err)=>{
-        if(err){
-            console.log("Error adding documents");
-        }else{
-            console.log("Mock_data saved in DB!");
-        }
-    });    
-});
+// mock_data.forEach(user => {
+//     const newUsers = new Users(user);
+//     newUsers.save((err)=>{
+//         if(err){
+//             console.log("Error adding documents");
+//         }else{
+//             console.log("Mock_data saved in DB!");
+//         }
+//     });    
+// });
 
 
 module.exports = Users;
