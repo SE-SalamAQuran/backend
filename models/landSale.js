@@ -2,7 +2,6 @@
 const mongoose = require('mongoose');
 
 const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
-const mock_data = require('../Lands.json');
 const uri = process.env.URI;
 mongoose.connect(uri,{useNewUrlParser:true, useUnifiedTopology:true});
 
@@ -31,8 +30,11 @@ const landsForSaleSchema = new Schema({
     timestamp:{
         type: Date,
         default: Date.now()
+    },
+    added_by:{
+        type: String,
+        ref: 'Users'
     }
-    
 });
 
 const Lands = mongoose.model("Lands", landsForSaleSchema);
@@ -48,7 +50,8 @@ const Lands = mongoose.model("Lands", landsForSaleSchema);
 //     });    
 // });
 
-// Users.deleteMany({} ,(err)=>{
+
+// Lands.deleteMany({} ,(err)=>{
 //     if(err){
 //         console.log("Can't Find data");
 //     }else{
