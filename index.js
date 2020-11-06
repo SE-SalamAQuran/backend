@@ -1,24 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config({path: 'C:/Users/user/Desktop/backend/.env'});
 const bodyParser = require('body-parser');
 const app = express();
 const ejs = require('ejs');
-dotenv.config();
-
+const uri = process.env.URI;
 const port = process.env.PORT || 5000;
-
-const Lands = require('./models/landSale');
-const Users = require('./models/users');
-const ApartmentsRent = require('./models/apartmentsRent');
-const ApartmentsCash = require('./models/apartmentsCashSale');
-const ApartmentsInstallment = require('./models/apartmentsInstallments');
 
 
 app.set('view engine',ejs);
 
-
-
+const Users = require('./models/users');
+const Properties = require('./models/property');
+const propertyTypes = require('./models/propertyTypes');
+const Appointments = require('./models/appointments');
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -37,46 +32,35 @@ app.get("/users", (req,res)=>{
     
 });
 
-app.get("/lands",(req,res)=>{
-    Lands.find({ })
-    .then((lands)=>{
-        console.log('Lands',lands);
-        res.json(lands);
-    })
-    .catch((err)=>{
-        console.log('Error',err);
-    });  
-});
 
-app.get("/apartments/rent", (req,res)=>{
-    ApartmentsRent.find({ })
-    .then((apartments)=>{
-        console.log('Data',apartments);
-        res.json(apartments);
+app.get("/properties",(req,res)=>{
+    Properties.find({  })
+    .then((properties)=>{
+        console.log('Data',properties);
+        res.json(properties);
     })
     .catch((err)=>{
         console.log('Error', err);
     });
 });
 
-app.get("/apartments/cash", (req,res)=>{
-    ApartmentsCash.find({ })
-    .then((apartments)=>{
-        console.log('Data',apartments);
-        res.json(apartments);
+app.get("/appointments", (req,res)=>{
+    Appointments.find({  })
+    .then((appointments)=>{
+        console.log('Data', appointments);
+        res.json(appointments);
     })
     .catch((err)=>{
         console.log('Error',err);
     });
 });
 
-app.get("/apartments/installment", (req,res)=>{
-    ApartmentsInstallment.find({ })
-    .then((apartments)=>{
-        console.log('Data',apartments);
-        res.json(apartments);
-    })
-    .catch((err)=>{
+app.get("/property_types", (req,res)=>{
+    propertyTypes.find({  })
+    .then((propertyTypes)=>{
+        console.log('Data', propertyTypes);
+        res.json(propertyTypes);
+    }).catch((err)=>{
         console.log('Error',err);
     });
 });
