@@ -40,15 +40,6 @@ const propertyTypesSchema = new Schema({
 
 const propertyTypes = mongoose.model("propertyTypes",propertyTypesSchema);
 
-const data = [
-    {"title":"encompassing","type":"apartment-installment","is_active":false},
-
-    {"title":"Right-sized","type":"house","is_active":true},
-
-    {"title":"encryption","type":"apartment-rent","is_active":true},
-
-    {"title":"synergy","type":"roof","is_active":true}
-];
 
 // data.forEach(type =>{
 //     const newType = new propertyTypes(type);
