@@ -1,16 +1,16 @@
 const  mongoose = require('mongoose');
-const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
-const uri = process.env.URI;
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true});
+// const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
+// const uri = process.env.URI;
+// mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true});
 
 
 
-mongoose.connection.on('connected',()=>{
-    console.log("Connected to DB");
-});
-mongoose.connection.on('error', (err)=>{
-    console.log("The error is:  " + err);
-});
+// mongoose.connection.on('connected',()=>{
+//     console.log("Connected to DB");
+// });
+// mongoose.connection.on('error', (err)=>{
+//     console.log("The error is:  " + err);
+// });
 
 var Schema = mongoose.Schema;
 
@@ -21,7 +21,7 @@ const propertyTypesSchema = new Schema({
     type: {
         type: String,
         required: true,
-        enum: ['land', 'apartment-cash', 'apartment-installment', 'house' ,'villa','roof','apartment-rent']
+        enum: ['land', 'apartment-cash', 'apartment-installment', 'shop-rent','shop-sale','house' ,'villa','roof','apartment-rent']
     },
     is_active: {
         type: Boolean,

@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
-const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
-const uri = process.env.URI;
+// const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
+// const uri = process.env.URI;
 
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false, useCreateIndex: true});
+// mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false, useCreateIndex: true});
 
 
 
-mongoose.connection.on('connected',()=>{
-    console.log("Connected to DB");
-});
-mongoose.connection.on('error', (err)=>{
-    console.log("The error is:  " + err);
-});
+// mongoose.connection.on('connected',()=>{
+//     console.log("Connected to DB");
+// });
+// mongoose.connection.on('error', (err)=>{
+//     console.log("The error is:  " + err);
+// });
 
 var Schema = mongoose.Schema;
 
@@ -89,7 +89,6 @@ const propertySchema = new Schema({
 });
 
 const Properties = mongoose.model("Properties",propertySchema);
-
 
 // data.forEach(p => {
 //     const newP = new Properties(p);
