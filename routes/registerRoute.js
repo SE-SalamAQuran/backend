@@ -14,6 +14,7 @@ Router.route('/').post((req,res)=>{
     var ssn_valid = checkSsn(ssn);
     var email_valid = checkEmail(email);
     var phone_valid = checkPhone(phoneNo);
+
     if(ssn_valid && email_valid && phone_valid){
         const newUser = new Users({
             ssn,

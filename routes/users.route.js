@@ -1,9 +1,10 @@
 const router = require('express').Router();
-let Users = require('../models/users');
+const Users = require('../models/users');
+const search = require("regex-collection");
 
 
 
-router.route('/users').get((req, res) => {
+router.route('/').get((req, res) => {
   Users.find({})
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -11,22 +12,24 @@ router.route('/users').get((req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-router.route('/register').post((req, res) => {
-  const username = req.body.username;
-  const newUser = new User({username});
-//Needs updates///////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-  newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
+router.route('/register').post((req,res)=>{
+   
+        const newUser = new Users({
+            ssn: req.body.ssn,
+            fname: req.body.fname,
+            lname: req.body.lname,
+            email: req.body.email,
+            phoneNo: req.body.phoneNo,
+            password: req.body.password,
+            address: req.body.address,
+            gender: req.body.gender,
+        });
+        newUser.save()
+        .then(()=> res.json("User added!"))
+        .catch(err => res.status(400).send("Error" + err));
+     
 });
+
+
 
 module.exports = router;

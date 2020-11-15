@@ -1,22 +1,13 @@
-var mongoose = require('mongoose');
-// const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
-// const uri = process.env.URI;
-// mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology:true, useCreateIndex: true});
-
-
-// mongoose.connection.on('connected',()=>{
-//     console.log("Connected to DB");
-// });
-// mongoose.connection.on('error', (err)=>{
-//     console.log("The error is:  " + err);
-// });
+var mongoose = require("mongoose");
+const search = require("regex-collection")
 
 
 var Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     ssn: {
-        type: Number
+        type: Number,
+        required: true
     },
     fname: {
         type: String,
@@ -29,12 +20,14 @@ const userSchema = new Schema({
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        validate: search.isEmailAddress
     },
     phoneNo: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        validate: search.isTelephoneNumber
     },
     password: {
         type: String,
@@ -58,28 +51,10 @@ const userSchema = new Schema({
         type: Boolean,
         default: true
     },
-    updatedOn: {
-        type: Date,
-        default: Date.now()
-    },
-    createdOn: {
-        type: Date,
-        default: Date.now()
-    }
-});
+},{timestamps: true}
+);
 
 const Users = mongoose.model("Users",userSchema);
 
-
-// data.forEach(user => {
-//     const newUser = new Users(user);
-//     newUser.save((err)=>{
-//         if(err){
-//             console.log("Error adding data!"+ err);
-//         }else{
-//             console.log("Added users successfully");
-//         }
-//     });
-// });
 
 module.exports = Users;

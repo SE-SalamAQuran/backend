@@ -5,7 +5,8 @@ const cors = require('cors');
 const uri = process.env.URI;
 const port = process.env.PORT || 5000;
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true ,useFindAndModify: false});
+
 const connection = mongoose.connection;
 connection.once('open',()=>{
     console.log("Connected to DB!");
@@ -22,12 +23,11 @@ app.use(express.json());
 
 
 
-const loginRoute = require('./routes/loginRoute');
-const registerRoute = require('./routes/registerRoute');
 
-app.use('/login', loginRoute);
+const usersRoute = require('./routes/users.route');
 
-app.use('/register',registerRoute);
+app.use('/users',usersRoute);
+
 
 app.listen(port, ()=>{
     console.log(`Listening on port: ${port}`);
