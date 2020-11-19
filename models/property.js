@@ -1,17 +1,5 @@
 var mongoose = require('mongoose');
-// const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
-// const uri = process.env.URI;
 
-// mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false, useCreateIndex: true});
-
-
-
-// mongoose.connection.on('connected',()=>{
-//     console.log("Connected to DB");
-// });
-// mongoose.connection.on('error', (err)=>{
-//     console.log("The error is:  " + err);
-// });
 
 var Schema = mongoose.Schema;
 
@@ -78,35 +66,10 @@ const propertySchema = new Schema({
     imgPath: {
         type: String
     },
-    updatedOn: {
-        type: Date,
-        default: Date.now()
-    },
-    createdOn: {
-        type: Date,
-        default: Date.now()
-    }
-});
+},{timestamps: true}
+);
 
 const Properties = mongoose.model("Properties",propertySchema);
 
-// data.forEach(p => {
-//     const newP = new Properties(p);
-//     newP.save((err)=>{
-//         if(err){
-//             console.log("Error adding data" +err);
-//         }else{
-//             console.log("Data added successfully");
-//         }
-//     }); 
-// });
-
-// Properties.deleteMany({} ,(err)=>{
-//     if(err){
-//         console.log("Can't Find data");
-//     }else{
-//         console.log("Deleted data successfully!");
-//     }
-// });
 
 module.exports =  Properties;

@@ -1,16 +1,6 @@
 const { time } = require("faker");
 const mongoose = require("mongoose");
-// const dotenv = require('dotenv').config({ path: 'C:/Users/user/Desktop/backend/.env' });
-// const uri = process.env.URI;
-// mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology:true, useFindAndModify: false,useCreateIndex: true});
 
-
-// mongoose.connection.on('connected',()=>{
-//     console.log("Connected to DB");
-// });
-// mongoose.connection.on('error', (err)=>{
-//     console.log("The error is:  " + err);
-// });
 
 const Schema = mongoose.Schema;
 
@@ -36,14 +26,9 @@ const appointmentsSchema = new Schema({
     place:{
         type: String
     },
-    updatedOn: {
-        type: Date,
-        default: Date.now()
-    },
-    createdOn: {
-        type: Date
-    }
-});
+
+},{timestamps: true}
+);
 
 const Appointments = mongoose.model("Appointments",appointmentsSchema);
 

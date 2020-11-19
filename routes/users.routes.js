@@ -32,4 +32,40 @@ router.route('/register').post((req,res)=>{
 
 
 
+
+router.route('/login').post((req,res)=>{
+ const email = req.body.username;
+ const password = req.body.password;
+Users.findOne({email: email},(err,user)=>{
+   if(err) {
+     console.log(err);
+   }else{
+     if(user){
+       if(user.password === password){
+         res.json(user);
+         console.log(user);
+       }else{
+         res.send("Wrong password");
+       }
+     }
+   }
+  });
+});
+
+
+  // Users.findOne({email: email, password: password},(userFound,err)=>{
+  //   if(err){
+  //     console.log(err);
+  //   }else{
+  //     if(userFound.password === password){
+  //       res.sendStatus(200).send("User logged in !");
+  //       userFound.is_active = true;
+  //     }else{
+  //       console.log("Incorrect password",err);
+  //     }
+  //   }
+  // });
+// });
+
+
 module.exports = router;
