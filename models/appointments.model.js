@@ -21,7 +21,6 @@ const appointmentsSchema = new Schema({
     },
     time: {
         type: String,
-        
     },
     place:{
         type: String
