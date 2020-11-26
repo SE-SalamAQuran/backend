@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Users = require('../models/users');
+const Users = require('../models/users.model');
 const search = require("regex-collection");
 
 
@@ -15,7 +15,6 @@ router.route('/').get((req, res) => {
 router.route('/register').post((req,res)=>{
    
         const newUser = new Users({
-            ssn: req.body.ssn,
             fname: req.body.fname,
             lname: req.body.lname,
             email: req.body.email,
@@ -53,19 +52,7 @@ Users.findOne({email: email},(err,user)=>{
 });
 
 
-  // Users.findOne({email: email, password: password},(userFound,err)=>{
-  //   if(err){
-  //     console.log(err);
-  //   }else{
-  //     if(userFound.password === password){
-  //       res.sendStatus(200).send("User logged in !");
-  //       userFound.is_active = true;
-  //     }else{
-  //       console.log("Incorrect password",err);
-  //     }
-  //   }
-  // });
-// });
+
 
 
 module.exports = router;

@@ -22,7 +22,6 @@ const userSchema = new Schema({
     },
     phoneNo: {
         type: String,
-        unique: true,
         required: true,
         validate: search.isTelephoneNumber
     },
@@ -47,6 +46,10 @@ const userSchema = new Schema({
     is_active: {
         type: Boolean,
         default: true
+    },
+    profile:{
+        type: String,
+        default: "C:/Users/user/Desktop/Pal Estate/backend/profile.png"
     },
 },{timestamps: true}
 );
