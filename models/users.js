@@ -5,10 +5,7 @@ const search = require("regex-collection")
 var Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    ssn: {
-        type: Number,
-        required: true
-    },
+   
     fname: {
         type: String,
         required: true

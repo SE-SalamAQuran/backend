@@ -20,8 +20,8 @@ const propertySchema = new Schema({
         trim: true
     },
     type: {
-        type: Schema.Types.ObjectId,
-        ref: 'propertyTypes'
+        type: String,
+        enum: ['land', 'apartment-cash', 'apartment-installment', 'shop-rent','shop-sale','house' ,'villa','roof','apartment-rent']
     },
     
     city: {
