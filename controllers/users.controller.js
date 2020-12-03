@@ -32,6 +32,6 @@ module.exports = {
                 }
             }
         });
-    } 
+    } , //Add your new code here
 };
     
