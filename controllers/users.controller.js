@@ -1,39 +1,65 @@
 const Users = require("../models/users.model");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+const passport = require("passport");
+const session = require("express-session");
+
+passport.initialize();
+passport.session();
+passport.use(Users.createStrategy());
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
 
 module.exports = {
   addNewUser: (req, res) => {
-    bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-      const newUser = new Users({
+    Users.register(
+      {
         fname: req.body.fname,
         lname: req.body.lname,
-        email: req.body.email,
+        username: req.body.username,
         phoneNo: req.body.phoneNo,
-        password: hash,
+        password: req.body.password,
         address: req.body.address,
         gender: req.body.gender,
-      });
-      newUser
-        .save()
-        .then(() => res.json("User added!"))
-        .catch((error) => res.status(400).send("Error" + error));
-    });
-  },
-  userLogin: (req, res) => {
-    const email = req.body.username;
-    const password = req.body.password;
-    Users.findOne({ email: email }, (err, user) => {
-      if (err) {
-        console.log(err);
-      } else {
-        if (user.password === password) {
-          res.json(user);
-          console.log(user.fname + " " + user.lname + " " + "Is logged in.");
+      },
+      req.body.password,
+      (err, user) => {
+        if (err) {
+          res.status(400).send(err);
         } else {
-          res.send("Wrong password");
+          passport.authenticate("local")(inReq, inRes, () => {
+            res.status(200).send(user);
+          });
         }
       }
+    );
+  },
+  userLogin: async (req, res) => {
+    const user = new Users({
+      username: req.body.email,
+      password: req.body.password,
+    });
+    req.login(user, function (err) {
+      if (err) {
+        res.status(400).send(err);
+      }
+      passport.initialize();
+      passport.session();
+      passport.authenticate(
+        { username: user.username },
+        user.password,
+        (error, result) => {
+          if (error) {
+            res.status(400).send(error);
+          } else {
+            res.status(200).send(result);
+          }
+        }
+      );
+      res.status(200).send(user);
     });
   }, //Add your new code here
+
+  logout: (req, res) => {
+    req.logout();
+    res.json("");
+  },
 };

@@ -1,12 +1,9 @@
-const router = require('express').Router({mergeParams: true});
+const router = require("express").Router({ mergeParams: true });
 
-var userController = require('../controllers/users.controller');
+var userController = require("../controllers/users.controller");
 
-
-
-router.post('/login', userController.userLogin);
-
-router.post('/register',userController.addNewUser);
-
+router.post("/login", userController.userLogin);
+router.post("/logout", userController.logout);
+router.post("/register", userController.addNewUser);
 
 module.exports = router;

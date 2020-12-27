@@ -1,6 +1,8 @@
 var mongoose = require("mongoose");
 const search = require("regex-collection");
-var encrypt = require("mongoose-encryption");
+const passportLocal = require("passport-local-mongoose");
+const passport = require("passport");
+const session = require("express-session");
 const dotenv = require("dotenv").config({
   path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
 });
@@ -18,7 +20,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    email: {
+    username: {
       type: String,
       unique: true,
       required: true,
@@ -58,6 +60,14 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
+passport.initialize();
+passport.session();
+
+userSchema.plugin(passportLocal);
 const Users = mongoose.model("Users", userSchema);
+
+passport.use(Users.createStrategy());
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
 
 module.exports = Users;

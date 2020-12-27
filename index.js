@@ -6,8 +6,23 @@ const dotenv = require("dotenv").config({
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const session = require("express-session");
+const passport = require("passport");
+
 const uri = process.env.URI;
 const port = process.env.PORT || 5000;
+const app = express();
+
+app.use(
+  session({
+    secret: process.env.PASSPORT_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -21,8 +36,6 @@ connection.once("open", () => {
   console.log("Connected to DB!");
 });
 
-const app = express();
-
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +44,7 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 const usersRoute = require("./routes/users.routes");
+const { initialize } = require("passport");
 
 app.use("/users", usersRoute);
 
