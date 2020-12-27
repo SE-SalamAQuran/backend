@@ -6,6 +6,7 @@ const session = require("express-session");
 const dotenv = require("dotenv").config({
   path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
 });
+
 const secret = process.env.ENCRYPT_SECRET;
 
 var Schema = mongoose.Schema;
