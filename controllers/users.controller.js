@@ -76,7 +76,7 @@ module.exports = {
         if (err) {
           res.status(400).send(err);
         } else {
-          passport.authenticate("local")(inReq, inRes, () => {
+          passport.authenticate("local")(req, res, () => {
             res.status(200).send(user);
           });
         }

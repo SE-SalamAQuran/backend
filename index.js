@@ -49,6 +49,7 @@ const usersRoute = require("./routes/users.routes");
 const { initialize } = require("passport");
 
 app.use("/users", usersRoute);
+
 app.get("/", (req, res) => {
   res.send("Success");
 });
