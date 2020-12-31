@@ -53,6 +53,12 @@ app.use("/users", usersRoute);
 app.get("/", (req, res) => {
   res.send("Success");
 });
+
+app.post("/logout", (req, res) => {
+  req.session.destroy();
+  res.status(200).send("User logged out");
+});
+
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });
