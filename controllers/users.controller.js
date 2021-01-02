@@ -1,5 +1,6 @@
 const Users = require("../models/users.model");
 const passport = require("passport");
+const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;

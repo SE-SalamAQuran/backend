@@ -55,6 +55,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
+  req.user = false;
   req.session.destroy();
   res.status(200).send("User logged out");
 });
