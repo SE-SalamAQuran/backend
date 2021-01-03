@@ -1,27 +1,16 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv").config({
-  path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
-});
-const cors = require("cors");
+const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv').config({path: 'C:/Users/ELIFE/Desktop/backend/.env'});
+const cors = require('cors');
+const uri = process.env.URI;
+const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
-
-const uri = process.env.URI;
-const port = process.env.PORT || 5000;
 const app = express();
-
-app.use(
-  session({
-    secret: process.env.PASSPORT_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -6,59 +6,8 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 
 const dotenv = require("dotenv").config({
-  path: "C:/Users/user/Desktop/Pal Estate/backend.env",
+  path: "C:/Users/ELIFE/Desktop/backend/.env",
 });
-
-passport.initialize();
-passport.session();
-passport.use(Users.createStrategy());
-passport.serializeUser(Users.serializeUser());
-passport.deserializeUser(Users.deserializeUser());
-
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-  done(null, obj);
-});
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/users/auth/google/PalestinianEstate",
-      userProfileURL: "http://www.googleapis.com/auth/plus.login",
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      Users.findOrCreate({ googleId: _id }, function (err, user) {
-        return cb(err, user);
-      });
-    }
-  )
-);
-
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-      profileFields: ["email", "name"],
-    },
-    function (accessToken, refreshToken, profile, done) {
-      const { email, first_name, last_name } = profile._json;
-      const userData = {
-        email,
-        firstName: first_name,
-        lastName: last_name,
-      };
-      new userModel(userData).save();
-      done(null, profile);
-    }
-  )
-);
 
 module.exports = {
   addNewUser: (req, res) => {
@@ -110,9 +59,62 @@ module.exports = {
     });
   }, //Add your new code here
 
+  fetcheUserData : (req, res) => {
+
+    const id = req.params.id;
+    Users.findOne({_id: id}, (err,result)=>{
+      if(err){
+        res.sendStatus(400).send("Error", err);
+      }else{
+        res.json(result);
+      }
+    })
+  } ,
+  updateUserData : (req, res) => {
+    console.log(req.params.id);
+    const id = req.params.id
+     console.log(id);
+    Users.findOneAndUpdate(
+       {_id:id},
+        {
+         $set: {
+          fname: req.body.fname,
+          lname: req.body.lname,
+          address: req.body.address,
+          phoneNo: req.body.phoneNumber,
+         
+         } }
+         ,(err, docs)=>{
+ 
+      if(err) res.json(err);
+        else
+        { 
+        console.log("updating done ");
+      }
+      });
+
+
+  },
+
   logout: (req, res) => {
     req.logout();
     req.session.destroy();
-    res.json("");
+    const id = req.params.id
+      console.log(id);
+     Users.findOneAndUpdate(
+        {_id:id},
+         {
+          $set: {
+            is_active: false
+          
+          } }
+          ,(err)=>{
+  
+       if(err) res.json(err);
+         else
+         { 
+         console.log("you are logged out ");
+       }
+       });
   },
 };
