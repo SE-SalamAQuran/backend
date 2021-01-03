@@ -63,6 +63,7 @@ export default function Register() {
     address: "",
     gender: "",
   });
+
   const classes = useStyles();
 
   function handleChange(event) {

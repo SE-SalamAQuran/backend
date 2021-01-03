@@ -6,7 +6,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 
 const dotenv = require("dotenv").config({
-  path: "C:/Users/ELIFE/Desktop/backend/.env",
+  path: "C:Users/user/Desktop/Pal Estate/backend/.env",
 });
 
 module.exports = {
@@ -25,6 +25,7 @@ module.exports = {
       (err, user) => {
         if (err) {
           res.status(400).send(err);
+          console.log(err);
         } else {
           passport.authenticate("local")(req, res, () => {
             res.status(200).send(user);
@@ -59,62 +60,57 @@ module.exports = {
     });
   }, //Add your new code here
 
-  fetcheUserData : (req, res) => {
-
+  fetcheUserData: (req, res) => {
     const id = req.params.id;
-    Users.findOne({_id: id}, (err,result)=>{
-      if(err){
+    Users.findOne({ _id: id }, (err, result) => {
+      if (err) {
         res.sendStatus(400).send("Error", err);
-      }else{
+      } else {
         res.json(result);
       }
-    })
-  } ,
-  updateUserData : (req, res) => {
+    });
+  },
+  updateUserData: (req, res) => {
     console.log(req.params.id);
-    const id = req.params.id
-     console.log(id);
+    const id = req.params.id;
+    console.log(id);
     Users.findOneAndUpdate(
-       {_id:id},
-        {
-         $set: {
+      { _id: id },
+      {
+        $set: {
           fname: req.body.fname,
           lname: req.body.lname,
           address: req.body.address,
           phoneNo: req.body.phoneNumber,
-         
-         } }
-         ,(err, docs)=>{
- 
-      if(err) res.json(err);
-        else
-        { 
-        console.log("updating done ");
+        },
+      },
+      (err, docs) => {
+        if (err) res.json(err);
+        else {
+          console.log("updating done ");
+        }
       }
-      });
-
-
+    );
   },
 
   logout: (req, res) => {
     req.logout();
     req.session.destroy();
-    const id = req.params.id
-      console.log(id);
-     Users.findOneAndUpdate(
-        {_id:id},
-         {
-          $set: {
-            is_active: false
-          
-          } }
-          ,(err)=>{
-  
-       if(err) res.json(err);
-         else
-         { 
-         console.log("you are logged out ");
-       }
-       });
+    const id = req.params.id;
+    console.log(id);
+    Users.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          is_active: false,
+        },
+      },
+      (err) => {
+        if (err) res.json(err);
+        else {
+          console.log("you are logged out ");
+        }
+      }
+    );
   },
 };

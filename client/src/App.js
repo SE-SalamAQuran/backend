@@ -4,7 +4,7 @@ import GridList from "./GridList";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Main from "./components/Main";
-import ProfilePage from "./components/profile";
+import ProfilePage from "./components/Profile";
 import uploadImage from "./components/UploadProfilePic";
 function App() {
   return (
@@ -13,7 +13,8 @@ function App() {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/test" component={GridList} />
-      <Route path="/Profile" component={ProfilePage} />
+      <Route path="/Profile" exact component={ProfilePage} />
+      <Route path="/Profile/update" component={uploadImage} />
     </Router>
   );
 }
