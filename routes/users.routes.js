@@ -7,7 +7,7 @@ var userController = require("../controllers/users.controller");
 router.put("/update/:id", userController.updateUserData);
 router.get("/user/:id", userController.fetcheUserData);
 router.post("/login", userController.userLogin);
-router.post("/logOut/:id", userController.logout);
+router.post("/logout/:id", userController.logout);
 router.post("/register", userController.addNewUser);
 
 module.exports = router;

@@ -95,8 +95,8 @@ module.exports = {
 
   logout: (req, res) => {
     req.logout();
-    req.session.destroy();
     const id = req.params.id;
+
     console.log(id);
     Users.findOneAndUpdate(
       { _id: id },
