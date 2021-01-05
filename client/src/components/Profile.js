@@ -20,11 +20,13 @@ function Copyright() {
   );
 }
 
+const token = localStorage.getItem("token");
+
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: "5fec61d7ecf9ad1c6c7ae9ed",
+      user_id: "",
       fname: "",
       lname: "",
       email: "",
