@@ -10,12 +10,15 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
+const cookieParser = require("cookie-parser");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const app = express();
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(cookieParser());
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
