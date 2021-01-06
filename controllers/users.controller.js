@@ -3,9 +3,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const dotenv = require("dotenv").config({
-  path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
-});
+const dotenv = require("dotenv").config();
 
 const secretKey = process.env.JWT_SECRET;
 

@@ -1,7 +1,5 @@
 const router = require("express").Router({ mergeParams: true });
-let dotenv = require("dotenv").config({
-  path: "C:Users/user/Desktop/Pal Estate/backend/.env",
-});
+
 const passport = require("passport");
 var userController = require("../controllers/users.controller");
 
