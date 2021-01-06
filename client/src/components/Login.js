@@ -51,21 +51,21 @@ const useStyles = makeStyles((theme) => ({
 export default function LogIn() {
   const classes = useStyles();
   const [state, setState] = useState({
-    email: "",
+    emailPhone: "",
     password: "",
   });
 
   function handleChange(event) {
     const { name, value } = event.target;
     setState((prev) => {
-      if (name === "username") {
+      if (name === "emailPhone") {
         return {
-          email: value,
+          emailPhone: value,
           password: prev.password,
         };
       } else if (name === "password") {
         return {
-          email: prev.email,
+          emailPhone: prev.emailPhone,
           password: value,
         };
       }
@@ -75,13 +75,13 @@ export default function LogIn() {
   function handleSubmit(event) {
     event.preventDefault();
     const user = {
-      email: state.email,
+      emailPhone: state.emailPhone,
       password: state.password,
     };
     axios
       .post("http://localhost:5000/users/login", user)
       .then((res) => {
-        window.location = "/";
+        window.location = "/Home";
         console.log("User ", user + "is logged in!");
         res.status(200);
       })
@@ -107,9 +107,9 @@ export default function LogIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="username"
+            name="emailPhone"
             onChange={handleChange}
-            value={state.username}
+            value={state.emailPhone}
             autoComplete="email"
             autoFocus
           />

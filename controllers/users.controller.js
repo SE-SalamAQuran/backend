@@ -1,64 +1,80 @@
 const Users = require("../models/users.model");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const session = require("express-session");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const FacebookStrategy = require("passport-facebook").Strategy;
+const jwt = require("jsonwebtoken");
 
 const dotenv = require("dotenv").config({
+<<<<<<< HEAD
   path: "C:/Users/ELIFE/Desktop/backend/.env",
+=======
+  path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
+>>>>>>> 1b633f0474a1f21afbf746edda7b062a5f10b725
 });
 
+const secretKey = process.env.JWT_SECRET;
+
 module.exports = {
-  addNewUser: (req, res) => {
-    Users.register(
-      {
-        fname: req.body.fname,
-        lname: req.body.lname,
-        username: req.body.username,
-        phoneNo: req.body.phoneNo,
-        password: req.body.password,
-        address: req.body.address,
-        gender: req.body.gender,
-      },
-      req.body.password,
-      (err, user) => {
-        if (err) {
-          res.status(400).send(err);
-          console.log(err);
-        } else {
-          passport.authenticate("local")(req, res, () => {
-            res.status(200).send(user);
-          });
-        }
-      }
-    );
-  },
-  userLogin: async (req, res) => {
-    const user = new Users({
-      username: req.body.email,
-      password: req.body.password,
-    });
-    req.login(user, function (err) {
+  registerNewUser: async (req, res) => {
+    bcrypt.hash(req.body.password, 10, async (err, hash) => {
       if (err) {
         res.status(400).send(err);
+      } else {
+        const newUser = new Users({
+          fname: req.body.fname,
+          lname: req.body.lname,
+          phoneNo: req.body.phoneNo,
+          username: req.body.username,
+          password: hash,
+          address: req.body.address,
+          gender: req.body.gender,
+        });
+
+        await newUser
+          .save()
+          .then(() => res.json(newUser))
+          .catch((error) => res.status(400).send(error));
       }
-      passport.initialize();
-      passport.session();
-      passport.authenticate(
-        { username: user.username },
-        user.password,
-        (error, result) => {
-          if (error) {
-            res.status(400).send(error);
-          } else {
-            res.status(200).send(result);
-          }
-        }
-      );
-      res.status(200).send(user);
     });
-  }, //Add your new code here
+  },
+
+  userLogin: (req, res) => {
+    var loginType;
+    if (req.body.emailPhone != "" && req.body.password != "") {
+      if (isNaN(req.body.emailPhone)) loginType = "username";
+      else loginType = "phoneNo";
+      Users.findOne()
+        .where(loginType, req.body.emailPhone)
+        .exec((err, data) => {
+          if (err) res.status(400).send(err);
+          //check if user exists
+          else if (data) {
+            bcrypt.compare(
+              //check if password correct
+              req.body.password,
+              data.password,
+              function (error, passMatch) {
+                if (error) res.status(400).send(error);
+                else if (passMatch) {
+                  let jwtData = {
+                    _id: data["_id"],
+                    fname: data["fname"],
+                    lname: data["lname"],
+                    username: data["username"],
+                    isAdmin: data["isAdmin"],
+                  };
+                  var token = jwt.sign({ user: jwtData }, secretKey);
+                  res
+                    .status(200)
+                    .json({ message: "Login Successful", token: token });
+                } else {
+                  res.status(401).json({ message: "Invalid Credentials1" });
+                }
+              }
+            );
+          } else res.status(401).json({ message: "Invalid Credentials2" });
+        });
+    } else res.status(400).json({ message: "Provide all Credentials" });
+  },
 
   fetcheUserData: (req, res) => {
     const id = req.params.id;
@@ -84,7 +100,7 @@ module.exports = {
           phoneNo: req.body.phoneNumber,
         },
       },
-      (err, docs) => {
+      (err) => {
         if (err) res.json(err);
         else {
           console.log("updating done ");
@@ -94,8 +110,13 @@ module.exports = {
   },
 
   logout: (req, res) => {
+<<<<<<< HEAD
     
+=======
+    req.logout();
+>>>>>>> 1b633f0474a1f21afbf746edda7b062a5f10b725
     const id = req.params.id;
+
     console.log(id);
     Users.findOneAndUpdate(
       { _id: id },
