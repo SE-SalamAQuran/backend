@@ -4,7 +4,7 @@ const passportLocal = require("passport-local-mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const dotenv = require("dotenv").config({
-  path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
+  path: "C:/Users/ELIFE/Desktop/backend/.env",
 });
 
 const secret = process.env.ENCRYPT_SECRET;

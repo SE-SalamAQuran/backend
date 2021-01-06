@@ -6,7 +6,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 
 const dotenv = require("dotenv").config({
-  path: "C:Users/user/Desktop/Pal Estate/backend/.env",
+  path: "C:/Users/ELIFE/Desktop/backend/.env",
 });
 
 module.exports = {
@@ -94,8 +94,7 @@ module.exports = {
   },
 
   logout: (req, res) => {
-    req.logout();
-    req.session.destroy();
+    
     const id = req.params.id;
     console.log(id);
     Users.findOneAndUpdate(

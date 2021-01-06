@@ -26,7 +26,7 @@ class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: "5fbd4a8096d6e639d044c02b" ,
+      user_id: "5fec61d7ecf9ad1c6c7ae9ed" ,
       fname : "" ,
       lname: "" , 
       email:"",
@@ -37,8 +37,7 @@ class ProfilePage extends React.Component {
       userName :" ",
       isActive: false ,
       isActiveEditProfileInformation: false ,
-      profileImage: null ,
-      profileImagem: " "
+      profileImagem: ""
     };
         this.onSaveEditInformation=this.onSaveEditInformation.bind(this);
   }
@@ -186,8 +185,8 @@ componentDidMount(){
   render() {
 
     if(this.state.profileImage){
-      var imagestr=this.state.profileImage;
-      var profilePic=pic;
+      
+      var profilePic=pic ;
   }else{
        profilePic= pic;
   }

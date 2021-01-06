@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config({
-  path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
+  path: "C:/Users/ELIFE/Desktop/backend/.env",
 });
 const cors = require("cors");
 const uri = process.env.URI;
@@ -45,11 +45,6 @@ app.get("/", (req, res) => {
   res.send("Success");
 });
 
-app.post("/logout", (req, res) => {
-  req.user = false;
-  req.session.destroy();
-  res.status(200).send("User logged out");
-});
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
