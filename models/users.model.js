@@ -1,60 +1,73 @@
 var mongoose = require("mongoose");
-const search = require("regex-collection")
+const search = require("regex-collection");
+const passportLocal = require("passport-local-mongoose");
+const passport = require("passport");
+const session = require("express-session");
+const dotenv = require("dotenv").config();
 
+const secret = process.env.ENCRYPT_SECRET;
 
 var Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-   
+const userSchema = new Schema(
+  {
     fname: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     lname: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        validate: search.isEmailAddress
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      validate: search.isEmailAddress,
     },
     phoneNo: {
-        type: String,
-        required: true,
-        validate: search.isTelephoneNumber
+      type: String,
+      required: true,
+      unique: true,
+      validate: search.isTelephoneNumber,
     },
     password: {
-        type: String,
-        required: true,
-        
+      type: String,
+      required: true,
     },
     address: {
-        type: String,
-        trim: true,
-        required:true
+      type: String,
+      trim: true,
+      required: true,
     },
     gender: {
-        type:String,
-        enum: ['Male','Female'],
+      type: String,
+      enum: ["Male", "Female"],
     },
     isAdmin: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     is_active: {
-        type: Boolean,
-        default: true
+      type: Boolean,
+      default: true,
     },
-    profile:{
-        type: String,
-        default: "C:/Users/user/Desktop/Pal Estate/backend/profile.png"
+    profile: {
+      type: String,
+      default: "C:/Users/user/Desktop/Pal Estate/backend/profile.png",
     },
-},{timestamps: true}
+  },
+  { timestamps: true }
 );
 
-const Users = mongoose.model("Users",userSchema);
+passport.initialize();
+passport.session();
 
+userSchema.plugin(passportLocal);
+const Users = mongoose.model("Users", userSchema);
+
+passport.use(Users.createStrategy());
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
 
 module.exports = Users;
