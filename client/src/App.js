@@ -7,6 +7,7 @@ import Main from "./components/Main";
 import ProfilePage from "./components/Profile";
 // import uploadImage from "./components/UploadProfilePic";
 import Welcome from "./components/Welcome";
+import Lands from "./components/Lands";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/profile" exact component={ProfilePage} />
       {/* <Route path="/profile/update" component={uploadImage} /> */}
       <Route path="/home" component={Welcome} />
+      <Route path="/main" component={Lands}></Route>
     </Router>
   );
 }

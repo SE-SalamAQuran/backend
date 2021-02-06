@@ -1,7 +1,7 @@
-import React, { PropTypes } from "react";
+import React from "react";
 import pic from "../images/ppic.jpg";
-import pic1 from "../images/seaside.jpg";
-import Button from "@material-ui/core/Button";
+// import pic1 from "../images/seaside.jpg";
+// import Button from "@material-ui/core/Button";
 import GridList from "../GridList";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
@@ -20,7 +20,7 @@ function Copyright() {
   );
 }
 
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);

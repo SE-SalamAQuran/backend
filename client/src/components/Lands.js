@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "./AppBar";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "./card";
+import GridList from "../GridList";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredGrid() {
+export default function Lands() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Navbar></Navbar>
-      <Card></Card>
+      <GridList></GridList>
     </div>
   );
 }
