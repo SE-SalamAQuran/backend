@@ -1,7 +1,5 @@
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv").config({
-  path: "C:Users/user/Desktop/Pal Estate/backend/.env",
-});
+const dotenv = require("dotenv").config();
 
 var secretKey = process.env.JWT_SECRET;
 

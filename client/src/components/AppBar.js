@@ -67,7 +67,7 @@ export default function MenuAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Photos
+            Palestinian Estate
           </Typography>
           {auth && (
             <div>
@@ -99,7 +99,9 @@ export default function MenuAppBar() {
                   {" "}
                   <a href="http://localhost:3000/profile">Profile</a>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <a href="http://localhost:3000/profile/">My account</a>
+                </MenuItem>
               </Menu>
             </div>
           )}
