@@ -1,8 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv").config({
-  path: "C:/Users/ELIFE/Desktop/backend/.env",
-});
+const dotenv = require("dotenv").config();
 const cors = require("cors");
 const uri = process.env.URI;
 const port = process.env.PORT || 5000;
@@ -48,10 +46,6 @@ app.get("/", (req, res) => {
   res.send("Success");
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 1b633f0474a1f21afbf746edda7b062a5f10b725
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });

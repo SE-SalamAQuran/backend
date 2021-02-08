@@ -2,15 +2,7 @@ const Users = require("../models/users.model");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-const dotenv = require("dotenv").config({
-<<<<<<< HEAD
-  path: "C:/Users/ELIFE/Desktop/backend/.env",
-=======
-  path: "C:/Users/user/Desktop/Pal Estate/backend/.env",
->>>>>>> 1b633f0474a1f21afbf746edda7b062a5f10b725
-});
-
+const dotenv = require("dotenv").config();
 const secretKey = process.env.JWT_SECRET;
 
 module.exports = {
@@ -110,11 +102,7 @@ module.exports = {
   },
 
   logout: (req, res) => {
-<<<<<<< HEAD
-    
-=======
     req.logout();
->>>>>>> 1b633f0474a1f21afbf746edda7b062a5f10b725
     const id = req.params.id;
 
     console.log(id);

@@ -3,9 +3,7 @@ const search = require("regex-collection");
 const passportLocal = require("passport-local-mongoose");
 const passport = require("passport");
 const session = require("express-session");
-const dotenv = require("dotenv").config({
-  path: "C:/Users/ELIFE/Desktop/backend/.env",
-});
+const dotenv = require("dotenv").config();
 
 const secret = process.env.ENCRYPT_SECRET;
 

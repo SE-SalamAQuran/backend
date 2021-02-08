@@ -26,8 +26,7 @@ class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-<<<<<<< HEAD
-      user_id: "5fec61d7ecf9ad1c6c7ae9ed" ,
+      user_id: "" ,
       fname : "" ,
       lname: "" , 
       email:"",
@@ -39,21 +38,6 @@ class ProfilePage extends React.Component {
       isActive: false ,
       isActiveEditProfileInformation: false ,
       profileImagem: ""
-=======
-      user_id: "",
-      fname: "",
-      lname: "",
-      email: "",
-      gender: "",
-      PhoneNumber: "",
-      address: "",
-      Password: "",
-      userName: " ",
-      isActive: false,
-      isActiveEditProfileInformation: false,
-      profileImage: null,
-      profileImagem: " ",
->>>>>>> 1b633f0474a1f21afbf746edda7b062a5f10b725
     };
     this.onSaveEditInformation = this.onSaveEditInformation.bind(this);
   }
@@ -193,7 +177,6 @@ class ProfilePage extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
 
     if(this.state.profileImage){
       
@@ -201,14 +184,6 @@ class ProfilePage extends React.Component {
   }else{
        profilePic= pic;
   }
-=======
-    if (this.state.profileImage) {
-      var imagestr = this.state.profileImage;
-      var profilePic = pic;
-    } else {
-      profilePic = pic;
-    }
->>>>>>> 1b633f0474a1f21afbf746edda7b062a5f10b725
 
     function sayHello() {
       alert("You want to edit profile picture");
