@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
+import jwt from "jwt-decode";
 
 function Copyright() {
   return (
@@ -74,16 +75,18 @@ export default function LogIn() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const user = {
+    const cred = {
       emailPhone: state.emailPhone,
       password: state.password,
     };
     axios
-      .post("http://localhost:5000/users/login", user)
+      .post("http://localhost:5000/users/login", cred)
       .then((res) => {
-        window.location = "/Home";
-        console.log("User ", user + "is logged in!");
-        res.status(200);
+        window.location = "/home";
+        const token = res.data.token;
+        sessionStorage.setItem("token", token);
+        let thisUser = res.data.decoded;
+        sessionStorage.setItem("user", JSON.stringify(thisUser));
       })
       .catch((err) => console.error("Error logging in!", err));
   }

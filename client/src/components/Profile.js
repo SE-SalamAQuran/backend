@@ -2,9 +2,11 @@ import React from "react";
 import pic from "../images/ppic.jpg";
 // import pic1 from "../images/seaside.jpg";
 // import Button from "@material-ui/core/Button";
+import jwt from "jwt-decode";
 import GridList from "../GridList";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
+import jwtDecode from "jwt-decode";
 const axios = require("axios");
 
 function Copyright() {
@@ -20,12 +22,13 @@ function Copyright() {
   );
 }
 
-// const token = localStorage.getItem("token");
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
+    var user = JSON.parse(sessionStorage.getItem("user"));
+    console.log(user);
     this.state = {
-      user_id: "5fec614e7fa1832f3c40eaf1",
+      user_id: user._id,
       fname: "",
       lname: "",
       email: "",
@@ -117,12 +120,8 @@ class ProfilePage extends React.Component {
 
   logOut = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/users/logout/" + this.state.user_id)
-      .then((res) => {
-        res.status(200);
-      })
-      .catch((err) => console.error("Error logging in!", err));
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     window.location = "http://localhost:3000";
   };
 
