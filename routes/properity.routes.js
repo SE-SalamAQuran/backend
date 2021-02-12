@@ -1,5 +1,6 @@
-const router =require("express").Router({mergeParams:true});
-const propertyController=require("../controllers/properties.controller");
+const router = require("express").Router({ mergeParams: true });
+const propertyController = require("../controllers/properties.controller");
 
-router.get("/allLands",propertyController.getLands);
-module.exports=router;
+router.get("/lands", propertyController.getLands);
+router.get("/villas", propertyController.getVillas);
+module.exports = router;

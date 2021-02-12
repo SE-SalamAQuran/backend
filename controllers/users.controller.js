@@ -57,9 +57,11 @@ module.exports = {
                     isAdmin: data["isAdmin"],
                   };
                   var token = jwt.sign({ user: jwtData }, secretKey);
-                  res
-                    .status(200)
-                    .json({ message: "Login Successful", token: token });
+                  let decoded = jwt.verify(token, secretKey);
+                  res.status(200).json({
+                    token: token,
+                    decoded: decoded.user,
+                  });
                 } else {
                   res.status(401).json({ message: "Invalid Credentials1" });
                 }
@@ -74,7 +76,7 @@ module.exports = {
     const id = req.params.id;
     Users.findOne({ _id: id }, (err, result) => {
       if (err) {
-        res.sendStatus(400).send("Error", err);
+        res.status(400).send(err);
       } else {
         res.json(result);
       }
