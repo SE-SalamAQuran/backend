@@ -2,11 +2,9 @@ import React from "react";
 import pic from "../images/ppic.jpg";
 // import pic1 from "../images/seaside.jpg";
 // import Button from "@material-ui/core/Button";
-import jwt from "jwt-decode";
 import GridList from "../GridList";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-import jwtDecode from "jwt-decode";
 const axios = require("axios");
 
 function Copyright() {
