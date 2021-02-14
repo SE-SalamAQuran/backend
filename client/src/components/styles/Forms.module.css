@@ -1,0 +1,23 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .icon {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.container .radio {
+  margin-left: 1rem;
+  padding-left: 5px;
+}
+
+.link {
+  margin: 1rem;
+}

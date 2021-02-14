@@ -20,7 +20,6 @@ module.exports = {
           username: req.body.username,
           password: hash,
           address: req.body.address,
-          gender: req.body.gender,
         });
 
         await newUser

@@ -1,112 +1,79 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import { Navbar, Nav } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./styles/Nav.module.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+export default function Appbar() {
+  function isLogged() {
+    return JSON.parse(sessionStorage.getItem("user")) == null ? false : true;
+  }
 
-export default function MenuAppBar() {
-  const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  function UserGreeting(props) {
+    return (
+      <a href="http://localhost:3000/main">
+        <img
+          src="https://img.icons8.com/windows/32/ffffff/user-tag.png"
+          alt="avatar"
+        />
+      </a>
+    );
+  }
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  function GuestGreeting(props) {
+    return (
+      <a className={styles.link} href="http://localhost:3000/login">
+        Login
+      </a>
+    );
+  }
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+      return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+  }
 
   return (
-    <div className={classes.root}>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? "Logout" : "Login"}
-        />
-      </FormGroup>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
+    <div id={styles.appBar}>
+      <Navbar expand="xl" bg="dark" variant="dark">
+        <Navbar.Brand href="http://localhost:3000/">
+          <img
+            src="https://img.icons8.com/wired/50/ffffff/real-estate.png"
+            alt="logo"
+            className={styles.logo}
+          />{" "}
+          Palestinian Estates
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav.Link className={styles.link} href="http://localhost:3000/lands">
+            Lands
+          </Nav.Link>
+          <Nav.Link className={styles.link} href="http://localhost:3000/villas">
+            Villas
+          </Nav.Link>
+          <Nav.Link className={styles.link} href="http://localhost:3000/roofs">
+            Roofs
+          </Nav.Link>
+          <Nav.Link
+            className={styles.link}
+            href="http://localhost:3000/apartments-rent"
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Palestinian Estate
-          </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>
-                  {" "}
-                  <a href="http://localhost:3000/profile">Profile</a>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <a href="http://localhost:3000/profile/">My account</a>
-                </MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
+            Apartments for Rent
+          </Nav.Link>
+          <Nav.Link
+            className={styles.link}
+            href="http://localhost:3000/apartments-sale"
+          >
+            Apartments for Sale
+          </Nav.Link>
+          <Navbar.Text>
+            <Greeting isLoggedIn={isLogged()}></Greeting>
+          </Navbar.Text>
+        </Navbar.Collapse>
+      </Navbar>
     </div>
   );
 }

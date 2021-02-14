@@ -5,9 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Main from "./components/Main";
 import ProfilePage from "./components/Profile";
-// import uploadImage from "./components/UploadProfilePic";
-import Welcome from "./components/Welcome";
-import Lands from "./components/Lands";
+import Test from "./components/testProfile";
 
 function App() {
   return (
@@ -17,9 +15,7 @@ function App() {
       <Route path="/login" component={Login} />
       <Route path="/test" component={GridList} />
       <Route path="/profile" exact component={ProfilePage} />
-      {/* <Route path="/profile/update" component={uploadImage} /> */}
-      <Route path="/home" component={Welcome} />
-      <Route path="/main" component={Lands}></Route>
+      <Route path="/main" component={Test}></Route>
     </Router>
   );
 }

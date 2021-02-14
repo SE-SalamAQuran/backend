@@ -1,0 +1,32 @@
+.nav {
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.nav ul li a {
+  margin: 5px, 15px;
+}
+.link {
+  color: #fafafa;
+}
+
+.link:hover {
+  color: #fafafa;
+  text-decoration: underline;
+}
+
+#appBar {
+  margin-top: 0;
+  width: 100%;
+
+  margin-bottom: auto;
+}
