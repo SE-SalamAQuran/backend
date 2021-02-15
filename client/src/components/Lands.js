@@ -1,7 +1,7 @@
 import React from "react";
+import Navbar from "./AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "../GridList";
-import Navbar from "./AppBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredGrid() {
+export default function Lands() {
   const classes = useStyles();
   return (
     <div className={classes.root}>

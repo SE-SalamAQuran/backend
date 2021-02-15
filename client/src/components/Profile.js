@@ -1,18 +1,20 @@
-import React, { PropTypes } from "react";
+import React from "react";
 import pic from "../images/ppic.jpg";
-import pic1 from "../images/seaside.jpg";
-import Button from "@material-ui/core/Button";
+// import pic1 from "../images/seaside.jpg";
+// import Button from "@material-ui/core/Button";
+import jwt from "jwt-decode";
 import GridList from "../GridList";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
+import jwtDecode from "jwt-decode";
 const axios = require("axios");
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="http://localhost:3000/">
-        Pal Estate
+      <Link color="inherit" href="http://localhost:3000/home">
+        Palestinian Estate
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -20,24 +22,25 @@ function Copyright() {
   );
 }
 
-const token = localStorage.getItem("token");
-
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
+    var user = JSON.parse(sessionStorage.getItem("user"));
+    console.log(user);
     this.state = {
-      user_id: "" ,
-      fname : "" ,
-      lname: "" , 
-      email:"",
-      gender:"",
-      PhoneNumber :"" , 
-      address: "" ,
-      Password : "" ,
-      userName :" ",
-      isActive: false ,
-      isActiveEditProfileInformation: false ,
-      profileImagem: ""
+      user_id: user._id,
+      fname: "",
+      lname: "",
+      email: "",
+      gender: "",
+      PhoneNumber: "",
+      address: "",
+      Password: "",
+      userName: " ",
+      isActive: false,
+      isActiveEditProfileInformation: false,
+      profileImage: null,
+      profileImagem: " ",
     };
     this.onSaveEditInformation = this.onSaveEditInformation.bind(this);
   }
@@ -117,12 +120,8 @@ class ProfilePage extends React.Component {
 
   logOut = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/users/logout/" + this.state.user_id)
-      .then((res) => {
-        res.status(200);
-      })
-      .catch((err) => console.error("Error logging in!", err));
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     window.location = "http://localhost:3000";
   };
 
@@ -235,7 +234,7 @@ class ProfilePage extends React.Component {
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                window.location.href = "http://localhost:3000/";
+                window.location.href = "http://localhost:3000/home";
               }}
             >
               {" "}
@@ -350,7 +349,7 @@ class ProfilePage extends React.Component {
               >
                 <h4>Update your information</h4>
                 <label for="FirstName">
-                  FirstName
+                  First Name
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </label>
                 <input
@@ -363,7 +362,7 @@ class ProfilePage extends React.Component {
                 <br />
                 <br />
                 <label for="LasttName">
-                  LaststName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  Last Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </label>
                 <input
                   type="text"
@@ -375,7 +374,8 @@ class ProfilePage extends React.Component {
                 <br />
                 <br />
                 <label for="Adress">
-                  Adress&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  Address
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </label>
                 <input
                   type="text"
@@ -452,7 +452,7 @@ class ProfilePage extends React.Component {
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
-                  window.location.href = "http://localhost:3000/";
+                  window.location.href = "http://localhost:3000/home";
                 }}
               >
                 {" "}

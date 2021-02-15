@@ -38,6 +38,7 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 const usersRoute = require("./routes/users.routes");
+const propertiesRoute = require("./routes/properity.routes");
 const { initialize } = require("passport");
 
 app.use("/users", usersRoute);
@@ -45,6 +46,8 @@ app.use("/users", usersRoute);
 app.get("/", (req, res) => {
   res.send("Success");
 });
+
+app.use("/properties", propertiesRoute);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

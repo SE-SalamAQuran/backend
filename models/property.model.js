@@ -1,75 +1,84 @@
-var mongoose = require('mongoose');
-
+var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-const propertySchema = new Schema({  
+const propertySchema = new Schema(
+  {
     title: {
-        type: String,
-        trim: true,
-        required: true
+      type: String,
+      trim: true,
+      required: true,
     },
     propertyFor: {
-        type: String,
-        required: true,
-        default: 'sell',
-        enum: ['sell', 'rent']
+      type: String,
+      required: true,
+      default: "sale",
+      enum: ["sale", "rent"],
     },
     description: {
-        type: String,
-        trim: true
+      type: String,
+      trim: true,
     },
     type: {
-        type: String,
-        enum: ['land', 'apartment-cash', 'apartment-installment', 'shop-rent','shop-sale','house' ,'villa','roof','apartment-rent']
+      type: String,
+      enum: [
+        "land",
+        "apartment-cash",
+        "apartment-installment",
+        "shop",
+        "house",
+        "villa",
+        "roof",
+        "apartment-rent",
+      ],
     },
-    
+
     city: {
-        type: String
+      type: String,
     },
-    
+
     address: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-     
+
     price: {
-        type: Number
+      type: Number,
     },
     currency: {
-        type: String,
-        enum: ['USD','JOD','ILS'],
-        default: 'USD'
+      type: String,
+      enum: ["USD", "JOD", "ILS"],
+      default: "USD",
     },
     userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Users',
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "Users",
+      required: true,
     },
     status: {
-        type: String,
-        default: 'available', 
-        enum: [ 'available', 'sold', 'rented', 'expired' ]
+      type: String,
+      default: "available",
+      enum: ["available", "sold", "rented", "expired"],
     },
     classification: {
-        type: String,
-        enum: ['A','B','C']
+      type: String,
+      enum: ["A", "B", "C"],
     },
     area: {
-        type: Number,
-        trim: true,
-        required: true
+      type: Number,
+      trim: true,
+      required: true,
     },
     images: {
-        type: [String]
+      type: [String],
     },
     imgPath: {
-        type: String
+      type: String,
     },
-},{timestamps: true}
+  },
+  { timestamps: true }
 );
 
-const Properties = mongoose.model("Properties",propertySchema);
+const Properties = mongoose.model("Properties", propertySchema);
 
-
-module.exports =  Properties;
+module.exports = Properties;

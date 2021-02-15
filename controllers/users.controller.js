@@ -18,7 +18,6 @@ module.exports = {
           username: req.body.username,
           password: hash,
           address: req.body.address,
-          gender: req.body.gender,
         });
 
         await newUser
@@ -51,13 +50,16 @@ module.exports = {
                     _id: data["_id"],
                     fname: data["fname"],
                     lname: data["lname"],
-                    username: data["username"],
+                    phoneNo:data["phoneNo"],
+                    address:data["address"],
                     isAdmin: data["isAdmin"],
                   };
                   var token = jwt.sign({ user: jwtData }, secretKey);
-                  res
-                    .status(200)
-                    .json({ message: "Login Successful", token: token });
+                  let decoded = jwt.verify(token, secretKey);
+                  res.status(200).json({
+                    token: token,
+                    decoded: decoded.user,
+                  });
                 } else {
                   res.status(401).json({ message: "Invalid Credentials1" });
                 }
@@ -72,7 +74,7 @@ module.exports = {
     const id = req.params.id;
     Users.findOne({ _id: id }, (err, result) => {
       if (err) {
-        res.sendStatus(400).send("Error", err);
+        res.status(400).send(err);
       } else {
         res.json(result);
       }
@@ -89,7 +91,7 @@ module.exports = {
           fname: req.body.fname,
           lname: req.body.lname,
           address: req.body.address,
-          phoneNo: req.body.phoneNumber,
+          phoneNo: req.body.phoneNo,
         },
       },
       (err) => {
