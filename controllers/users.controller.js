@@ -2,7 +2,9 @@ const Users = require("../models/users.model");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const nodemailer = require("nodemailer");
+const randomString = require("randomstring");
+const twilio = require("twilio");
 const dotenv = require("dotenv").config();
 
 const secretKey = process.env.JWT_SECRET;
@@ -123,5 +125,75 @@ module.exports = {
         }
       }
     );
+  },
+
+  forgotPasswordMail: async (req, res) => {
+    let verCode = randomString.generate({
+      length: 8,
+      charset: "alphanumeric",
+      readable: true,
+    });
+    var mailConfig;
+    if (process.env.NODE_ENV === "production") {
+      // all emails are delivered to destination
+      mailConfig = {
+        host: "smtp.sendgrid.net",
+        port: 587,
+        auth: {
+          user: process.env.SEND_GRID_USR,
+          pass: process.env.SEND_GRID_PSWD,
+        },
+      };
+    } else {
+      // all emails are catched by ethereal.email
+      mailConfig = {
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: process.env.EMAIL_ADDR,
+          pass: process.env.EMAIL_PASSWD,
+        },
+      };
+    }
+    let transporter = nodemailer.createTransport(mailConfig);
+    const destEmail = req.body.emailPhone;
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: `${process.env.BRAND} ${process.env.EMAIL_ADDR} `, // sender address
+      to: `${destEmail}`, // list of receivers
+      subject: "Password Recovery Service", // Subject line
+      text: `Our valid user,  ${verCode} is the code to your password recovery. Do Not share this code with anyone`, // plain text body
+      html: `<h1>Palestinian Estates</h1> <p><em> ${verCode}</em>  is the code to your password recovery, Do Not share this code with anyone</p>`, //html body
+    });
+    res.status(200).send(info);
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  },
+
+  forgotPasswordSMS: async (req, res) => {
+    const accountSid = process.env.TWILIO_ACCOUNT_SID;
+    const authToken = process.env.TWILIO_AUTH_TOKEN;
+    const client = require("twilio")(accountSid, authToken);
+    const sender = process.env.TWILIO_PHONE_NUM;
+    const destPhone = req.body.emailPhone;
+    let verCode = randomString.generate({
+      length: 8,
+      charset: "alphanumeric",
+      readable: true,
+    });
+
+    client.messages
+      .create({
+        body: `${verCode} is the verification code for your account`,
+        from: `${sender}`,
+        to: `${destPhone}`,
+      })
+      .then((message) => res.status(200).send(message))
+      .catch((err) => res.status(400).send(err));
   },
 };
