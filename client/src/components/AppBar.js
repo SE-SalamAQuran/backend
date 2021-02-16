@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Nav.module.css";
 
@@ -48,27 +48,30 @@ export default function Appbar() {
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Nav.Link className={styles.link} href="http://localhost:3000/lands">
-            Lands
-          </Nav.Link>
-          <Nav.Link className={styles.link} href="http://localhost:3000/villas">
-            Villas
-          </Nav.Link>
-          <Nav.Link className={styles.link} href="http://localhost:3000/roofs">
-            Roofs
-          </Nav.Link>
-          <Nav.Link
-            className={styles.link}
-            href="http://localhost:3000/apartments-rent"
-          >
-            Apartments for Rent
-          </Nav.Link>
-          <Nav.Link
-            className={styles.link}
-            href="http://localhost:3000/apartments-sale"
-          >
-            Apartments for Sale
-          </Nav.Link>
+          <Dropdown>
+            <Dropdown.Toggle variant="light" id="dropdown-basic">
+              Estates
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="http://localhost:3000/lands">
+                Lands
+              </Dropdown.Item>
+              <Dropdown.Item href="http://localhost:3000/villas">
+                Villas
+              </Dropdown.Item>
+              <Dropdown.Item href="http://localhost:3000/roofs">
+                Roof
+              </Dropdown.Item>
+              <Dropdown.Item href="http://localhost:3000/apartments-sale">
+                Apartments For Sale
+              </Dropdown.Item>
+              <Dropdown.Item href="http://localhost:3000/apartments-rent">
+                Apartments For Rent
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
           <Nav.Link className={styles.link} href="http://localhost:3000/about">
             About
           </Nav.Link>

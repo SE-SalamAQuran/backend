@@ -2,7 +2,7 @@ import React from "react";
 import pic from "../images/ppic.jpg";
 // import pic1 from "../images/seaside.jpg";
 // import Button from "@material-ui/core/Button";
-import GridList from "../GridList";
+// import GridList from "../GridList";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 const axios = require("axios");
@@ -174,13 +174,11 @@ class ProfilePage extends React.Component {
   }
 
   render() {
-
-    if(this.state.profileImage){
-      
-      var profilePic=pic ;
-  }else{
-       profilePic= pic;
-  }
+    if (this.state.profileImage) {
+      var profilePic = pic;
+    } else {
+      profilePic = pic;
+    }
 
     function sayHello() {
       alert("You want to edit profile picture");
@@ -302,7 +300,7 @@ class ProfilePage extends React.Component {
             </form>
           </div>
 
-          <GridList></GridList>
+          {/* <GridList></GridList> */}
           <Copyright />
         </div>
       );
@@ -429,7 +427,7 @@ class ProfilePage extends React.Component {
               <br /> <br />
             </div>
 
-            <GridList></GridList>
+            {/* <GridList></GridList> */}
             <Copyright />
           </div>
         );
@@ -519,7 +517,7 @@ class ProfilePage extends React.Component {
               </button>
             </div>
 
-            <GridList></GridList>
+            {/* <GridList></GridList> */}
             <Copyright />
           </div>
         );
