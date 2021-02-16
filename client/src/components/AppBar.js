@@ -10,7 +10,7 @@ export default function Appbar() {
 
   function UserGreeting(props) {
     return (
-      <a href="http://localhost:3000/main">
+      <a href="http://localhost:3000/tprofile">
         <img
           src="https://img.icons8.com/windows/32/ffffff/user-tag.png"
           alt="avatar"
