@@ -19,7 +19,6 @@ function App() {
       <Route path="/login" component={Login} />
       <Route path="/test" component={GridList} />
       <Route path="/profile" exact component={ProfilePage} />
-      <Route path="/main" component={Test}></Route>
       <Route path="/tprofile" exact component={TestProfile} />
       <Route path="/Update user Information" component={updateUserInformation} />
 

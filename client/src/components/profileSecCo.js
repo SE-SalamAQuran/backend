@@ -26,9 +26,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
       <Navbar.Collapse className="justify-content-left">
       <div class="row"  >
         <div class="col-sm-12 text-left" >
-        <button type="button" class="btn btn-secondary btn-lg" onClick = {logOut}>LogOut</button>
-        <button type="button" class="btn btn-secondary btn-lg" onClick = {backHome}>Home</button>
-        <button type="button" class="btn btn-secondary btn-lg" onClick = {updateUserInformation}>Edit user Information</button>
+        <button  type="button" class="btn btn-secondary btn-lg" onClick = {logOut}>LogOut</button>
+        <button  type="button" class="btn btn-secondary btn-lg" onClick = {backHome}>Home</button>
+        <button  type="button" class="btn btn-secondary btn-lg" onClick = {updateUserInformation}>Edit user Information</button>
          </div>
     </div>
       </Navbar.Collapse>

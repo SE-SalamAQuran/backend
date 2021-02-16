@@ -28,7 +28,7 @@ class ProfilePage extends React.Component {
     var user = JSON.parse(sessionStorage.getItem("user"));
     console.log(user);
     this.state = {
-      user_id: user._id,
+      user_id: "60295e0573cc4412b07f0d80",
       fname: "",
       lname: "",
       email: "",

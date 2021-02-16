@@ -1,70 +1,77 @@
-import { React, useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
 import axios from "axios";
+import { set } from 'mongoose';
 
 function Register() {
     
     let user = JSON.parse(sessionStorage.getItem("user"));
 
-  const [state, setState] = useState({
-    fname: user.fname,
-    lname: user.lname,
-    phoneNo: user.phoneNo,
-    address: user.address,
-  });
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [phoneNo, setPhoneNO] = useState("");
+  const [address, setAddress] = useState("");
+
+
+
+
+  useEffect(() => {
+
+    axios
+    .get("http://localhost:5000/users/user/" + user._id, {
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+    .then((res) => {
+
+      setFname(res.data.fname)
+      setLname(res.data.lname)
+      setAddress(res.data.address)
+      setPhoneNO(res.data.phoneNo)
+
+      console.log(res)
+      console.log(res.data.fname)
+      console.log(res.data.lname)
+      console.log(res.data.phoneNo)
+      console.log(res.data.address);})
+
+      .catch((err) => console.log(err));
+      
+  },[])
 
   function backProfile (e)  {
     e.preventDefault();
     window.location = "/tprofile";
   };
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setState((prev) => {
-      if (name === "fname") {
-        return {
-          fname: value,
-          lname: prev.lname,
-          phoneNo: prev.phoneNo,
-          address: prev.address,
-        };
-      } else if (name === "lname") {
-        return {
-          fname: prev.fname,
-          lname: value,
-          phoneNo: prev.phoneNo,
-          address: prev.address,
-        };
-      } else if (name === "phoneNo") {
-        return {
-          fname: prev.fname,
-          lname: prev.lname,
-          phoneNo: value,
-          address: prev.address,
-        };
-      
-      } else if (name === "address") {
-        return {
-          fname: prev.fname,
-          lname: prev.lname,
-          phoneNo: prev.phoneNo,
-          address: value,
-        };
-      }
-    });
-  }
+  function changeFName (e) {
+    setFname(e.target.value);
+    
+  };
+  function changeLName  (e)  {
+    setLname(e.target.value);
+  };
+  function changeAddress  (e)  {
+   setAddress( e.target.value,);
+  };
+  function changePhoneNumbe  (e) {
+setPhoneNO( e.target.value,);
+  };
+
+  
 
   function handleSubmit(event) {
     event.preventDefault();
     const data = {
     
-      fname: state.fname,
-      lname: state.lname,
-      phoneNo: state.phoneNo,
-      address: state.address,
+      fname: fname,
+      lname: lname,
+      phoneNo: phoneNo,
+      address: address,
     };
     console.log(data)
     axios
@@ -88,8 +95,8 @@ function Register() {
             <Form.Label>First Name</Form.Label>
             <Form.Control
               name="fname"
-              value={state.fname}
-              onChange={handleChange}
+              value={fname}
+              onChange={changeFName}
               placeholder="First name"
             />
           </Form.Group>
@@ -98,8 +105,8 @@ function Register() {
             <Form.Label>Last Name</Form.Label>
             <Form.Control
               name="lname"
-              value={state.lname}
-              onChange={handleChange}
+              value={lname}
+              onChange={changeLName}
               placeholder="Last name"
             />
           </Form.Group>
@@ -109,8 +116,8 @@ function Register() {
           <Form.Label>Your Address </Form.Label>
           <Form.Control
             name="address"
-            value={state.address}
-            onChange={handleChange}
+            value={address}
+            onChange={changeAddress}
             placeholder="Ramallah, Jenin, Hebron, ..."
           />
         </Form.Group>
@@ -120,8 +127,8 @@ function Register() {
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
               name="phoneNo"
-              value={state.phoneNo}
-              onChange={handleChange}
+              value={phoneNo}
+              onChange={changePhoneNumbe}
               placeholder="phone number"
             />
           </Form.Group>

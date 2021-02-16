@@ -8,13 +8,13 @@ import Footer from "./Footer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
+
+
 function TestProfile() {
-
-
   let user = JSON.parse(sessionStorage.getItem("user"));
 
-  
-  
+ 
 
   return(
 
@@ -22,12 +22,12 @@ function TestProfile() {
       <ProfileHead></ProfileHead> 
       <ProfileSecCom ></ProfileSecCom >
       <ProfileBody ></ProfileBody >
-      <button type="button" class="btn btn-secondary btn-lg btn-block">Upload your realestata NOW !! ^-^</button>
+      <button type="button" class="btn btn-secondary btn-lg btn-block">Upload a new realestata NOW !! ^-^</button>
       <Footer />
 
      </div>
-    );
-  }
+    );}
+    
  
 
 export default TestProfile;
