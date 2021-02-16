@@ -69,6 +69,15 @@ export default function Appbar() {
           >
             Apartments for Sale
           </Nav.Link>
+          <Nav.Link className={styles.link} href="http://localhost:3000/about">
+            About
+          </Nav.Link>
+          <Nav.Link
+            className={styles.link}
+            href="http://localhost:3000/#contact"
+          >
+            Contact Us
+          </Nav.Link>
           <Navbar.Text>
             <Greeting isLoggedIn={isLogged()}></Greeting>
           </Navbar.Text>

@@ -30,3 +30,8 @@
 
   margin-bottom: auto;
 }
+
+.badge {
+  margin-top: 0.3125rem;
+  margin-bottom: 0.3125rem;
+}

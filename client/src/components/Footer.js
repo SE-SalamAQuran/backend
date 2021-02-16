@@ -3,7 +3,7 @@ import styles from "./styles/Home.module.css";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer id="contact" className={styles.footer}>
       <a href="http://localhost:3000" rel="noopener noreferrer">
         Copyrights @ Palestinian Estates {new Date().getFullYear()}
         <img
