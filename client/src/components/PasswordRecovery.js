@@ -1,21 +1,45 @@
 import { React, useState } from "react";
+import search from "regex-collection";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
-import { Form, Button, Nav } from "react-bootstrap";
+import { Form, Button, Row } from "react-bootstrap";
 import Footer from "./Footer";
 import axios from "axios";
 
 export default function PasswordRecovery() {
   const [state, setState] = useState({
     emailPhone: "",
+    type: "",
   });
 
+  function MailIcon() {
+    return (
+      <img
+        src="https://img.icons8.com/ios-filled/25/000000/apple-mail.png"
+        alt="mail-icon"
+      />
+    );
+  }
+  function SMSIcon() {
+    return (
+      <img
+        src="https://img.icons8.com/android/24/000000/sms.png"
+        alt="sms-icon"
+      />
+    );
+  }
   function handleChange(event) {
     const { name, value } = event.target;
     setState((prev) => {
       if (name === "emailPhone") {
         return {
           emailPhone: value,
+          type: prev.type,
+        };
+      } else if (name === "type") {
+        return {
+          emailPhone: prev.emailPhone,
+          type: value,
         };
       }
     });
@@ -26,68 +50,58 @@ export default function PasswordRecovery() {
     const cred = {
       emailPhone: state.emailPhone,
     };
-    axios
-      .post("http://localhost:5000/users/sendmail", cred)
-      .then((res) => {
-        window.location = "/";
-        const token = res.data.token;
-        sessionStorage.setItem("token", token);
-        let thisUser = res.data.decoded;
-        sessionStorage.setItem("user", JSON.stringify(thisUser));
-      })
-      .catch((err) => console.error("Error logging in!", err));
+    if (cred.emailPhone.isEmailAddress) {
+      axios
+        .post("http://localhost:5000/users/sendmail", cred)
+        .then((res) => {
+          window.location = "/";
+        })
+        .catch((err) => console.error("Error logging in!", err));
+    } else if (cred.emailPhone.isTelephoneNumber) {
+      axios
+        .post("http://localhost:5000/users/sendSMS", cred)
+        .then((res) => {
+          window.location = "/";
+        })
+        .catch((err) => console.error("Error logging in!", err));
+    }
   }
-
   return (
     <div className={styles.container}>
-      <img
-        className={styles.icon}
-        src="https://img.icons8.com/pastel-glyph/50/000000/user-lock.png"
-        alt="lock"
-      />
+      <Row style={{ padding: "1rem" }} sm={10}>
+        {" "}
+        <MailIcon></MailIcon>
+        <SMSIcon></SMSIcon>
+      </Row>
+
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>Email / Phone</Form.Label>
           <Form.Control
             value={state.emailPhone}
             onChange={handleChange}
             type="email"
             name="emailPhone"
-            placeholder="Enter email"
+            placeholder="Enter mail or phone"
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            value={state.password}
-            onChange={handleChange}
-            placeholder="Password"
-          />
-        </Form.Group>
         <Button
           style={{
             justifyContent: "center",
             alignItem: "center",
             alignSelf: "center",
-            marginTop: "6px",
+            marginBottom: "6rem",
+            marginTop: "10px",
           }}
           variant="dark"
           className={styles.button}
           type="submit"
         >
-          Login
+          Send Verification Code
         </Button>
-        <Nav.Link href="http://localhost:3000/forgot">
-          Forgot your password ?
-        </Nav.Link>
       </Form>
 
-      <a href="http://localhost:3000/register" className={styles.link}>
-        New user? Sign up for an account here
-      </a>
       <Footer />
     </div>
   );

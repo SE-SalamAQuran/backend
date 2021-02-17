@@ -6,6 +6,7 @@ import Main from "./components/Main";
 import ProfilePage from "./components/Profile";
 import TestProfile from "./components/testProfile";
 import updateUserInformation from "./components/updateUserInfo";
+import PasswordRecovery from "./components/PasswordRecovery";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         path="/Update user Information"
         component={updateUserInformation}
       />
+      <Route path="/recover" component={PasswordRecovery} />
     </Router>
   );
 }
