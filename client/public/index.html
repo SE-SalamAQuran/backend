@@ -17,6 +17,15 @@
   <div id="root"></div>
 
   <div id="fb-root"></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./serviceWorker.js")
+          .then((reg) => console.log("Success: ", reg.scope))
+          .catch((err) => console.log("Failure: ", err));
+      });
+    }
+  </script>
   <script async defer crossorigin="anonymous"
     src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v9.0&appId=710825812958412&autoLogAppEvents=1"
     nonce="lOcHTwQW"></script>

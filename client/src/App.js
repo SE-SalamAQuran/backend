@@ -7,8 +7,6 @@ import ProfilePage from "./components/Profile";
 import TestProfile from "./components/testProfile";
 import updateUserInformation from "./components/updateUserInfo";
 
-import Test from "./components/testProfile";
-
 function App() {
   return (
     <Router>

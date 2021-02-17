@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Palestinian Estates</title>
+    <link rel="icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#343a40" />
+    <meta name="background-color" content="#888" />
+    <meta name="description" content="Your number one app for real estate transactions" />
+    <meta name="keywords" content="Real Estate, Lands, Apartments, Villas, Roofs, Sell/Buy/Rent" />
+    <link type="application/json" rel="manifest" href="./manifest.json" />
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    <div id="fb-root"></div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("./serviceWorker.js")
+                    .then((reg) => console.log("Success: ", reg.scope))
+                    .catch((err) => console.log("Failure: ", err));
+            });
+        }
+    </script>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v9.0&appId=710825812958412&autoLogAppEvents=1"
+        nonce="lOcHTwQW"></script>
+</body>
+
+</html>
