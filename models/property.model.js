@@ -12,8 +12,7 @@ const propertySchema = new Schema(
     propertyFor: {
       type: String,
       required: true,
-      default: "sale",
-      enum: ["sale", "rent"],
+      enum: ["sale-cash", "sale-installment", "rent"],
     },
     description: {
       type: String,
@@ -21,20 +20,25 @@ const propertySchema = new Schema(
     },
     type: {
       type: String,
-      enum: [
-        "land",
-        "apartment-cash",
-        "apartment-installment",
-        "shop",
-        "house",
-        "villa",
-        "roof",
-        "apartment-rent",
-      ],
+      enum: ["land", "apartment", "shop", "house", "villa", "roof", "office"],
     },
 
     city: {
       type: String,
+      enum: [
+        "Ramallah",
+        "Nablus",
+        "Hebron",
+        "Bethlehem",
+        "Tulkarm",
+        "Qalqilia",
+        "Salfit",
+        "Tubas",
+        "Jenin",
+        "Jericho",
+        "Jerusalem",
+        "AlBireh",
+      ],
     },
 
     address: {
@@ -45,12 +49,13 @@ const propertySchema = new Schema(
     price: {
       type: Number,
     },
+
     currency: {
       type: String,
       enum: ["USD", "JOD", "ILS"],
       default: "USD",
     },
-    userId: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: "Users",
       required: true,

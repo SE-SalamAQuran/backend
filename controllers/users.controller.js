@@ -53,8 +53,8 @@ module.exports = {
                     _id: data["_id"],
                     fname: data["fname"],
                     lname: data["lname"],
-                    phoneNo:data["phoneNo"],
-                    address:data["address"],
+                    phoneNo: data["phoneNo"],
+                    address: data["address"],
                     isAdmin: data["isAdmin"],
                   };
                   var token = jwt.sign({ user: jwtData }, secretKey);
@@ -166,7 +166,7 @@ module.exports = {
       text: `Our valid user,  ${verCode} is the code to your password recovery. Do Not share this code with anyone`, // plain text body
       html: `<h1>Palestinian Estates</h1> <p><em> ${verCode}</em>  is the code to your password recovery, Do Not share this code with anyone</p>`, //html body
     });
-    res.status(200).send(info);
+    res.status(200).send(verCode);
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 

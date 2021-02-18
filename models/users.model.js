@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-const search = require("regex-collection");
+const validator = require("validator");
 const passportLocal = require("passport-local-mongoose");
 const passport = require("passport");
 const session = require("express-session");
@@ -23,13 +23,23 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      validate: search.isEmailAddress,
+       minlength: 10,
+        validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error("Email is invalid");
+        }
+      },
     },
     phoneNo: {
       type: String,
       required: true,
       unique: true,
-      validate: search.isTelephoneNumber,
+      minlength: 10,
+      validate(value) {
+        if (!validator.isMobilePhone(value)) {
+          throw new Error("Phone number is invalid");
+        }
+      },
     },
     password: {
       type: String,
