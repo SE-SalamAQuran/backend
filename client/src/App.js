@@ -6,12 +6,15 @@ import Main from "./components/Main";
 import ProfilePage from "./components/Profile";
 import TestProfile from "./components/testProfile";
 import updateUserInformation from "./components/updateUserInfo";
-import PasswordRecovery from "./components/PasswordRecovery";
+import MailForm from "./components/PasswordRecovery";
+import SMSForm from "./components/SMSCode";
 
 function App() {
   return (
     <Router>
       <Route path="/" exact component={Main} />
+      <Route path="/verify/mail" component={MailForm} />
+      <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/profile" exact component={ProfilePage} />
@@ -20,7 +23,6 @@ function App() {
         path="/Update user Information"
         component={updateUserInformation}
       />
-      <Route path="/recover" component={PasswordRecovery} />
     </Router>
   );
 }

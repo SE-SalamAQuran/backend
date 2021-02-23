@@ -6,19 +6,19 @@ import Footer from "./Footer";
 import axios from "axios";
 import jsCookie from "js-cookie";
 
-export default function PasswordRecovery() {
+function SMSIcon() {
+  return (
+    <img
+      src="https://img.icons8.com/android/24/000000/sms.png"
+      alt="sms-icon"
+    />
+  );
+}
+
+export default function SMSCode() {
   const [state, setState] = useState({
     emailPhone: "",
   });
-
-  function MailIcon() {
-    return (
-      <img
-        src="https://img.icons8.com/ios-filled/25/000000/apple-mail.png"
-        alt="mail-icon"
-      />
-    );
-  }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -38,29 +38,28 @@ export default function PasswordRecovery() {
     };
 
     axios
-      .post("http://localhost:5000/users/sendmail", cred)
+      .post("http://localhost:5000/users/sendSMS", cred)
       .then((res) => {
         window.location = "/success";
-        jsCookie.set("emailCode", res.data.code);
+        jsCookie.set("smsCode", res.data.code);
       })
       .catch((err) => console.error("Error logging in!", err));
   }
   return (
     <div className={styles.container}>
-      <h5>Password Recovery by Email</h5>
+      <h5>Password Recovery by SMS</h5>
       <Row style={{ padding: "1rem" }} sm={10}>
         {" "}
       </Row>
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Phone</Form.Label>
           <Form.Control
             value={state.emailPhone}
             onChange={handleChange}
-            type="email"
             name="emailPhone"
-            placeholder="Enter your email"
+            placeholder="Enter your phone"
           />
           <Button
             style={{
@@ -74,20 +73,20 @@ export default function PasswordRecovery() {
             className={styles.button}
             type="submit"
           >
-            <MailIcon></MailIcon>
+            <SMSIcon></SMSIcon>
           </Button>
         </Form.Group>
         <div style={{ marginBottom: "2rem" }}>
           {" "}
           <a
             style={{ marginBottom: "1rem" }}
-            href="http://localhost:3000/verify/sms"
+            href="http://localhost:3000/verify/mail"
           >
-            Verify using SMS instead?
+            Verify using Email instead?
           </a>
           <br></br>
           <a href="http://localhost:3000/login">Try to login again</a>
-        </div>{" "}
+        </div>
       </Form>
 
       <Footer />

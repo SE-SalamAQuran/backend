@@ -88,7 +88,7 @@ function Login() {
         >
           Login
         </Button>
-        <Nav.Link href="http://localhost:3000/forgot">
+        <Nav.Link href="http://localhost:3000/verify/mail">
           Forgot your password ?
         </Nav.Link>
       </Form>

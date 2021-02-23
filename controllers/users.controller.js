@@ -166,13 +166,7 @@ module.exports = {
       text: `Our valid user,  ${verCode} is the code to your password recovery. Do Not share this code with anyone`, // plain text body
       html: `<h1>Palestinian Estates</h1> <p><em> ${verCode}</em>  is the code to your password recovery, Do Not share this code with anyone</p>`, //html body
     });
-    res.status(200).send(verCode);
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    res.status(200).json({ code: verCode });
   },
 
   forgotPasswordSMS: async (req, res) => {
@@ -193,7 +187,8 @@ module.exports = {
         from: `${sender}`,
         to: `${destPhone}`,
       })
-      .then((message) => res.status(200).send(message))
+
+      .then((message) => res.status(200).json({ code: verCode }))
       .catch((err) => res.status(400).send(err));
   },
 };
