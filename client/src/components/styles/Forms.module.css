@@ -12,8 +12,16 @@
   align-items: center;
   margin-bottom: 10px;
 }
-.button {
+.container .loginButton {
   align-self: center;
+  margin-left: 4rem;
+  align-content: center;
+  justify-self: center;
+  margin-bottom: 2rem;
+}
+.container .signUpButton {
+  align-self: center;
+  margin-left: 10.4375rem;
   align-content: center;
   justify-self: center;
 }

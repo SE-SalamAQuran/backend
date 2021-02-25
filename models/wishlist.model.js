@@ -8,9 +8,7 @@ const wishListSchema = new Schema(
       ref: "Users",
       required: true,
     },
-    title: {
-      type: String,
-    },
+
     propType: {
       type: String,
       required: true,
@@ -40,10 +38,6 @@ const wishListSchema = new Schema(
     },
 
     address: {
-      type: String,
-      required: true,
-    },
-    description: {
       type: String,
       required: true,
     },
