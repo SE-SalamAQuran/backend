@@ -1,31 +1,37 @@
 import { React, useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
-import { Form, Button, Row } from "react-bootstrap";
 import Footer from "./Footer";
 import axios from "axios";
-import jsCookie from "js-cookie";
 
-export default function PasswordRecovery() {
+function PasswordRecovery() {
   const [state, setState] = useState({
-    emailPhone: "",
+    pass: "",
+    passConf: "",
+    username: "",
   });
-
-  function MailIcon() {
-    return (
-      <img
-        src="https://img.icons8.com/ios-filled/25/000000/apple-mail.png"
-        alt="mail-icon"
-      />
-    );
-  }
 
   function handleChange(event) {
     const { name, value } = event.target;
     setState((prev) => {
-      if (name === "emailPhone") {
+      if (name === "pass") {
         return {
-          emailPhone: value,
+          pass: value,
+          passConf: prev.passConf,
+          username: prev.username,
+        };
+      } else if (name === "passConf") {
+        return {
+          pass: prev.pass,
+          passConf: value,
+          username: prev.username,
+        };
+      } else if (name === "username") {
+        return {
+          pass: prev.pass,
+          passConf: prev.passConf,
+          username: value,
         };
       }
     });
@@ -34,63 +40,68 @@ export default function PasswordRecovery() {
   function handleSubmit(event) {
     event.preventDefault();
     const cred = {
-      emailPhone: state.emailPhone,
+      username: state.username,
+      pass: state.pass,
+      passConf: state.passConf,
     };
-
     axios
-      .post("http://localhost:5000/users/sendmail", cred)
+      .patch("http://localhost:5000/users/updatepass", cred)
       .then((res) => {
-        window.location = "/success";
-        jsCookie.set("emailCode", res.data.code);
+        window.location = "/login";
       })
-      .catch((err) => console.error("Error logging in!", err));
+      .catch((err) => console.error("User Not Found", err));
   }
+
   return (
     <div className={styles.container}>
-      <h5>Password Recovery by Email</h5>
-      <Row style={{ padding: "1rem" }} sm={10}>
-        {" "}
-      </Row>
+      <img
+        alt="password-icon"
+        src="https://img.icons8.com/fluent/48/000000/password-window.png"
+        className={styles.icon}
+      />
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Your Email</Form.Label>
           <Form.Control
-            value={state.emailPhone}
-            onChange={handleChange}
             type="email"
-            name="emailPhone"
-            placeholder="Enter your email"
+            name="username"
+            value={state.username}
+            onChange={handleChange}
+            placeholder="Email"
           />
-          <Button
-            style={{
-              justifyContent: "center",
-              alignItem: "center",
-              alignSelf: "center",
-              marginBottom: "2rem",
-              marginTop: "10px",
-            }}
-            variant="light"
-            className={styles.button}
-            type="submit"
-          >
-            <MailIcon></MailIcon>
-          </Button>
         </Form.Group>
-        <div style={{ marginBottom: "2rem" }}>
-          {" "}
-          <a
-            style={{ marginBottom: "1rem" }}
-            href="http://localhost:3000/verify/sms"
-          >
-            Verify using SMS instead?
-          </a>
-          <br></br>
-          <a href="http://localhost:3000/login">Try to login again</a>
-        </div>{" "}
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>New Password</Form.Label>
+          <Form.Control
+            value={state.pass}
+            onChange={handleChange}
+            type="password"
+            name="pass"
+            placeholder="Enter new password"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="passConf"
+            value={state.passConf}
+            onChange={handleChange}
+            placeholder="Confirm password"
+          />
+        </Form.Group>
+        <Button variant="dark" className={styles.loginButton} type="submit">
+          Submit
+        </Button>
       </Form>
 
+      <a href="http://localhost:3000/register" className={styles.link}>
+        New user? Sign up for an account here
+      </a>
       <Footer />
     </div>
   );
 }
+export default PasswordRecovery;

@@ -4,33 +4,43 @@ import styles from "./styles/Forms.module.css";
 import { Form, Button, Row } from "react-bootstrap";
 import Footer from "./Footer";
 import axios from "axios";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 import jsCookie from "js-cookie";
 
-function SMSIcon() {
-  return (
-    <img
-      src="https://img.icons8.com/android/24/000000/sms.png"
-      alt="sms-icon"
-    />
-  );
-}
-
-export default function SMSCode() {
+export default function PasswordRecovery() {
   const [state, setState] = useState({
     emailPhone: "",
   });
 
+  function MailIcon() {
+    return (
+      <img
+        src="https://img.icons8.com/ios-filled/25/000000/apple-mail.png"
+        alt="mail-icon"
+      />
+    );
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setState((prev) => {
+      if (name === "emailPhone") {
+        return {
+          emailPhone: value,
+        };
+      }
+    });
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     const cred = {
-      emailPhone: "+" + state.emailPhone,
+      emailPhone: state.emailPhone,
     };
+
     jsCookie.set("cred", state.emailPhone);
 
     axios
-      .post("http://localhost:5000/users/sendSMS", cred)
+      .post("http://localhost:5000/users/sendmail", cred)
       .then((res) => {
         window.location = "/success";
         jsCookie.set("code", res.data.code);
@@ -39,20 +49,21 @@ export default function SMSCode() {
   }
   return (
     <div className={styles.container}>
-      <h5>Password Recovery by SMS</h5>
+      <h5>Password Recovery by Email</h5>
       <Row style={{ padding: "1rem" }} sm={10}>
         {" "}
       </Row>
+
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Phone</Form.Label>
-          <PhoneInput
-            country={"ps"}
+          <Form.Label>Email</Form.Label>
+          <Form.Control
             value={state.emailPhone}
+            onChange={handleChange}
+            type="email"
             name="emailPhone"
-            onChange={(emailPhone) => setState({ emailPhone })}
-          ></PhoneInput>
-
+            placeholder="Enter your email"
+          />
           <Button
             style={{
               justifyContent: "center",
@@ -65,20 +76,20 @@ export default function SMSCode() {
             className={styles.button}
             type="submit"
           >
-            <SMSIcon></SMSIcon> Next
+            <MailIcon></MailIcon> Next
           </Button>
         </Form.Group>
         <div style={{ marginBottom: "2rem" }}>
           {" "}
           <a
             style={{ marginBottom: "1rem" }}
-            href="http://localhost:3000/verify/mail"
+            href="http://localhost:3000/verify/sms"
           >
-            Verify using Email instead?
+            Verify using SMS instead?
           </a>
           <br></br>
           <a href="http://localhost:3000/login">Try to login again</a>
-        </div>
+        </div>{" "}
       </Form>
 
       <Footer />

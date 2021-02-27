@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
 import axios from "axios";
+
 function Register() {
   const [state, setState] = useState({
     fname: "",
@@ -162,6 +163,7 @@ function Register() {
         <Form.Row>
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>Phone Number</Form.Label>
+
             <Form.Control
               name="phoneNo"
               value={state.phoneNo}

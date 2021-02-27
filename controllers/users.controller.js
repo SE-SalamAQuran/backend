@@ -159,7 +159,7 @@ module.exports = {
     let transporter = nodemailer.createTransport(mailConfig);
     const destEmail = req.body.emailPhone;
     // send mail with defined transport object
-    let info = await transporter.sendMail({
+    await transporter.sendMail({
       from: `${process.env.BRAND} ${process.env.EMAIL_ADDR} `, // sender address
       to: `${destEmail}`, // list of receivers
       subject: "Password Recovery Service", // Subject line
@@ -190,5 +190,43 @@ module.exports = {
 
       .then((message) => res.status(200).json({ code: verCode }))
       .catch((err) => res.status(400).send(err));
+  },
+  // changePassword: async (req, res) => {
+  //   const { pass, passConf, username } = req.body;
+  //   bcrypt.hash(pass, 10, async (err, hash) => {
+  //     if (err) {
+  //       res.status(400).send(err);
+  //     } else {
+  //       if (pass === passConf) {
+  //         await Users.findOneAndUpdate(
+  //           { username: username },
+  //           { password: hash }
+  //         )
+  //           .then(() => res.json(pass))
+  //           .catch((error) => res.status(400).send(error));
+  //       } else {
+  //         res.json({ Error: "Passwords do not match" });
+  //       }
+  //     }
+  //   });
+  // },
+  changePassword: async (req, res) => {
+    const { pass, passConf, username } = req.body;
+    if (pass === passConf) {
+      bcrypt.hash(pass, 10, async (err, hash) => {
+        if (err) {
+          res.status(400).json({ Error: err });
+        } else {
+          await Users.findOneAndUpdate(
+            { username: username },
+            { password: hash }
+          )
+            .then(() => res.json({ New: pass }))
+            .catch((error) => res.status(400).send(error));
+        }
+      });
+    } else {
+      res.status(400).json({ error: "Passwords do not match" });
+    }
   },
 };
