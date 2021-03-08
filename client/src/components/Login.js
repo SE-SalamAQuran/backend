@@ -75,7 +75,7 @@ function Login() {
             placeholder="Password"
           />
         </Form.Group>
-        <Button variant="dark" className={styles.loginButton} type="submit">
+        <Button variant="dark" className="btn btn-block" type="submit">
           Login
         </Button>
       </Form>

@@ -62,7 +62,7 @@ export default function SMSCode() {
               marginTop: "10px",
             }}
             variant="light"
-            className={styles.button}
+            className="btn btn-block"
             type="submit"
           >
             <SMSIcon></SMSIcon> Next

@@ -92,8 +92,8 @@ function PasswordRecovery() {
             placeholder="Confirm password"
           />
         </Form.Group>
-        <Button variant="dark" className={styles.loginButton} type="submit">
-          Submit
+        <Button variant="dark" className="btn btn-block" type="submit">
+          Change password
         </Button>
       </Form>
 

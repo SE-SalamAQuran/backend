@@ -67,7 +67,7 @@ export default function Success() {
               marginTop: "10px",
             }}
             variant="light"
-            className={styles.button}
+            className="btn btn-block"
             type="submit"
           >
             <MyIcon /> Next

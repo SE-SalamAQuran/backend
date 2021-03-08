@@ -172,7 +172,7 @@ function Register() {
             />
           </Form.Group>
         </Form.Row>
-        <Button variant="dark" className={styles.signUpButton} type="submit">
+        <Button variant="dark" className="btn btn-block" type="submit">
           Signup
         </Button>
       </Form>

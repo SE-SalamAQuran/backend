@@ -73,7 +73,7 @@ export default function PasswordRecovery() {
               marginTop: "10px",
             }}
             variant="light"
-            className={styles.button}
+            className="btn btn-block"
             type="submit"
           >
             <MailIcon></MailIcon> Next
