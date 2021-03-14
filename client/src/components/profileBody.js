@@ -9,6 +9,27 @@ export default function ProfileBody() {
 
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const [photo, setPicture] = useState("");
+
+  const handlePhoto = (e) => {
+    setPicture({photo: e.target.files[0]});
+}
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append('photo',photo);
+
+  
+
+  axios.patch('http://localhost:5000/users/UploadProfile'+ user._id , formData)
+       .then(res => {
+          console.log(res);
+       })
+       .catch(err => {
+          console.log(err);
+       });
+}
+
 
   function upload() {
     window.location = "/upload";
@@ -27,6 +48,10 @@ export default function ProfileBody() {
 
       .catch((err) => console.log(err));
   });
+  function goListedWishesPage (e)  {
+    e.preventDefault();
+    window.location = "http://localhost:3000/table";
+  };
 
   return (
     <div
@@ -50,22 +75,41 @@ export default function ProfileBody() {
             style={{ marginTop: "2rem" }}
             class="btn btn-secondary btn-block"
             type="button"
+<<<<<<< HEAD
             id={styles.btnUpload}
             onClick={upload}
+=======
+          
+>>>>>>> a75f8c8c203056f45e5fc3c02345074feb688b18
           >
             Upload New Picture
           </button>
+
         </div>
         <div class="col-sm-4">
           <div>
             <button type="button" class="btn btn-secondary  btn-lg">
+<<<<<<< HEAD
               My Appointments
+=======
+            My appointments
+            </button>
+          </div>
+          <br></br> <br></br> <br></br>
+          <div>
+            <button onClick = {goListedWishesPage} type="button" class="btn btn-secondary  btn-lg">
+              My requsted list
+>>>>>>> a75f8c8c203056f45e5fc3c02345074feb688b18
             </button>
           </div>
           <br></br> <br></br> <br></br>
           <div>
             <button type="button" class="btn btn-secondary  btn-lg">
+<<<<<<< HEAD
               My Realestates
+=======
+            My properties
+>>>>>>> a75f8c8c203056f45e5fc3c02345074feb688b18
             </button>
           </div>
         </div>

@@ -4,11 +4,7 @@ var Schema = mongoose.Schema;
 
 const propertySchema = new Schema(
   {
-    title: {
-      type: String,
-      trim: true,
-      required: true,
-    },
+    
     propertyFor: {
       type: String,
       required: true,

@@ -58,9 +58,12 @@ app.post("/upload/avatar", (req, res) => {
       return res.status(500).send(err);
     }
 
+app.use("/properity", propertiesRoute);
+
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
   });
 });
+
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

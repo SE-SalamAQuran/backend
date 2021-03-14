@@ -1,10 +1,10 @@
 const router = require("express").Router({ mergeParams: true });
-const uploadController = require("../controllers/upload.controller");
 const passport = require("passport");
 const homeController = require("../controllers/home");
 var userController = require("../controllers/users.controller");
 router.get("/", homeController.getHome);
 router.put("/update/:id", userController.updateUserData);
+router.put("/uploadProfile/:id", userController.updateUserPicture);
 router.get("/user/:id", userController.fetcheUserData);
 router.post("/login", userController.userLogin);
 router.post("/sendmail", userController.forgotPasswordMail);
@@ -13,5 +13,7 @@ router.post("/logout/:id", userController.logout);
 router.post("/register", userController.registerNewUser);
 router.patch("/updatePass", userController.changePassword);
 router.post("/upload", uploadController.uploadFile);
+
+
 
 module.exports = router;
