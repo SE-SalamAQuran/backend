@@ -45,7 +45,7 @@ function UploadRealEstateRequset () {
       };
    
      axios
-        .post("http://localhost:5000/properity/addWishItem", data)
+        .post("http://localhost:5000/properties/addWishItem", data)
         .then((res) => {
         console.log({data})
           res.status(200);

@@ -14,7 +14,7 @@ function Table() {
     function deleteItem(wishListId) {
       const id =  wishListId ; 
 
-      axios.delete("http://localhost:5000/properity/deleteWishItem/" +id )
+      axios.delete("http://localhost:5000/properties/deleteWishItem/" +id )
       .then((res) => {
         res.status(200);
       })
@@ -28,7 +28,7 @@ function Table() {
       };  
       useEffect(() => {
         axios
-          .get("http://localhost:5000/properity/getWishItem/" + user._id, {
+          .get("http://localhost:5000/properties/getWishItem/" + user._id, {
             headers: {
               "content-type": "application/json",
             },
@@ -56,13 +56,8 @@ return (
 <button onClick={() => deleteItem(wishList._id)} type="button" class="btn btn-outline-danger"> Delete</button></td>
 </tr>
 
-
 )
 }
-
-  
-
-
   return(
 
 <div>
