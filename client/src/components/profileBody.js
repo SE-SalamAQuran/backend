@@ -61,7 +61,7 @@ const handleSubmit = (e) => {
       <div class="row">
         <div class="col-sm-4">
           <br /> <br /> <br /> <br />
-          <h1>{user.fname + " " + user.lname}</h1>
+          <h1>{fname + " " + lname}</h1>
         </div>
         <div class="col-sm-4">
           <img

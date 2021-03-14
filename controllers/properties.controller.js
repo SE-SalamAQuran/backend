@@ -21,6 +21,7 @@ module.exports = {
       
     
   },
+
   deleteWishItem : (req, res) => {
 console.log(req.params.id)
     console.log("trying to delete ")
@@ -34,8 +35,10 @@ console.log(req.params.id)
 
       
   },
+  
 
   fetcheWishlList: (req, res) => {
+    console.log("trying to fetching")
     const id = req.params.id;
     wishlist.find({user : id }, (err, result) => {
       if (err) {
@@ -45,6 +48,7 @@ console.log(req.params.id)
       }
     });
   },
+
   
   getLands: async (req, res) => {
     await Properity.find({ type: "land" }, (err, lands) => {

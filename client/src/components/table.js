@@ -10,8 +10,7 @@ function Table() {
 
     let user = JSON.parse(sessionStorage.getItem("user"));
 
-  const [wishList, setWishList] = useState([{"_id" : ""  , "propType": "" , "transType":"" ,  "city" : "" , "address": ""}]);
-  const[count,setCount] = useState(0)
+  const [wishList, setWishList] = useState([]);
     function deleteItem(wishListId) {
       const id =  wishListId ; 
 
@@ -27,7 +26,22 @@ function Table() {
         e.preventDefault();
         window.location = "http://localhost:3000/uploadNewRralEstateRequest";
       };  
-
+      useEffect(() => {
+        axios
+          .get("http://localhost:5000/properity/getWishItem/" + user._id, {
+            headers: {
+              "content-type": "application/json",
+            },
+          })
+          .then((res) => {
+            setWishList(res.data);
+          console.log(res.data) ;
+          
+    
+          })
+          .catch((err) => console.log(err));
+      } , []);
+    
     
 
 const renderWishlist = (wishList , index )=>{
@@ -45,21 +59,6 @@ return (
 
 )
 }
-useEffect(() => {
-    axios
-      .get("http://localhost:5000/properity/getWishItem/" + user._id, {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-      .then((res) => {
-        setWishList(res.data);
-      console.log(res.data) ;
-      
-
-      })
-      .catch((err) => console.log(err));
-  } , []);
 
   
 
