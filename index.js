@@ -17,7 +17,7 @@ const propertiesRoute = require("./routes/properity.routes");
 const { initialize } = require("passport");
 
 const app = express();
-app.set("view engine", "ejs");
+// app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -58,12 +58,11 @@ app.post("/upload/avatar", (req, res) => {
       return res.status(500).send(err);
     }
 
-app.use("/properity", propertiesRoute);
+    app.use("/properity", propertiesRoute);
 
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
   });
 });
-
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

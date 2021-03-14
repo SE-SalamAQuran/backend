@@ -7,13 +7,9 @@ const randomString = require("randomstring");
 const twilio = require("twilio");
 const dotenv = require("dotenv").config();
 const secretKey = process.env.JWT_SECRET;
-const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
-let path = require('path');
-
-
-
-
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
+let path = require("path");
 
 module.exports = {
   registerNewUser: async (req, res) => {
@@ -115,10 +111,10 @@ module.exports = {
   updateUserPicture: (req, res) => {
     console.log(req.params.id);
     const id = req.params.id;
-    console.log({id});
+    console.log({ id });
     console.log(req.body.filename);
-  
-   /*Users.findOneAndUpdate(
+
+    /*Users.findOneAndUpdate(
       { _id: id },
       {
         $set: {
@@ -220,25 +216,7 @@ module.exports = {
       .then((message) => res.status(200).json({ code: verCode }))
       .catch((err) => res.status(400).send(err));
   },
-  // changePassword: async (req, res) => {
-  //   const { pass, passConf, username } = req.body;
-  //   bcrypt.hash(pass, 10, async (err, hash) => {
-  //     if (err) {
-  //       res.status(400).send(err);
-  //     } else {
-  //       if (pass === passConf) {
-  //         await Users.findOneAndUpdate(
-  //           { username: username },
-  //           { password: hash }
-  //         )
-  //           .then(() => res.json(pass))
-  //           .catch((error) => res.status(400).send(error));
-  //       } else {
-  //         res.json({ Error: "Passwords do not match" });
-  //       }
-  //     }
-  //   });
-  // },
+
   changePassword: async (req, res) => {
     const { pass, passConf, username } = req.body;
     if (pass === passConf) {
