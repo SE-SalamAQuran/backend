@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
+const ejs = require("ejs");
 const uri = process.env.URI;
 const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
@@ -11,15 +12,16 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const methodOverride = require("method-override");
 const upload = require("./providers/gridFS.provider");
-const fileUpload = require("express-fileupload");
 const usersRoute = require("./routes/users.routes");
 const propertiesRoute = require("./routes/properity.routes");
 const { initialize } = require("passport");
 
 const app = express();
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(morgan("dev"));
-app.use(fileUpload({}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
@@ -37,9 +39,6 @@ connection.once("open", () => {
   console.log("Connected to DB!");
 });
 
-app.use(bodyParser.json());
-app.use(upload.single());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(methodOverride("_method"));
 app.use("/users", usersRoute);

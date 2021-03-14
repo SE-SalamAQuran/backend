@@ -1,4 +1,3 @@
-const { $where } = require("../models/property.model");
 const Properity = require("../models/property.model");
 
 module.exports = {

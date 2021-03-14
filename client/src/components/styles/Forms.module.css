@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
   padding: 0;
-  display: flex;
+  display: grid;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -10,7 +10,7 @@
 .container .icon {
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin: auto;
 }
 .container .loginButton {
   align-self: center;

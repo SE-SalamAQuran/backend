@@ -9,6 +9,7 @@ import MailForm from "./components/MailCode";
 import SMSForm from "./components/SMSCode";
 import Success from "./components/Success";
 import Recover from "./components/PasswordRecovery";
+import UploadProfilePic from "./components/UploadProfilePic";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/success" component={Success} />
       <Route path="/newPassword" component={Recover} />
       <Route path="/tprofile" exact component={TestProfile} />
+      <Route path="/upload" component={UploadProfilePic} />
       <Route
         path="/Update user Information"
         component={updateUserInformation}

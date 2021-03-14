@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+.toolBtn {
+  margin-top: 2rem;
+  color: bisque;
+}
