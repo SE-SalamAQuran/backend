@@ -23,6 +23,15 @@ function ProfileSecCom() {
     <Navbar variant="dark" bg="dark">
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-left">
+
+      <div class="row"  >
+        <div class="col-sm-12 text-left" >
+        <button style={{padding:15,margin:5}}  type="button" class="btn btn-secondary btn-lg" onClick = {logOut}>LogOut</button>
+        <button style={{padding:15,margin:5}} type="button" class="btn btn-secondary btn-lg" onClick = {backHome}>Home</button>
+        <button  style={{padding:15,margin:5}}  type="button" class="btn btn-secondary btn-lg" onClick = {updateUserInformation}>Edit user Information</button>
+         </div>
+    </div>
+
         <div class="row">
           <div class="col-sm-12 text-left">
             <button
@@ -51,6 +60,7 @@ function ProfileSecCom() {
             </button>
           </div>
         </div>
+
       </Navbar.Collapse>
     </Navbar>
   );

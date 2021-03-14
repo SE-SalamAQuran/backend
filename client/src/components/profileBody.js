@@ -59,7 +59,7 @@ export default function ProfileBody() {
       <div class="row">
         <div class="col-sm-4">
           <br /> <br /> <br /> <br />
-          <h1>{user.fname + " " + user.lname}</h1>
+          <h1>{fname + " " + lname}</h1>
         </div>
         <div class="col-sm-4">
           <img
@@ -73,6 +73,7 @@ export default function ProfileBody() {
             style={{ marginTop: "2rem" }}
             class="btn btn-secondary btn-block"
             type="button"
+
           >
             Upload New Picture
           </button>
@@ -80,7 +81,8 @@ export default function ProfileBody() {
         <div class="col-sm-4">
           <div>
             <button type="button" class="btn btn-secondary  btn-lg">
-              My appointments
+            My appointments
+
             </button>
           </div>
           <br></br> <br></br> <br></br>
@@ -91,11 +93,13 @@ export default function ProfileBody() {
               class="btn btn-secondary  btn-lg"
             >
               My requested list
+
             </button>
           </div>
           <br></br> <br></br> <br></br>
           <div>
             <button type="button" class="btn btn-secondary  btn-lg">
+
               My properties
             </button>
           </div>

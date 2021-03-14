@@ -14,4 +14,5 @@ router.post("/logout/:id", userController.logout);
 router.post("/register", userController.registerNewUser);
 router.patch("/updatePass", userController.changePassword);
 
+
 module.exports = router;

@@ -16,10 +16,12 @@ module.exports = {
         .then(() => res.json(newWishItem))
         .catch((error) => res.status(400).send(error));
   },
-  deleteWishItem: (req, res) => {
-    console.log(req.params.id);
-    console.log("trying to delete ");
-    wishlist.remove({ _id: req.params.id }, function (err) {
+
+  deleteWishItem : (req, res) => {
+console.log(req.params.id)
+    console.log("trying to delete ")
+   wishlist.remove({ _id: req.params.id }, function(err) {
+
       if (!err) {
         return res.send("wishlist deleted!");
       } else {
@@ -27,8 +29,10 @@ module.exports = {
       }
     });
   },
+  
 
   fetcheWishlList: (req, res) => {
+    console.log("trying to fetching")
     const id = req.params.id;
     wishlist.find({ user: id }, (err, result) => {
       if (err) {
@@ -38,6 +42,7 @@ module.exports = {
       }
     });
   },
+
 
   getLands: async (req, res) => {
     await Properity.find({ type: "land" }, (err, lands) => {
