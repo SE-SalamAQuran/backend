@@ -30,6 +30,8 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "express-session": "^1.17.1",
+    "faker": "^5.1.0",
+
     "gridfs-stream": "^1.1.1",
     "http-proxy": "^1.18.1",
     "identity-obj-proxy": "^3.0.0",
@@ -58,6 +60,7 @@
     "randomstring": "^1.1.5",
     "regex-collection": "^1.0.1",
     "twilio": "^3.56.0",
+    "uuid": "^8.3.2",
     "validator": "^13.5.2"
   }
 }
