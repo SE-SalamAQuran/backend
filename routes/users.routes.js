@@ -12,7 +12,7 @@ router.post("/sendSMS", userController.forgotPasswordSMS);
 router.post("/logout/:id", userController.logout);
 router.post("/register", userController.registerNewUser);
 router.patch("/updatePass", userController.changePassword);
-router.post("/upload", uploadController.uploadFile);
+
 
 
 
