@@ -1,45 +1,37 @@
 import { React, useState } from "react";
-import search from "regex-collection";
+import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
-import { Form, Button, Row } from "react-bootstrap";
 import Footer from "./Footer";
 import axios from "axios";
 
-export default function PasswordRecovery() {
+function PasswordRecovery() {
   const [state, setState] = useState({
-    emailPhone: "",
-    type: "",
+    pass: "",
+    passConf: "",
+    username: "",
   });
 
-  function MailIcon() {
-    return (
-      <img
-        src="https://img.icons8.com/ios-filled/25/000000/apple-mail.png"
-        alt="mail-icon"
-      />
-    );
-  }
-  function SMSIcon() {
-    return (
-      <img
-        src="https://img.icons8.com/android/24/000000/sms.png"
-        alt="sms-icon"
-      />
-    );
-  }
   function handleChange(event) {
     const { name, value } = event.target;
     setState((prev) => {
-      if (name === "emailPhone") {
+      if (name === "pass") {
         return {
-          emailPhone: value,
-          type: prev.type,
+          pass: value,
+          passConf: prev.passConf,
+          username: prev.username,
         };
-      } else if (name === "type") {
+      } else if (name === "passConf") {
         return {
-          emailPhone: prev.emailPhone,
-          type: value,
+          pass: prev.pass,
+          passConf: value,
+          username: prev.username,
+        };
+      } else if (name === "username") {
+        return {
+          pass: prev.pass,
+          passConf: prev.passConf,
+          username: value,
         };
       }
     });
@@ -48,61 +40,68 @@ export default function PasswordRecovery() {
   function handleSubmit(event) {
     event.preventDefault();
     const cred = {
-      emailPhone: state.emailPhone,
+      username: state.username,
+      pass: state.pass,
+      passConf: state.passConf,
     };
-    if (cred.emailPhone.isEmailAddress) {
-      axios
-        .post("http://localhost:5000/users/sendmail", cred)
-        .then((res) => {
-          window.location = "/";
-        })
-        .catch((err) => console.error("Error logging in!", err));
-    } else if (cred.emailPhone.isTelephoneNumber) {
-      axios
-        .post("http://localhost:5000/users/sendSMS", cred)
-        .then((res) => {
-          window.location = "/";
-        })
-        .catch((err) => console.error("Error logging in!", err));
-    }
+    axios
+      .patch("http://localhost:5000/users/updatepass", cred)
+      .then((res) => {
+        window.location = "/login";
+      })
+      .catch((err) => console.error("User Not Found", err));
   }
+
   return (
     <div className={styles.container}>
-      <Row style={{ padding: "1rem" }} sm={10}>
-        {" "}
-        <MailIcon></MailIcon>
-        <SMSIcon></SMSIcon>
-      </Row>
+      <img
+        alt="password-icon"
+        src="https://img.icons8.com/fluent/48/000000/password-window.png"
+        className={styles.icon}
+      />
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email / Phone</Form.Label>
+          <Form.Label>Your Email</Form.Label>
           <Form.Control
-            value={state.emailPhone}
-            onChange={handleChange}
             type="email"
-            name="emailPhone"
-            placeholder="Enter mail or phone"
+            name="username"
+            value={state.username}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>New Password</Form.Label>
+          <Form.Control
+            value={state.pass}
+            onChange={handleChange}
+            type="password"
+            name="pass"
+            placeholder="Enter new password"
           />
         </Form.Group>
 
-        <Button
-          style={{
-            justifyContent: "center",
-            alignItem: "center",
-            alignSelf: "center",
-            marginBottom: "6rem",
-            marginTop: "10px",
-          }}
-          variant="dark"
-          className={styles.button}
-          type="submit"
-        >
-          Send Verification Code
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="passConf"
+            value={state.passConf}
+            onChange={handleChange}
+            placeholder="Confirm password"
+          />
+        </Form.Group>
+        <Button variant="dark" className="btn btn-block" type="submit">
+          Change password
         </Button>
       </Form>
 
+      <a href="http://localhost:3000/register" className={styles.link}>
+        New user? Sign up for an account here
+      </a>
       <Footer />
     </div>
   );
 }
+export default PasswordRecovery;

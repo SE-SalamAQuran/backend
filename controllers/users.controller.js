@@ -188,20 +188,14 @@ module.exports = {
     let transporter = nodemailer.createTransport(mailConfig);
     const destEmail = req.body.emailPhone;
     // send mail with defined transport object
-    let info = await transporter.sendMail({
+    await transporter.sendMail({
       from: `${process.env.BRAND} ${process.env.EMAIL_ADDR} `, // sender address
       to: `${destEmail}`, // list of receivers
       subject: "Password Recovery Service", // Subject line
       text: `Our valid user,  ${verCode} is the code to your password recovery. Do Not share this code with anyone`, // plain text body
       html: `<h1>Palestinian Estates</h1> <p><em> ${verCode}</em>  is the code to your password recovery, Do Not share this code with anyone</p>`, //html body
     });
-    res.status(200).send(verCode);
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    res.status(200).json({ code: verCode });
   },
 
   forgotPasswordSMS: async (req, res) => {
@@ -222,7 +216,46 @@ module.exports = {
         from: `${sender}`,
         to: `${destPhone}`,
       })
-      .then((message) => res.status(200).send(message))
+
+      .then((message) => res.status(200).json({ code: verCode }))
       .catch((err) => res.status(400).send(err));
+  },
+  // changePassword: async (req, res) => {
+  //   const { pass, passConf, username } = req.body;
+  //   bcrypt.hash(pass, 10, async (err, hash) => {
+  //     if (err) {
+  //       res.status(400).send(err);
+  //     } else {
+  //       if (pass === passConf) {
+  //         await Users.findOneAndUpdate(
+  //           { username: username },
+  //           { password: hash }
+  //         )
+  //           .then(() => res.json(pass))
+  //           .catch((error) => res.status(400).send(error));
+  //       } else {
+  //         res.json({ Error: "Passwords do not match" });
+  //       }
+  //     }
+  //   });
+  // },
+  changePassword: async (req, res) => {
+    const { pass, passConf, username } = req.body;
+    if (pass === passConf) {
+      bcrypt.hash(pass, 10, async (err, hash) => {
+        if (err) {
+          res.status(400).json({ Error: err });
+        } else {
+          await Users.findOneAndUpdate(
+            { username: username },
+            { password: hash }
+          )
+            .then(() => res.json({ New: pass }))
+            .catch((error) => res.status(400).send(error));
+        }
+      });
+    } else {
+      res.status(400).json({ error: "Passwords do not match" });
+    }
   },
 };

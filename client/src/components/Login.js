@@ -75,24 +75,14 @@ function Login() {
             placeholder="Password"
           />
         </Form.Group>
-        <Button
-          style={{
-            justifyContent: "center",
-            alignItem: "center",
-            alignSelf: "center",
-            marginTop: "6px",
-          }}
-          variant="dark"
-          className={styles.button}
-          type="submit"
-        >
+        <Button variant="dark" className="btn btn-block" type="submit">
           Login
         </Button>
-        <Nav.Link href="http://localhost:3000/forgot">
-          Forgot your password ?
-        </Nav.Link>
       </Form>
 
+      <Nav.Link href="http://localhost:3000/verify/mail">
+        Forgot your password ?
+      </Nav.Link>
       <a href="http://localhost:3000/register" className={styles.link}>
         New user? Sign up for an account here
       </a>

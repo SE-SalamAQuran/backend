@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,19 @@
   align-items: center;
   margin-bottom: 10px;
 }
-
+.container .loginButton {
+  align-self: center;
+  margin-left: 4rem;
+  align-content: center;
+  justify-self: center;
+  margin-bottom: 2rem;
+}
+.container .signUpButton {
+  align-self: center;
+  margin-left: 10.4375rem;
+  align-content: center;
+  justify-self: center;
+}
 .container .radio {
   margin-left: 1rem;
   padding-left: 5px;

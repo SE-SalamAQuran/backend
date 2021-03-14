@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-
 var Schema = mongoose.Schema;
 
 const wishListSchema = new Schema(
@@ -9,7 +8,7 @@ const wishListSchema = new Schema(
       ref: "Users",
       required: true,
     },
-   
+
     propType: {
       type: String,
       required: true,
@@ -42,7 +41,6 @@ const wishListSchema = new Schema(
       type: String,
       required: true,
     },
-   
   },
 
   { timestamps: true }

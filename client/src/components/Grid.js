@@ -12,6 +12,7 @@ import office from "../images/Office.jpg";
 export default function Grid() {
   return (
     <div
+      id="estates"
       className={styles.grid}
       style={{ marginRight: "", padding: "5rem" }}
       class="row"

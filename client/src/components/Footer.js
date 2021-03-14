@@ -7,7 +7,7 @@ export default function Footer() {
       <a href="http://localhost:3000" rel="noopener noreferrer">
         Copyrights @ Palestinian Estates {new Date().getFullYear()}
         <img
-          src="https://img.icons8.com/wired/50/000000/real-estate.png"
+          src="https://img.icons8.com/wired/50/00000/real-estate.png"
           alt="logo"
           className={styles.logo}
         />
