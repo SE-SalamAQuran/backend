@@ -13,6 +13,10 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -41,13 +45,18 @@ const usersRoute = require("./routes/users.routes");
 const propertiesRoute = require("./routes/properity.routes");
 const { initialize } = require("passport");
 
+
 app.use("/users", usersRoute);
+
+
 
 app.get("/", (req, res) => {
   res.send("Success");
 });
 
+
 app.use("/properties", propertiesRoute);
+
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

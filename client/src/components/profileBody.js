@@ -12,24 +12,22 @@ export default function ProfileBody() {
   const [photo, setPicture] = useState("");
 
   const handlePhoto = (e) => {
-    setPicture({photo: e.target.files[0]});
-}
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const formData = new FormData();
-  formData.append('photo',photo);
+    setPicture({ photo: e.target.files[0] });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("photo", photo);
 
-  
-
-  axios.patch('http://localhost:5000/users/UploadProfile'+ user._id , formData)
-       .then(res => {
-          console.log(res);
-       })
-       .catch(err => {
-          console.log(err);
-       });
-}
-
+    axios
+      .patch("http://localhost:5000/users/UploadProfile" + user._id, formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   function upload() {
     window.location = "/upload";
@@ -48,10 +46,10 @@ const handleSubmit = (e) => {
 
       .catch((err) => console.log(err));
   });
-  function goListedWishesPage (e)  {
+  function goListedWishesPage(e) {
     e.preventDefault();
     window.location = "http://localhost:3000/table";
-  };
+  }
 
   return (
     <div
@@ -75,28 +73,34 @@ const handleSubmit = (e) => {
             style={{ marginTop: "2rem" }}
             class="btn btn-secondary btn-block"
             type="button"
-           
+
           >
             Upload New Picture
           </button>
-
         </div>
         <div class="col-sm-4">
           <div>
             <button type="button" class="btn btn-secondary  btn-lg">
             My appointments
+
             </button>
           </div>
           <br></br> <br></br> <br></br>
           <div>
-            <button onClick = {goListedWishesPage} type="button" class="btn btn-secondary  btn-lg">
-              My requsted list
+            <button
+              onClick={goListedWishesPage}
+              type="button"
+              class="btn btn-secondary  btn-lg"
+            >
+              My requested list
+
             </button>
           </div>
           <br></br> <br></br> <br></br>
           <div>
             <button type="button" class="btn btn-secondary  btn-lg">
-            My properties
+
+              My properties
             </button>
           </div>
         </div>

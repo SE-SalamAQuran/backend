@@ -12,13 +12,18 @@ import SMSForm from "./components/SMSCode";
 import Success from "./components/Success";
 import Recover from "./components/PasswordRecovery";
 import UploadProfilePic from "./components/UploadProfilePic";
+
 import uploadRealEstate from "./components/uploadRealEstate"
 
+
+import Table from "./components/table";
 
 function App() {
   return (
     <Router>
       <Route path="/" exact component={Main} />
+      <Route path="/table" component={Table} />
+
       <Route path="/verify/mail" component={MailForm} />
       <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />
