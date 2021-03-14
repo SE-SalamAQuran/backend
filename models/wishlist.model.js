@@ -9,13 +9,11 @@ const wishListSchema = new Schema(
       ref: "Users",
       required: true,
     },
-    title: {
-      type: String,
-    },
+   
     propType: {
       type: String,
       required: true,
-      enum: ["land", "apartment", "shop", "house", "villa", "roof", "office"],
+      enum: ["land", "appartment", "shop", "house", "villa", "roof", "office"],
     },
     transType: {
       type: String,
@@ -44,10 +42,7 @@ const wishListSchema = new Schema(
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
+   
   },
 
   { timestamps: true }

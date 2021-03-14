@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
   res.send("Success");
 });
 
-app.use("/properties", propertiesRoute);
+app.use("/properity", propertiesRoute);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

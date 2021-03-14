@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
 import axios from "axios";
+import Navbar from "./AppBar"
+
 import { set } from 'mongoose';
 
 function Register() {
@@ -87,6 +89,7 @@ setPhoneNO( e.target.value,);
 
   return (
     <div className={styles.container}>
+      <Navbar></Navbar>
       <h1> upadte your information </h1>
       <br/>
       <Form onSubmit={handleSubmit}>
