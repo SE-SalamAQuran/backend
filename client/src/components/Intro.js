@@ -23,7 +23,7 @@ const Intro = () => {
             market
           </h3>
 
-          <p>Take advantage of the oppurtunity now and invest your money.</p>
+          <p>Take advantage of the opportunity now and invest your money.</p>
           <a href="#estates" className={styles.btnScroll} title="Go Down">
             Check the estates below
           </a>

@@ -20,14 +20,14 @@ function Table() {
       })
       .catch((err) => console.log(err));
   }, []);
-  const [wishList, setWishList] = useState([]);
 
+  const [wishList, setWishList] = useState([]);
   const [count, setCount] = useState(0);
   function deleteItem(wishListId) {
     const id = wishListId;
 
     axios
-      .delete("http://localhost:5000/properity/deleteWishItem/" + id)
+      .delete("http://localhost:5000/properties/deleteWishItem/" + id)
 
       .then((res) => {
         res.status(200);
@@ -62,19 +62,6 @@ function Table() {
     );
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/properties/getWishItem/" + user._id, {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-      .then((res) => {
-        setWishList(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
   return (
     <div>
       <Navbar></Navbar>
@@ -90,10 +77,10 @@ function Table() {
             </button>
           </div>
           <div className="form-group col-md-4">
-            <h3 style={{ textAlign: "center" }}>
+            <h4 style={{ textAlign: "center" }}>
               {" "}
-              requsted list (you have {wishList.length} request)
-            </h3>
+              List of Requests: (you have {wishList.length} requests)
+            </h4>
           </div>
           <div className="form-group col-md-4"></div>
         </div>
@@ -101,11 +88,11 @@ function Table() {
         <ReactBootStrap.Table striped bordered hover>
           <thead>
             <tr>
-              <th>proprty Type</th>
-              <th>transaction Type</th>
+              <th>Property Type</th>
+              <th>Transaction Type</th>
               <th>Location address</th>
-              <th>city</th>
-              <th>delete request</th>
+              <th>City</th>
+              <th>Delete Request</th>
             </tr>
           </thead>
           <tbody>{wishList.map(renderWishlist)}</tbody>

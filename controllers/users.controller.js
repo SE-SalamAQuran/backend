@@ -8,8 +8,8 @@ const twilio = require("twilio");
 const dotenv = require("dotenv").config();
 const secretKey = process.env.JWT_SECRET;
 const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
 let path = require("path");
+const upload = require("../middleware/upload.single");
 
 module.exports = {
   registerNewUser: async (req, res) => {
@@ -107,28 +107,6 @@ module.exports = {
         }
       }
     );
-  },
-  updateUserPicture: (req, res) => {
-    console.log(req.params.id);
-    const id = req.params.id;
-    console.log({ id });
-    console.log(req.body.filename);
-
-    /*Users.findOneAndUpdate(
-      { _id: id },
-      {
-        $set: {
-          profile: photo,
-      
-        },
-      },
-      (err) => {
-        if (err) res.json(err);
-        else {
-          console.log("updating profile done ");
-        }
-      }
-    );*/
   },
 
   logout: (req, res) => {

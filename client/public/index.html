@@ -25,7 +25,7 @@
   <div id="root"></div>
 
 
-  <script>
+  <script crossorigin="anonymous">
     if ('serviceWorker' in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("./serviceWorker.js")
@@ -35,13 +35,11 @@
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-  <script type="text/javascript" src="validator.min.js"></script>
+  <script crossorigin="anonymous" type="text/javascript" src="validator.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
     crossorigin="anonymous"></script>
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v9.0&appId=710825812958412&autoLogAppEvents=1"
-    nonce="lOcHTwQW"></script>
+
   <script src="https://kit.fontawesome.com/1cdea78cdd.js" crossorigin="anonymous"></script>
 </body>
 
