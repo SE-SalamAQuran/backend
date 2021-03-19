@@ -27,7 +27,18 @@ export default function ProfileBody() {
 
       .catch((err) => console.log(err));
   });
-
+  function hexToBase64(str) {
+    return btoa(
+      String.fromCharCode.apply(
+        null,
+        str
+          .replace(/\r|\n/g, "")
+          .replace(/([\da-fA-F]{2}) ?/g, "0x$1 ")
+          .replace(/ +$/, "")
+          .split(" ")
+      )
+    );
+  }
   function goListedWishesPage(e) {
     e.preventDefault();
     window.location = "http://localhost:3000/table";
@@ -45,7 +56,7 @@ export default function ProfileBody() {
         </div>
         <div class="col-sm-4">
           <img
-            src={pic}
+            src={"data:image/jpeg;base64" + hexToBase64(pic)}
             class="img-circle"
             style={{ width: 250, height: 250 }}
             alt="avatar"
@@ -53,6 +64,7 @@ export default function ProfileBody() {
           <br />
           <button
             style={{ marginTop: "2rem" }}
+            id={styles.btnUpload}
             class="btn btn-secondary btn-block"
             type="button"
             onClick={upload}

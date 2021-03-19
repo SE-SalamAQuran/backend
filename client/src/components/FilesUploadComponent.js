@@ -12,11 +12,14 @@ export default function FilesUploadComponent() {
     const formData = new FormData();
     formData.append("avatar", avatar);
 
-    axios({
-      method: "patch",
-      url: "http://localhost:5000/upload/avatar/" + user._id,
-      data: formData,
-    })
+    axios(
+      {
+        method: "patch",
+        url: "http://localhost:5000/upload/avatar/" + user._id,
+        data: formData,
+      },
+      (window.location = "/tprofile")
+    )
       .then(function (response) {
         //handle success
         console.log(response);
@@ -35,7 +38,7 @@ export default function FilesUploadComponent() {
         alt="pic"
       />
       <h1>Upload a new profile picture</h1>
-      <div className="row">
+      <div className="row mt-4">
         <form onSubmit={onSubmit} encType="multipart-form-data">
           <div className="form-group">
             <input
