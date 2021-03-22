@@ -33,3 +33,8 @@
 .link {
   margin: 1rem;
 }
+@media screen and (min-width: 400px) {
+  .container {
+    margin: 2rem;
+  }
+}

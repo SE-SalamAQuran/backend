@@ -214,4 +214,14 @@ module.exports = {
       res.status(400).json({ error: "Passwords do not match" });
     }
   },
+  getProfileImg: async (req, res) => {
+    const id = req.params.id;
+    Users.findOne({ _id: id }, (err, result) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.status(200).send(result.profile);
+      }
+    });
+  },
 };

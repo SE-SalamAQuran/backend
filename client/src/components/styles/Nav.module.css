@@ -35,7 +35,14 @@
   margin-top: 0.3125rem;
   margin-bottom: 0.3125rem;
 }
-@media screen and (min-width: 400px) {
+
+.avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+
+@media (min-width: 400px) {
   #btnUpload {
     margin-bottom: 2em;
   }
