@@ -2,16 +2,34 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import styles from "./styles/Nav.module.css";
+import { Image } from "react-bootstrap";
 
 export default function ProfileBody() {
   let user = JSON.parse(sessionStorage.getItem("user"));
-
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [pic, setPic] = useState("");
+  const [av, setAv] = useState("");
+
   function upload() {
     window.location = "/upload";
   }
+
+  function _imageEncode(arrayBuffer) {
+    let u8 = new Uint8Array(arrayBuffer);
+    let b64encoded = btoa(
+      [].reduce.call(
+        new Uint8Array(arrayBuffer),
+        function (p, c) {
+          return p + String.fromCharCode(c);
+        },
+        ""
+      )
+    );
+    let mimetype = "image/jpeg";
+    return "data:" + mimetype + ";base64," + b64encoded;
+  }
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/users/user/" + user._id, {
@@ -27,23 +45,16 @@ export default function ProfileBody() {
 
       .catch((err) => console.log(err));
   });
-  function hexToBase64(str) {
-    return btoa(
-      String.fromCharCode.apply(
-        null,
-        str
-          .replace(/\r|\n/g, "")
-          .replace(/([\da-fA-F]{2}) ?/g, "0x$1 ")
-          .replace(/ +$/, "")
-          .split(" ")
-      )
-    );
-  }
+  useEffect(() => {
+    axios.get(pic, { responseType: "arraybuffer" }).then((res) => {
+      setAv(_imageEncode(res.data));
+    });
+  });
+
   function goListedWishesPage(e) {
     e.preventDefault();
     window.location = "http://localhost:3000/table";
   }
-
   return (
     <div
       class="container-fluid bg-3 text-center"
@@ -55,12 +66,7 @@ export default function ProfileBody() {
           <h1>{fname + " " + lname}</h1>
         </div>
         <div class="col-sm-4">
-          <img
-            src={"data:image/jpeg;base64" + hexToBase64(pic)}
-            class="img-circle"
-            style={{ width: 250, height: 250 }}
-            alt="avatar"
-          ></img>
+          <Image srcSet={av} alt="avatar" className={styles.avatar} />
           <br />
           <button
             style={{ marginTop: "2rem" }}

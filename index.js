@@ -11,6 +11,7 @@ const passport = require("passport");
 const multer = require("multer");
 const cookieParser = require("cookie-parser");
 const upload = require("./middleware/upload.single");
+const path = require("path");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const app = express();
@@ -21,7 +22,6 @@ app.use(
 app.use(express.json({ extended: true, limit: "50mb" }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/public", express.static("public"));
 
 app.use(cookieParser());
 
@@ -47,11 +47,20 @@ const usersRoute = require("./routes/users.routes");
 const propertiesRoute = require("./routes/properity.routes");
 const uploadRoutes = require("./middleware/upload.single");
 const { initialize } = require("passport");
+const { dirname } = require("path");
 
 app.use("/users", usersRoute);
 app.use("/upload/avatar", uploadRoutes);
-
+app.use(express.static(path.join(__dirname, "./uploads")));
 app.use("/properties", propertiesRoute);
+
+app.get("/uploads/:bin", (req, res) => {
+  const bin = req.params.bin;
+  res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
+  var file = "./uploads/" + bin;
+  var image = res.sendFile(file, { root: __dirname });
+  return image;
+});
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

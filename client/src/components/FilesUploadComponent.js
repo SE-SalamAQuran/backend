@@ -48,7 +48,7 @@ export default function FilesUploadComponent() {
                 setAvatar(avatar);
               }}
               className="form-control-avatar"
-              id="avatar"
+              name="avatar"
             />
             <input
               type="submit"
