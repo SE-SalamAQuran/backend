@@ -23,7 +23,10 @@ export default function ProfileBody() {
         setFname(res.data.fname);
         setLname(res.data.lname);
         setPic(res.data.profile);
+        console.log(res.data.profile)
       })
+
+      
 
       .catch((err) => console.log(err));
   });
