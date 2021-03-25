@@ -38,7 +38,7 @@ function Table() {
   }
   function goListedWishesPage(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/uploadNewRralEstateRequest";
+    window.location = "http://localhost:3000/uploadNewRealEstateRequest";
   }
 
   const renderWishlist = (wishList, index) => {

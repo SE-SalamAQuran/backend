@@ -1,5 +1,6 @@
 const Properity = require("../models/property.model");
 const wishlist = require("../models/wishlist.model");
+const uploader = require("../middleware/upload.multiple");
 
 module.exports = {
   addNewWishItem: (req, res) => {
@@ -17,11 +18,10 @@ module.exports = {
         .catch((error) => res.status(400).send(error));
   },
 
-  deleteWishItem : (req, res) => {
-console.log(req.params.id)
-    console.log("trying to delete ")
-   wishlist.remove({ _id: req.params.id }, function(err) {
-
+  deleteWishItem: (req, res) => {
+    console.log(req.params.id);
+    console.log("trying to delete ");
+    wishlist.remove({ _id: req.params.id }, function (err) {
       if (!err) {
         return res.send("wishlist deleted!");
       } else {
@@ -29,10 +29,9 @@ console.log(req.params.id)
       }
     });
   },
-  
 
   fetcheWishlList: (req, res) => {
-    console.log("trying to fetching")
+    console.log("trying to fetching");
     const id = req.params.id;
     wishlist.find({ user: id }, (err, result) => {
       if (err) {
@@ -42,7 +41,6 @@ console.log(req.params.id)
       }
     });
   },
-
 
   getLands: async (req, res) => {
     await Properity.find({ type: "land" }, (err, lands) => {

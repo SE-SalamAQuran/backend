@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 
 const propertySchema = new Schema(
   {
-    
     propertyFor: {
       type: String,
       required: true,
@@ -12,7 +11,7 @@ const propertySchema = new Schema(
     },
     description: {
       type: String,
-      trim: true,
+      required: true,
     },
     type: {
       type: String,

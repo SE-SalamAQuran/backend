@@ -5,7 +5,7 @@ import Register from "./components/Register";
 import Main from "./components/Main";
 import TestProfile from "./components/testProfile";
 import Table from "./components/table";
-import UploadRealEstateRequset from "./components/notFoundRealestate";
+import UploadRealEstateRequest from "./components/notFoundRealestate";
 import updateUserInformation from "./components/updateUserInfo";
 import MailForm from "./components/MailCode";
 import SMSForm from "./components/SMSCode";
@@ -25,10 +25,10 @@ function App() {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/table" component={Table} />
-      <Route path="/uploadNewRralEstate" component={uploadRealEstate} />
+      <Route path="/uploadNewRealEstate" component={uploadRealEstate} />
       <Route
-        path="/uploadNewRralEstateRequest"
-        component={UploadRealEstateRequset}
+        path="/uploadNewRealEstateRequest"
+        component={UploadRealEstateRequest}
       />
       <Route path="/success" component={Success} />
       <Route path="/newPassword" component={Recover} />

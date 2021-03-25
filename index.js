@@ -40,24 +40,44 @@ connection.once("open", () => {
 app.use(cors());
 
 app.use(multer({ dest: "./uploads" }).single("avatar"));
+app.use(multer({ dest: "./public/properties" }).array("media"));
+
 // use morgan to log requests to the console
 app.use(morgan("dev"));
 
 const usersRoute = require("./routes/users.routes");
 const propertiesRoute = require("./routes/properity.routes");
 const uploadRoutes = require("./middleware/upload.single");
+const uploadProp = require("./middleware/upload.multiple");
 const { initialize } = require("passport");
 const { dirname } = require("path");
 
 app.use("/users", usersRoute);
 app.use("/upload/avatar", uploadRoutes);
+app.use("/uploads", uploadProp);
 app.use(express.static(path.join(__dirname, "./uploads")));
+app.use(express.static(path.join(__dirname, "./public/properties")));
+
 app.use("/properties", propertiesRoute);
 
 app.get("/uploads/:bin", (req, res) => {
   const bin = req.params.bin;
   res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
   var file = "./uploads/" + bin;
+  var image = res.sendFile(file, { root: __dirname });
+  return image;
+});
+
+app.get("/default/avatar", (req, res) => {
+  res.sendFile("./profile.png", { root: __dirname });
+});
+
+app.get("/media/:bin", (req, res) => {
+  const bin = req.params.bin;
+  res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
+  var files = "./public/properties/" + bin;
+
+  var file = ".//" + bin;
   var image = res.sendFile(file, { root: __dirname });
   return image;
 });
