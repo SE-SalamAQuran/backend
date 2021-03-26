@@ -3,7 +3,10 @@ import Footer from "./Footer";
 import Navbar from "./AppBar";
 import UploadBody from "./uploadBody";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Alert, Button, Tab, Tabs } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
+import styles from "./styles/Forms.module.css";
+
+function onSubmit() {}
 
 function UploadRealEstate() {
   const [show, setShow] = useState(true);
@@ -46,6 +49,14 @@ function UploadRealEstate() {
           Feel free to upload up to 6 images and/or videos to give a better view
           of your property.
         </h6>{" "}
+        <h6>
+          {" "}
+          <img
+            src="https://img.icons8.com/emoji/20/000000/check-mark-button-emoji.png"
+            alt="green"
+          />{" "}
+          Total size limit of uploads must not exceed 50MB per upload.
+        </h6>
         <h6>
           {" "}
           <img
@@ -98,28 +109,28 @@ function UploadRealEstate() {
       >
         Choose the type of real estate you want to upload
       </h1>
-      <Tabs defaultActiveKey="land" id="uncontrolled-tab-example">
-        <Tab eventKey="land" title="Land ">
-          <UploadBody />
-        </Tab>
-
-        <Tab eventKey="apartment" title="Apartment">
-          <UploadBody />
-        </Tab>
-        <Tab eventKey="villa" title="Villa">
-          <UploadBody />
-        </Tab>
-        <Tab eventKey="roof" title="Roof">
-          <UploadBody />
-        </Tab>
-        <Tab eventKey="house" title="House">
-          <UploadBody />
-        </Tab>
-        <Tab eventKey="office" title="Office">
-          <UploadBody />
-        </Tab>
-      </Tabs>
-
+      <UploadBody />
+      <div className={styles.container}>
+        <form onSubmit={onSubmit} encType="multipart-form-data">
+          <div className="form-group">
+            <input
+              type="file"
+              onChange={(event) => {
+                const avatar = event.target.files[0];
+                // setAvatar(avatar);
+              }}
+              className="form-control-avatar"
+              name="avatar"
+            />
+            <input
+              type="submit"
+              value="Upload Picture"
+              className="btn btn-block btn-primary"
+              style={{ marginTop: "2rem" }}
+            />
+          </div>
+        </form>
+      </div>
       <Footer />
     </div>
   );

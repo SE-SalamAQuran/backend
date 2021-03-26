@@ -46,6 +46,7 @@ export default function Appbar() {
           />{" "}
           Palestinian Estates
         </Navbar.Brand>
+
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Dropdown>
