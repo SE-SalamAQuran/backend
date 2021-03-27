@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
-import { Form, Button, Row } from "react-bootstrap";
+import { Form, Button, Row, Toast, Col } from "react-bootstrap";
 import Footer from "./Footer";
 import axios from "axios";
 import jsCookie from "js-cookie";
@@ -9,6 +9,12 @@ import jsCookie from "js-cookie";
 export default function PasswordRecovery() {
   const [state, setState] = useState({
     emailPhone: "",
+  });
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
   });
 
   function MailIcon() {
@@ -42,10 +48,24 @@ export default function PasswordRecovery() {
     axios
       .post("http://localhost:5000/users/sendmail", cred)
       .then((res) => {
-        window.location = "/success";
         jsCookie.set("code", res.data.code);
+        setMessage({
+          type: "alert alert-success",
+          header: "Success",
+          text: "Code sent successfully",
+        });
+        setShow(true);
+        window.location = "/success";
       })
-      .catch((err) => console.error("Error logging in!", err));
+      .catch(function (response) {
+        //handle error
+        setMessage({
+          type: "alert alert-danger",
+          header: "Failed",
+          text: "Invalid email address",
+        });
+        setShow(true);
+      });
   }
   return (
     <div className={styles.container}>
@@ -78,6 +98,27 @@ export default function PasswordRecovery() {
           >
             <MailIcon></MailIcon> Next
           </Button>
+          <Row>
+            <Col xs={12}>
+              <Toast
+                onClose={() => setShow(false)}
+                show={show}
+                style={{
+                  display: "block",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                delay={3000}
+                autohide
+              >
+                <div className={message.type}>
+                  <strong className="mr-auto">{message.header}</strong>
+                  <br></br>
+                  <small>{message.text}</small>
+                </div>
+              </Toast>
+            </Col>
+          </Row>
         </Form.Group>
         <div style={{ marginBottom: "2rem" }}>
           {" "}

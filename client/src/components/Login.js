@@ -4,11 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
 import axios from "axios";
+import { Col, Row, Toast } from "react-bootstrap";
 
 function Login() {
   const [state, setState] = useState({
     emailPhone: "",
     password: "",
+  });
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
   });
 
   function handleChange(event) {
@@ -37,13 +44,27 @@ function Login() {
     axios
       .post("http://localhost:5000/users/login", cred)
       .then((res) => {
+        setMessage({
+          type: "alert alert-success",
+          header: "Success",
+          text: "Logged in successfully",
+        });
+        setShow(true);
         window.location = "/";
         const token = res.data.token;
         sessionStorage.setItem("token", token);
         let thisUser = res.data.decoded;
         sessionStorage.setItem("user", JSON.stringify(thisUser));
       })
-      .catch((err) => console.error("Error logging in!", err));
+      .catch(function (response) {
+        //handle error
+        setMessage({
+          type: "alert alert-danger",
+          header: "Failed",
+          text: "Incorrect username or password",
+        });
+        setShow(true);
+      });
   }
 
   return (
@@ -78,6 +99,27 @@ function Login() {
         <Button variant="dark" className="btn btn-block" type="submit">
           Login
         </Button>
+        <Row>
+          <Col xs={12}>
+            <Toast
+              onClose={() => setShow(false)}
+              show={show}
+              style={{
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              delay={3000}
+              autohide
+            >
+              <div className={message.type}>
+                <strong className="mr-auto">{message.header}</strong>
+                <br></br>
+                <small>{message.text}</small>
+              </div>
+            </Toast>
+          </Col>
+        </Row>
       </Form>
 
       <Nav.Link href="http://localhost:3000/verify/mail">

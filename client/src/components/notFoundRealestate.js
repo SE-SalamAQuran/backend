@@ -2,17 +2,24 @@ import React, { useState } from "react";
 import ProfileHead from "./ProfileHeader";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Col } from "react-bootstrap";
+import { Form, Col, Row, Toast, Alert, Button } from "react-bootstrap";
 import Navbar from "./AppBar";
 const axios = require("axios");
 
 function UploadRealEstateRequset() {
   let user = JSON.parse(sessionStorage.getItem("user"));
+  const [Ashow, setAShow] = useState(true);
 
   const [propertyType, setPropertyType] = useState("house");
   const [transactionType, setTransactionType] = useState("sale-cash");
   const [city, setCity] = useState("Ramallah");
   const [address, setAddress] = useState("");
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+  });
 
   function onChangePropertyType(e) {
     setPropertyType(e.target.value);
@@ -45,25 +52,90 @@ function UploadRealEstateRequset() {
       .then((res) => {
         console.log({ data });
         res.status(200);
+        setMessage({
+          type: "alert alert-success",
+          header: "Success",
+          text: "Request Added Successfully",
+        });
+        setShow(true);
+        window.location = "/tprofile";
       })
-      .catch((err) => console.error("Error logging in!", err));
-
-    window.location = "/tprofile";
+      .catch(function (response) {
+        //handle error
+        setMessage({
+          type: "alert alert-danger",
+          header: "Failed",
+          text: "Please fill all fields",
+        });
+        setShow(true);
+      });
   }
 
   return (
     <div>
       <Navbar></Navbar>
-      <h1 style={{ textAlign: "center" }}> unavailable realestate Request </h1>
-      <h3 style={{ textAlign: "center" }}> Please make sure that:</h3>
-      <p style={{ textAlign: "center" }}>
-        {" "}
-        1 _ fill all the fields in the uploading form.{" "}
-      </p>
-      <p style={{ textAlign: "center" }}>
-        {" "}
-        2 _ please don't add any missleadig information.{" "}
-      </p>
+      <h1 style={{ textAlign: "center" }}> Unavailable Realestate Request </h1>
+      <Alert
+        show={Ashow}
+        style={{ marginTop: "1rem", textAlign: "center" }}
+        variant="dark"
+      >
+        <Alert.Heading>
+          Hey, nice to see you are uploading some content to our app
+        </Alert.Heading>
+        <h5>
+          Aww yeah, here are a few reminders before you make your request
+          process.
+        </h5>{" "}
+        <h6>
+          <img
+            src="https://img.icons8.com/emoji/20/000000/check-mark-button-emoji.png"
+            alt="green"
+          />{" "}
+          Please fill all the fields you will be asked to fill out.
+        </h6>
+        <h6>
+          {" "}
+          <img
+            src="https://img.icons8.com/emoji/20/000000/check-mark-button-emoji.png"
+            alt="green"
+          />{" "}
+          You will get a notification via mail or sms when something close to
+          the description you provide is uploaded to the platform.
+        </h6>
+        <hr />
+        <p style={{ textAlign: "center" }}>
+          We appreciate the choice you made to use platform.
+          <br></br>
+          Thank you and we wish you a nice day.
+        </p>
+        <Button
+          style={{
+            display: "block",
+            marginTop: "0.54rem",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+          onClick={() => setAShow(false)}
+          variant="outline-danger"
+        >
+          X
+        </Button>
+      </Alert>
+      {!Ashow && (
+        <Button
+          variant="info"
+          style={{
+            display: "block",
+            marginTop: "0.54rem",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+          onClick={() => setShow(true)}
+        >
+          Our terms of use
+        </Button>
+      )}
       <div style={{ padding: 20 }}></div>
       <div className="container">
         <form>
@@ -135,7 +207,27 @@ function UploadRealEstateRequset() {
           Add request{" "}
         </button>
       </div>
-
+      <Row>
+        <Col xs={12}>
+          <Toast
+            onClose={() => setShow(false)}
+            show={show}
+            style={{
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            delay={3000}
+            autohide
+          >
+            <div className={message.type}>
+              <strong className="mr-auto">{message.header}</strong>
+              <br></br>
+              <small>{message.text}</small>
+            </div>
+          </Toast>
+        </Col>
+      </Row>
       <Footer />
     </div>
   );

@@ -58,12 +58,9 @@ const propertySchema = new Schema(
     status: {
       type: String,
       default: "available",
-      enum: ["available", "sold", "rented", "expired"],
+      enum: ["available", "sold", "rented"],
     },
-    classification: {
-      type: String,
-      enum: ["A", "B", "C"],
-    },
+
     area: {
       type: Number,
       trim: true,

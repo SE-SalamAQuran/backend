@@ -58,7 +58,7 @@ router.post(
     var images = [];
     let i;
     for (i = 0; i < req.files.length; i++) {
-      images.push(url + "public/properties" + req.files[i].filename);
+      images.push(url + "public/properties/" + req.files[i].filename);
     }
     let newProp = new Property({
       propertyFor: propertyFor,

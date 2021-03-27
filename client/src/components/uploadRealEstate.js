@@ -3,19 +3,61 @@ import Footer from "./Footer";
 import Navbar from "./AppBar";
 import UploadBody from "./uploadBody";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Toast, Col, Row } from "react-bootstrap";
 import styles from "./styles/Forms.module.css";
-
-function onSubmit() {}
+import axios from "axios";
 
 function UploadRealEstate() {
-  const [show, setShow] = useState(true);
+  const [Ashow, setAshow] = useState(true);
+  const [state, setState] = useState({
+    selectedFile: null,
+    prop: {},
+  });
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+  });
 
+  function onSubmit(e) {
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    e.preventDefault();
+    const formData = new FormData();
+    for (var x = 0; x < this.state.selectedFile.length; x++) {
+      formData.append("images", this.state.selectedFile[x]);
+    }
+
+    axios({
+      method: "post",
+      url: "http://localhost:5000/upload/new/property" + user._id,
+      data: formData,
+    })
+      .then(function (response) {
+        //handle success
+        setMessage({
+          type: "alert alert-success",
+          header: "Success",
+          text: "Property Added Successfully",
+        });
+        setShow(true);
+        window.location = "/uploadNewRealEstate";
+      })
+      .catch(function (response) {
+        //handle error
+        setMessage({
+          type: "alert alert-danger",
+          header: "Failed",
+          text: "Please fill all fields",
+        });
+        setShow(true);
+      });
+  }
   return (
     <div>
       <Navbar />
       <Alert
-        show={show}
+        Ashow={Ashow}
         style={{ marginTop: "1rem", textAlign: "center" }}
         variant="dark"
       >
@@ -80,13 +122,13 @@ function UploadRealEstate() {
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          onClick={() => setShow(false)}
+          onClick={() => setAshow(false)}
           variant="outline-danger"
         >
           X
         </Button>
       </Alert>
-      {!show && (
+      {!Ashow && (
         <Button
           variant="info"
           style={{
@@ -95,7 +137,7 @@ function UploadRealEstate() {
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          onClick={() => setShow(true)}
+          onClick={() => setAshow(true)}
         >
           Our terms of use
         </Button>
@@ -116,11 +158,11 @@ function UploadRealEstate() {
             <input
               type="file"
               onChange={(event) => {
-                const avatar = event.target.files[0];
-                // setAvatar(avatar);
+                setState(event.target.files);
               }}
+              multiple
               className="form-control-avatar"
-              name="avatar"
+              name="images"
             />
             <input
               type="submit"
@@ -131,6 +173,27 @@ function UploadRealEstate() {
           </div>
         </form>
       </div>
+      <Row>
+        <Col xs={12}>
+          <Toast
+            onClose={() => setShow(false)}
+            show={show}
+            style={{
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            delay={3000}
+            autohide
+          >
+            <div className={message.type}>
+              <strong className="mr-auto">{message.header}</strong>
+              <br></br>
+              <small>{message.text}</small>
+            </div>
+          </Toast>
+        </Col>
+      </Row>
       <Footer />
     </div>
   );
