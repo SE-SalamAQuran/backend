@@ -10,4 +10,5 @@ router.delete("/deleteWishItem/:id",propertyController.deleteWishItem);
 
 
 
+
 module.exports = router;
