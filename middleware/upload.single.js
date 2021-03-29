@@ -40,8 +40,8 @@ router.patch("/:id", upload.single("avatar"), function (req, res) {
 
   const profileImg = url + "uploads/" + req.file.filename;
   var err;
-  if (err instanceof MulterError) {
-    res.status(400).send(err);
+  if (err instanceof MulterError || !req.file) {
+    res.statusCode(400).send(err);
   }
   User.findOneAndUpdate(
     { _id: id },

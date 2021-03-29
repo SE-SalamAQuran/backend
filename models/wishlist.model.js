@@ -12,7 +12,7 @@ const wishListSchema = new Schema(
     propType: {
       type: String,
       required: true,
-      enum: ["land", "appartment", "shop", "house", "villa", "roof", "office"],
+      enum: ["land", "apartment", "shop", "house", "villa", "roof", "office"],
     },
     transType: {
       type: String,

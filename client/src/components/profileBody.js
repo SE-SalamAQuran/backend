@@ -70,6 +70,7 @@ export default function ProfileBody() {
         </div>
         <div class="col-sm-4">
           <Image srcSet={av} alt="avatar" className={styles.avatar} />
+
           <br />
           <button
             style={{ marginTop: "2rem" }}

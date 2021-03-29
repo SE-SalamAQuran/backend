@@ -4,11 +4,6 @@ var Schema = mongoose.Schema;
 
 const propertySchema = new Schema(
   {
-    title: {
-      type: String,
-      trim: true,
-      required: true,
-    },
     propertyFor: {
       type: String,
       required: true,
@@ -16,7 +11,7 @@ const propertySchema = new Schema(
     },
     description: {
       type: String,
-      trim: true,
+      required: true,
     },
     type: {
       type: String,
@@ -63,12 +58,9 @@ const propertySchema = new Schema(
     status: {
       type: String,
       default: "available",
-      enum: ["available", "sold", "rented", "expired"],
+      enum: ["available", "sold", "rented"],
     },
-    classification: {
-      type: String,
-      enum: ["A", "B", "C"],
-    },
+
     area: {
       type: Number,
       trim: true,

@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Toast, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
@@ -14,7 +14,12 @@ function Register() {
     password: "",
     address: "",
   });
-
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+  });
   function handleChange(event) {
     const { name, value } = event.target;
     setState((prev) => {
@@ -89,11 +94,23 @@ function Register() {
     axios
       .post("http://localhost:5000/users/register", data)
       .then((res) => {
-        window.location = "/";
-
-        res.status(200);
+        setMessage({
+          type: "alert alert-success",
+          header: "Success",
+          text: "Account Created Successfully",
+        });
+        setShow(true);
+        window.location = "/login";
       })
-      .catch((err) => console.error("Error logging in!", err));
+      .catch(function (response) {
+        //handle error
+        setMessage({
+          type: "alert alert-danger",
+          header: "Failed",
+          text: "Please fill all fields",
+        });
+        setShow(true);
+      });
   }
 
   return (
@@ -175,6 +192,27 @@ function Register() {
         <Button variant="dark" className="btn btn-block" type="submit">
           Signup
         </Button>
+        <Row>
+          <Col xs={12}>
+            <Toast
+              onClose={() => setShow(false)}
+              show={show}
+              style={{
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              delay={3000}
+              autohide
+            >
+              <div className={message.type}>
+                <strong className="mr-auto">{message.header}</strong>
+                <br></br>
+                <small>{message.text}</small>
+              </div>
+            </Toast>
+          </Col>
+        </Row>
       </Form>
 
       <a href="http://localhost:3000/login" className={styles.link}>

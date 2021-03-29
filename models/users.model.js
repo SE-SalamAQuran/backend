@@ -23,8 +23,8 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-       minlength: 10,
-        validate(value) {
+      minlength: 10,
+      validate(value) {
         if (!validator.isEmail(value)) {
           throw new Error("Email is invalid");
         }
@@ -61,7 +61,7 @@ const userSchema = new Schema(
     },
     profile: {
       type: String,
-      default: "C:/Users/user/Desktop/Pal Estate/backend/profile.png",
+      default: "http://localhost:5000/default/avatar",
     },
   },
   { timestamps: true }

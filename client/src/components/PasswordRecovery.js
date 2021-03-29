@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col, Row, Toast } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
@@ -11,6 +11,12 @@ function PasswordRecovery() {
     passConf: "",
     username: "",
   });
+   const [show, setShow] = useState(false);
+   const [message, setMessage] = useState({
+     type: "",
+     header: "",
+     text: "",
+   });
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -47,9 +53,23 @@ function PasswordRecovery() {
     axios
       .patch("http://localhost:5000/users/updatepass", cred)
       .then((res) => {
+        setMessage({
+          type: "alert alert-success",
+          header: "Success",
+          text: "Changed password successfully",
+        });
+        setShow(true);
         window.location = "/login";
       })
-      .catch((err) => console.error("User Not Found", err));
+      .catch(function (response) {
+        //handle error
+        setMessage({
+          type: "alert alert-danger",
+          header: "Failed",
+          text: "Passwords don't match or password too short",
+        });
+        setShow(true);
+      });
   }
 
   return (
@@ -95,6 +115,27 @@ function PasswordRecovery() {
         <Button variant="dark" className="btn btn-block" type="submit">
           Change password
         </Button>
+        <Row>
+          <Col xs={12}>
+            <Toast
+              onClose={() => setShow(false)}
+              show={show}
+              style={{
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              delay={3000}
+              autohide
+            >
+              <div className={message.type}>
+                <strong className="mr-auto">{message.header}</strong>
+                <br></br>
+                <small>{message.text}</small>
+              </div>
+            </Toast>
+          </Col>
+        </Row>
       </Form>
 
       <a href="http://localhost:3000/register" className={styles.link}>
