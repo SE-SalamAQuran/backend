@@ -22,7 +22,6 @@ function uploadRealEstate() {
       <p style = {{textAlign:"center"}}>  3 _ your form will be review by our team so please be careful. </p>
 
      <UploadBody />
- 
       <Footer />
 
      </div>
