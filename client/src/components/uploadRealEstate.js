@@ -142,15 +142,7 @@ function UploadRealEstate() {
           Our terms of use
         </Button>
       )}
-      <h1
-        style={{
-          textAlign: "center",
-          marginTop: "1rem",
-          marginBottom: "1.23rem",
-        }}
-      >
-        Choose the type of real estate you want to upload
-      </h1>
+    
       <UploadBody />
       <div className={styles.container}>
         <form onSubmit={onSubmit} encType="multipart-form-data">
