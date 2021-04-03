@@ -4,7 +4,7 @@ import { Col, Row, Toast } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 export default function FilesUploadComponent() {
-  const [avatar, setAvatar] = useState(null);
+  const [images, setImages] = useState([]);
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState({
     type: "",
@@ -17,11 +17,12 @@ export default function FilesUploadComponent() {
 
     e.preventDefault();
     const formData = new FormData();
-    formData.append("avatar", avatar);
-
+    for (const key of Object.keys(images)) {
+      formData.append("images", images[key]);
+    }
     axios({
-      method: "patch",
-      url: "http://localhost:5000/upload/avatar/" + user._id,
+      method: "post",
+      url: "http://localhost:5000/uploads/test/" + user._id,
       data: formData,
     })
       .then(function (response) {
@@ -43,7 +44,7 @@ export default function FilesUploadComponent() {
         });
         setShow(true);
       });
-    console.log(formData.get("avatar"));
+    console.log(formData.get("images"));
   }
 
   return (
@@ -60,11 +61,11 @@ export default function FilesUploadComponent() {
             <input
               type="file"
               onChange={(event) => {
-                const avatar = event.target.files[0];
-                setAvatar(avatar);
+                setImages(event.target.files);
               }}
               className="form-control-avatar"
-              name="avatar"
+              name="images"
+              multiple
             />
             <input
               type="submit"

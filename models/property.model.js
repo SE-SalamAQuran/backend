@@ -71,6 +71,7 @@ const propertySchema = new Schema(
     },
     imgPath: {
       type: String,
+      default: "http://localhost:5000/default/path",
     },
   },
   { timestamps: true }

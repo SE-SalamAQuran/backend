@@ -36,30 +36,35 @@ var upload = multer({
 
 const Property = require("../models/property.model");
 
+router.post("/test/:id", upload.array("images", 6), async (req, res) => {
+  const id = req.params.id;
+  let err;
+  if (err instanceof MulterError || !req.files) {
+    res.status(400).send(err);
+  }
+  res.status(200).json({ id: id, images: req.files });
+});
+
 router.post(
   "/new/property/:id",
   upload.array("images", 6),
   async (req, res) => {
     const owner = req.params.id;
     const url = req.protocol + "://" + req.get("host") + "/";
-
-    const {
-      propertyFor,
-      description,
-      type,
-      city,
-      address,
-      price,
-      currency,
-      classification,
-      area,
-    } = req.body;
-    var imgPath = url + "public/properties/" + req.files[0].filename;
     var images = [];
-    let i;
-    for (i = 0; i < req.files.length; i++) {
+    const propertyFor = req.body.transactionType;
+    const type = req.body.propertyType;
+    const city = req.body.city;
+    const address = req.body.location;
+    const price = req.body.price;
+    const description = req.body.description;
+    const area = req.body.area;
+    const currency = req.body.currency;
+    for (var i = 0; i < req.files.length; i++) {
       images.push(url + "public/properties/" + req.files[i].filename);
     }
+    const imgPath = images[0];
+    console.log(req.files);
     let newProp = new Property({
       propertyFor: propertyFor,
       description: description,
@@ -69,7 +74,6 @@ router.post(
       address: address,
       price: price,
       currency: currency,
-      classification: classification,
       area: area,
       imgPath: imgPath,
       images: images,

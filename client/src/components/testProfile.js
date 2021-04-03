@@ -33,6 +33,7 @@ function TestProfile() {
         class="btn btn-secondary btn-lg btn-block"
       >
         Upload a new realestate NOW{" "}
+        <img src="https://img.icons8.com/metro/48/26e07f/plus.png" alt="plus" />
       </button>
       <button
         onClick={uploadNewRealEstatePageRequest}
@@ -40,6 +41,10 @@ function TestProfile() {
         class="btn btn-secondary btn-lg btn-block"
       >
         Request a Real estate{" "}
+        <img
+          src="https://img.icons8.com/plasticine/48/26e07f/plus.png"
+          alt="plus"
+        />
       </button>
 
       <Grid></Grid>

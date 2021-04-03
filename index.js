@@ -72,14 +72,8 @@ app.get("/default/avatar", (req, res) => {
   res.sendFile("./profile.png", { root: __dirname });
 });
 
-app.get("/media/:bin", (req, res) => {
-  const bin = req.params.bin;
-  res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
-  var files = "./public/properties/" + bin;
-
-  var file = ".//" + bin;
-  var image = res.sendFile(file, { root: __dirname });
-  return image;
+app.get("/default/path", (req, res) => {
+  res.sendFile("./making-offer-house.jpg", { root: __dirname });
 });
 
 app.listen(port, () => {

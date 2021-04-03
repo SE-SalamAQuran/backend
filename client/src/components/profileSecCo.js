@@ -39,7 +39,7 @@ function ProfileSecCom() {
               class="btn btn-secondary btn-lg"
               onClick={backHome}
             >
-              Home
+              Main page
             </button>
             <button
               style={{ padding: 15, margin: 5 }}
@@ -47,7 +47,7 @@ function ProfileSecCom() {
               class="btn btn-secondary btn-lg"
               onClick={updateUserInformation}
             >
-              Edit user Information
+              Update user Information
             </button>
           </div>
         </div>

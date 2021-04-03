@@ -12,14 +12,14 @@ import SMSForm from "./components/SMSCode";
 import Success from "./components/Success";
 import Recover from "./components/PasswordRecovery";
 import UploadProfilePic from "./components/FilesUploadComponent";
-
+import FilesUpload from "./components/FilesUpload";
 import uploadRealEstate from "./components/uploadRealEstate";
 
 function App() {
   return (
     <Router>
       <Route path="/" exact component={Main} />
-
+      <Route path="/salam" component={FilesUpload} />
       <Route path="/verify/mail" component={MailForm} />
       <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />
