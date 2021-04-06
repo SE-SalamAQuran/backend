@@ -5,6 +5,8 @@ import Register from "./components/Register";
 import Main from "./components/Main";
 import TestProfile from "./components/testProfile";
 import Table from "./components/table";
+import AppointmentTable from "./components/AppointmentPage";
+import AppointmentTableAdmin from "./components/AllApointment";
 import UploadRealEstateRequest from "./components/notFoundRealestate";
 import updateUserInformation from "./components/updateUserInfo";
 import MailForm from "./components/MailCode";
@@ -25,6 +27,9 @@ function App() {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/table" component={Table} />
+      <Route path="/Appointements" component={AppointmentTable} />
+      <Route path="/allAppointements" component={AppointmentTableAdmin} />
+
       <Route path="/uploadNewRealEstate" component={uploadRealEstate} />
       <Route
         path="/uploadNewRealEstateRequest"

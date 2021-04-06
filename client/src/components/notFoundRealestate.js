@@ -143,6 +143,7 @@ function UploadRealEstateRequset() {
             <div class="form-group col-md-6">
               <label for="inputType of properity">Type of property</label>
               <select
+              required
                 onChange={onChangePropertyType}
                 class="form-control"
                 id="sel1"
@@ -162,6 +163,7 @@ function UploadRealEstateRequset() {
                 class="form-control"
                 id="sel1"
                 onChange={onChangetransactionType}
+                required
               >
                 <option value="sale-cash">sale-cash</option>
                 <option value="sale-installment">sale-installment</option>
@@ -172,7 +174,7 @@ function UploadRealEstateRequset() {
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputCity">City</label>
-              <select class="form-control" id="sel1" onChange={onChangeCity}>
+              <select class="form-control" id="sel1" onChange={onChangeCity} required>
                 <option value="Ramallah">Ramallah</option>
                 <option value="AlBireh">AlBireh</option>
                 <option value="Nablus">Nablus</option>
@@ -194,6 +196,7 @@ function UploadRealEstateRequset() {
                 type="text"
                 class="form-control"
                 id="inputText"
+                required
                 placeholder="Location address"
               />
             </div>

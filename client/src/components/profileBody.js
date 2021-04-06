@@ -6,6 +6,7 @@ import { Image } from "react-bootstrap";
 
 export default function ProfileBody() {
   let user = JSON.parse(sessionStorage.getItem("user"));
+  const isAdmin = user.isAdmin ;
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [pic, setPic] = useState("");
@@ -58,8 +59,19 @@ export default function ProfileBody() {
     e.preventDefault();
     window.location = "http://localhost:3000/table";
   }
-  return (
-    <div
+  function goToMyAppointment(e) {
+    e.preventDefault();
+    window.location = "http://localhost:3000/Appointements";
+  }
+  function goToAllAppointment(e) {
+    e.preventDefault();
+    window.location = "http://localhost:3000/allAppointements";
+  }
+
+  function showBody(){
+    if (isAdmin){
+      return(
+      <div
       class="container-fluid bg-3 text-center"
       style={{ padding: 70, paddingBottom: 70, background: "AliceBlue" }}
     >
@@ -84,7 +96,59 @@ export default function ProfileBody() {
         </div>
         <div class="col-sm-4">
           <div>
+            <button type="button" class="btn btn-secondary  btn-lg" onClick = {goToAllAppointment}>
+             All appointments
+            </button>
+          </div>
+          <br></br> <br></br> <br></br>
+          <div>
+            <button
+              onClick={goListedWishesPage}
+              type="button"
+              class="btn btn-secondary  btn-lg"
+            >
+              All requested list
+            </button>
+          </div>
+          <br></br> <br></br> <br></br>
+          <div>
             <button type="button" class="btn btn-secondary  btn-lg">
+             All properties
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>);
+
+    }
+    else{
+      return(
+      <div
+      class="container-fluid bg-3 text-center"
+      style={{ padding: 70, paddingBottom: 70, background: "AliceBlue" }}
+    >
+      <div class="row">
+        <div class="col-sm-4">
+          <br /> <br /> <br /> <br />
+          <h1>{fname + " " + lname}</h1>
+        </div>
+        <div class="col-sm-4">
+          <Image srcSet={av} alt="avatar" className={styles.avatar} />
+
+          <br />
+          <button
+            style={{ marginTop: "2rem" }}
+            id={styles.btnUpload}
+            class="btn btn-secondary btn-block"
+            type="button"
+            onClick={upload}
+          >
+            Upload New Picture
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <div>
+            <button type="button" class="btn btn-secondary  btn-lg" onClick = {goToMyAppointment}>
               My appointments
             </button>
           </div>
@@ -107,5 +171,11 @@ export default function ProfileBody() {
         </div>
       </div>
     </div>
+      );
+    }
+  }
+
+  return (
+   showBody()
   );
 }

@@ -60,6 +60,16 @@ console.log(req.params.id)
     });
   },
 
+  getproperty: (req, res) => {
+    const id = req.params.id;
+    Properity.findOne({ _id: id }, (err, result) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  },
   getLands: async (req, res) => {
     await Properity.find({ type: "land" }, (err, lands) => {
       if (err) {

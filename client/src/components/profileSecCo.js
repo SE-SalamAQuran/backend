@@ -47,7 +47,7 @@ function ProfileSecCom() {
               class="btn btn-secondary btn-lg"
               onClick={updateUserInformation}
             >
-              Edit user Information
+              Edit Information
             </button>
           </div>
         </div>
