@@ -55,7 +55,7 @@ export default function FilesUploadComponent() {
       />
       <h1>Upload a new profile picture</h1>
       <div className="row mt-4">
-        <form onSubmit={onSubmit} encType="multipart-form-data">
+        <form onSubmit={onSubmit} encType="multipart/form-data">
           <div className="form-group">
             <input
               type="file"

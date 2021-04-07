@@ -19,7 +19,7 @@ function App() {
   return (
     <Router>
       <Route path="/" exact component={Main} />
-      <Route path="/salam" component={FilesUpload} />
+      <Route path="/upload/media" component={FilesUpload} />
       <Route path="/verify/mail" component={MailForm} />
       <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />
@@ -32,8 +32,8 @@ function App() {
       />
       <Route path="/success" component={Success} />
       <Route path="/newPassword" component={Recover} />
-      <Route path="/tprofile" exact component={TestProfile} />
-      <Route path="/upload" component={UploadProfilePic} />
+      <Route path="/tprofile" component={TestProfile} />
+      <Route path="/upload" exact component={UploadProfilePic} />
       <Route
         path="/Update user Information"
         component={updateUserInformation}

@@ -5,10 +5,12 @@ let express = require("express"),
 const { ResumeToken } = require("mongodb");
 const { MulterError } = require("multer");
 var multer = require("multer");
+const User = require("../models/users.model");
+const Property = require("../models/property.model");
 
 const DIR = "../uploads";
 
-const storage = multer.diskStorage({
+const storage = new multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, DIR);
   },
@@ -16,7 +18,8 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + path.extname(file.originalname));
   },
 });
-var upload = multer({
+
+var upload = new multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (
@@ -32,8 +35,6 @@ var upload = multer({
   },
 });
 
-const User = require("../models/users.model");
-
 router.patch("/:id", upload.single("avatar"), function (req, res) {
   const id = req.params.id;
   const url = req.protocol + "://" + req.get("host") + "/";
@@ -46,6 +47,36 @@ router.patch("/:id", upload.single("avatar"), function (req, res) {
   User.findOneAndUpdate(
     { _id: id },
     { profile: profileImg },
+    (error, result) => {
+      if (error) {
+        res.status(400).send(error);
+      } else {
+        res.status(204).json(result);
+      }
+    }
+  );
+});
+
+router.patch("/prop/:id", upload.array("images", 6), (req, res) => {
+  const id = req.params.id;
+  const url = req.protocol + "://" + req.get("host") + "/";
+
+  var err;
+  if (err instanceof MulterError || !req.files) {
+    res.statusCode(400).send(err);
+  }
+
+  Property.find({ _id: id }, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      result.images.push(url + "uploads/" + req.file.filename);
+    }
+  });
+
+  Property.findOneAndUpdate(
+    { _id: id },
+    { imgPath: url + "uploads/" + req.files[0].filename },
     (error, result) => {
       if (error) {
         res.status(400).send(error);

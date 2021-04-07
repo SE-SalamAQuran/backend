@@ -41,10 +41,8 @@ export default function ProfileBody() {
         setFname(res.data.fname);
         setLname(res.data.lname);
         setPic(res.data.profile);
-        console.log(res.data.profile)
+        console.log(res.data.profile);
       })
-
-      
 
       .catch((err) => console.log(err));
   });
@@ -80,6 +78,11 @@ export default function ProfileBody() {
             onClick={upload}
           >
             Upload New Picture
+            <img
+              style={{ marginLeft: "5px" }}
+              src="https://img.icons8.com/color/25/000000/test-account.png"
+              alt="profile"
+            />
           </button>
         </div>
         <div class="col-sm-4">

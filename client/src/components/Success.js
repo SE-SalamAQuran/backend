@@ -44,14 +44,15 @@ export default function Success() {
       });
       setShow(true);
       window.location = "/newPassword";
+    } else {
+      setMessage({
+        type: "alert alert-danger",
+        header: "Failed",
+        text: "Invalid Code",
+      });
+      setShow(true);
+      window.location.reload();
     }
-    setMessage({
-      type: "alert alert-danger",
-      header: "Failed",
-      text: "Invalid Code",
-    });
-    setShow(true);
-    window.location.reload();
   }
 
   return (
