@@ -6,10 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Alert, Form, Toast, Col, Row } from "react-bootstrap";
 import styles from "./styles/Forms.module.css";
 import axios from "axios";
+import jsCookie from "js-cookie";
 
 function UploadBody() {
   const [show, setShow] = useState(false);
   const [alert, setAlert] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [message, setMessage] = useState({
     type: "",
     header: "",
@@ -256,7 +258,7 @@ function UploadBody() {
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
-                      <option value=" more than 3 ">more than 3</option>
+                      <option value=" more than 5 ">more than 5</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
@@ -299,7 +301,7 @@ function UploadBody() {
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="inputType Services">Pavement</label>
+                    <label for="inputType Pavement">Pavement</label>
                     <select
                       class="form-control"
                       id="sel1"
@@ -309,12 +311,12 @@ function UploadBody() {
                         Located on a paved street
                       </option>
                       <option value="There is no pavement">
-                        Located Not on a paved street
+                        Located on a non paved street
                       </option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="inputType Services">Number of streets</label>
+                    <label for="inputType streets">Number of streets</label>
                     <select
                       class="form-control"
                       id="sel1"
@@ -443,7 +445,7 @@ function UploadBody() {
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
-                      <option value=" more than 3 ">more than 3</option>
+                      <option value=" more than 5 ">more than 5</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
@@ -697,7 +699,7 @@ function UploadBody() {
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                    <option value=" more than 3 ">more than 3</option>
+                    <option value=" more than 5 ">more than 5</option>
                   </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -786,13 +788,10 @@ function UploadBody() {
           text: "Property Added Successfully",
         });
         setShow(true);
-        if (
-          document.getElementById("uploads").getAttribute("checked") === true
-        ) {
-          window.location = "/salam";
-        }
-        window.location = "/uploadNewRealEstate";
-        console.log(data);
+
+        const prop_id = response.data._id;
+        jsCookie.set("id", prop_id);
+        window.location = "/upload/media";
       })
       .catch(function (response) {
         //handle error
@@ -803,6 +802,7 @@ function UploadBody() {
         });
         setShow(true);
       });
+    console.log(data);
   }
 
   return (
@@ -811,7 +811,7 @@ function UploadBody() {
       style={{ padding: 20, justifyContent: "center" }}
     >
       <h2 style={{ textAlign: "center", marginTop: "1rem" }}>
-        Upload a new property
+        Upload your new property
       </h2>
       <img
         style={{ display: "block", marginRight: "auto", marginLeft: "auto" }}
@@ -911,18 +911,7 @@ function UploadBody() {
         <div>{Describtion(type)}</div>
 
         <hr></hr>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label>
-              <strong>Check here if you want to upload pics</strong>
-            </label>
-            <Form.Check
-              label="I want to upload pics"
-              type="checkbox"
-              id="uploads"
-            ></Form.Check>
-          </div>
-        </div>
+
         <button type="submit" class="btn btn-secondary btn-block">
           Upload
         </button>

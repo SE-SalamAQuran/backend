@@ -6,9 +6,9 @@ const { ResumeToken } = require("mongodb");
 const { MulterError } = require("multer");
 var multer = require("multer");
 
-const DIR = "../public/properties";
+const DIR = "../public";
 
-const storage = multer.diskStorage({
+const storageProp = new multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, DIR);
   },
@@ -17,14 +17,13 @@ const storage = multer.diskStorage({
   },
 });
 
-var upload = multer({
-  storage: storage,
+var uploadProp = new multer({
+  storage: storageProp,
   fileFilter: (req, file, cb) => {
     if (
       file.mimetype == "image/png" ||
       file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg" ||
-      file.mimetype == "video/mp4"
+      file.mimetype == "image/jpeg"
     ) {
       cb(null, true);
     } else {
@@ -36,55 +35,32 @@ var upload = multer({
 
 const Property = require("../models/property.model");
 
-router.post("/test/:id", upload.array("images", 6), async (req, res) => {
+router.patch("/new/:id", uploadProp.array("images",6), async (req, res) => {
   const id = req.params.id;
-  let err;
-  if (err instanceof MulterError || !req.files) {
-    res.status(400).send(err);
-  }
-  res.status(200).json({ id: id, images: req.files });
-});
+  //   const url = req.protocol + "://" + req.get("host") + "/";
+  //   var images = [];
 
-router.post(
-  "/new/property/:id",
-  upload.array("images", 6),
-  async (req, res) => {
-    const owner = req.params.id;
-    const url = req.protocol + "://" + req.get("host") + "/";
-    var images = [];
-    const propertyFor = req.body.transactionType;
-    const type = req.body.propertyType;
-    const city = req.body.city;
-    const address = req.body.location;
-    const price = req.body.price;
-    const description = req.body.description;
-    const area = req.body.area;
-    const currency = req.body.currency;
-    for (var i = 0; i < req.files.length; i++) {
-      images.push(url + "public/properties/" + req.files[i].filename);
-    }
-    const imgPath = images[0];
+  //   for (var i = 0; i < req.files.length; i++) {
+  //     images.push(url + "public/" + req.files[i].filename);
+  //   }
+  //   const imgPath = images[0];
+  //   console.log(req.files);
+  //   Property.findByIdAndUpdate(
+  //     { _id: id },
+  //     { imgPath: imgPath, images: images },
+  //     (err, result) => {
+  //       if (err || !req.files || err instanceof MulterError) {
+  //         res.status(400).send(err);
+  //       } else {
+  //         res.status(204).send(result);
+  //       }
+  //     }
+  //   );
+  try {
     console.log(req.files);
-    let newProp = new Property({
-      propertyFor: propertyFor,
-      description: description,
-      type: type,
-      city: city,
-      owner: owner,
-      address: address,
-      price: price,
-      currency: currency,
-      area: area,
-      imgPath: imgPath,
-      images: images,
-    });
-    await newProp
-      .save()
-      .then(res.json(newProp))
-      .catch((error) => {
-        res.status(400).send(error);
-      });
+  } catch (error) {
+    console.error(error);
   }
-);
+});
 
 module.exports = router;

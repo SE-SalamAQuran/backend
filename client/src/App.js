@@ -24,15 +24,14 @@ import uploadRealEstate from "./components/uploadRealEstate";
 function App() {
   return (
     <Router>
-      <Route path="/" exact component={Main} />
-      <Route path="/Lands" exact component={Lands} />
+        <Route path="/Lands" exact component={Lands} />
       <Route path="/Villas" exact component={Villas} />
       <Route path="/Roof" exact component={Roof} />
       <Route path="/Shop" exact component={Shop} />
       <Route path="/Office" exact component={Office} />
       <Route path="/Apartment" exact component={Apartment}/> 
-
-      <Route path="/salam" component={FilesUpload} />
+      <Route path="/" exact component={Main} />
+      <Route path="/upload/media" component={FilesUpload} />
       <Route path="/verify/mail" component={MailForm} />
       <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />
@@ -45,8 +44,8 @@ function App() {
       />
       <Route path="/success" component={Success} />
       <Route path="/newPassword" component={Recover} />
-      <Route path="/tprofile" exact component={TestProfile} />
-      <Route path="/upload" component={UploadProfilePic} />
+      <Route path="/tprofile" component={TestProfile} />
+      <Route path="/upload" exact component={UploadProfilePic} />
       <Route
         path="/Update user Information"
         component={updateUserInformation}

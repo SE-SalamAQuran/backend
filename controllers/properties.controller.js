@@ -1,6 +1,5 @@
 const Properity = require("../models/property.model");
 const wishlist = require("../models/wishlist.model");
-const uploader = require("../middleware/upload.multiple");
 
 module.exports = {
   addNewWishItem: (req, res) => {

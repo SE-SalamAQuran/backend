@@ -3,8 +3,8 @@ import axios from "axios";
 import { Col, Row, Toast } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
+import jsCookie from "js-cookie";
 export default function FilesUploadComponent() {
-  const [images, setImages] = useState([]);
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState({
     type: "",
@@ -12,18 +12,22 @@ export default function FilesUploadComponent() {
     text: "",
   });
 
-  function onSubmit(e) {
-    let user = JSON.parse(sessionStorage.getItem("user"));
+  const [state, setState] = useState({
+    images: null,
+  });
 
+  function onSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
-    for (const key of Object.keys(images)) {
-      formData.append("images", images[key]);
+    let prop = jsCookie.get("id");
+    for (var i = 0; i < state.images.length; i++) {
+      formData.append("images", state.images[i], state.images[i].name);
     }
+    
     axios({
-      method: "post",
-      url: "http://localhost:5000/uploads/test/" + user._id,
-      data: formData,
+      method: "patch",
+      url: "http://localhost:5000/props/new/" + prop,
+      body: formData.getAll("images"),
     })
       .then(function (response) {
         //handle success
@@ -33,6 +37,7 @@ export default function FilesUploadComponent() {
           text: "Image uploaded successfully",
         });
         setShow(true);
+        console.log(response.data);
         window.location = "/tprofile";
       })
       .catch(function (response) {
@@ -43,10 +48,21 @@ export default function FilesUploadComponent() {
           text: "An error occured, please try again",
         });
         setShow(true);
+        console.log(response.data);
       });
-    console.log(formData.get("images"));
+    console.log(formData.getAll("images"));
   }
 
+  function handleSkip() {
+    jsCookie.remove("id");
+    setMessage({
+      type: "alert alert-warning",
+      header: "Warning",
+      text: "You skipped uploading images",
+    });
+    setShow(true);
+    window.location = "/tprofile";
+  }
   return (
     <div className={styles.container}>
       <img
@@ -54,24 +70,32 @@ export default function FilesUploadComponent() {
         src="https://img.icons8.com/carbon-copy/80/000000/test-account.png"
         alt="pic"
       />
-      <h1>Upload a new profile picture</h1>
+      <h1>Upload images of your property</h1>
       <div className="row mt-4">
-        <form onSubmit={onSubmit} encType="multipart-form-data">
+        <form onSubmit={onSubmit} encType="multipart/form-data">
           <div className="form-group">
             <input
               type="file"
-              onChange={(event) => {
-                setImages(event.target.files);
+              onChange={(e) => {
+                setState({ images: e.currentTarget.files });
               }}
-              className="form-control-avatar"
+              className="form-control"
               name="images"
               multiple
             />
+
             <input
               type="submit"
-              value="Upload Picture"
+              value="Upload Pictures"
               className="btn btn-block btn-primary"
               style={{ marginTop: "2rem" }}
+            />
+            <input
+              type="button"
+              value="Skip"
+              className="btn btn-block btn-light"
+              style={{ marginTop: "2rem" }}
+              onClick={handleSkip}
             />
           </div>
         </form>

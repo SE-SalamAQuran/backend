@@ -56,7 +56,7 @@ function Login() {
         let thisUser = res.data.decoded;
         sessionStorage.setItem("user", JSON.stringify(thisUser));
       })
-      .catch(function (response) {
+      .catch((res) => {
         //handle error
         setMessage({
           type: "alert alert-danger",
@@ -98,6 +98,11 @@ function Login() {
         </Form.Group>
         <Button variant="dark" className="btn btn-block" type="submit">
           Login
+          <img
+            src="https://img.icons8.com/android/20/ffffff/login-rounded-right.png"
+            style={{ marginLeft: "5px" }}
+            alt="login-icon"
+          />
         </Button>
         <Row>
           <Col xs={12}>

@@ -26,26 +26,29 @@ function TestProfile() {
       <ProfileHead></ProfileHead>
       <ProfileSecCom></ProfileSecCom>
       <ProfileBody></ProfileBody>
-
-      <button
-        onClick={uploadNewRealEstatePage}
-        type="button"
-        class="btn btn-secondary btn-lg btn-block"
-      >
-        Upload a new realestate NOW{" "}
-        <img src="https://img.icons8.com/metro/48/26e07f/plus.png" alt="plus" />
-      </button>
-      <button
-        onClick={uploadNewRealEstatePageRequest}
-        type="button"
-        class="btn btn-secondary btn-lg btn-block"
-      >
-        Request a Real estate{" "}
-        <img
-          src="https://img.icons8.com/plasticine/48/26e07f/plus.png"
-          alt="plus"
-        />
-      </button>
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            {" "}
+            <button
+              onClick={uploadNewRealEstatePage}
+              type="button"
+              className="btn btn-outline-success btn-lg btn-block"
+            >
+              Upload New Real estate{" "}
+            </button>
+          </div>
+          <div class="col-6">
+            <button
+              onClick={uploadNewRealEstatePageRequest}
+              type="button"
+              className="btn btn-outline-info btn-lg btn-block"
+            >
+              Request a Real estate{" "}
+            </button>
+          </div>
+        </div>
+      </div>
 
       <Grid></Grid>
       <Footer />

@@ -8,22 +8,47 @@ export default function Appbar() {
     return JSON.parse(sessionStorage.getItem("user")) == null ? false : true;
   }
 
+  function handleUserClick() {
+    window.location = "/tprofile";
+  }
+
   function UserGreeting(props) {
     return (
-      <a href="http://localhost:3000/tprofile">
+      <button
+        type="button"
+        className="btn btn-light"
+        style={{
+          width: "30px",
+          height: "30px",
+          padding: "6px 0px",
+          borderRadius: "15px",
+          textAlign: "center",
+          fontSize: "12px",
+          lineHeight: "1.42857",
+        }}
+        onClick={handleUserClick}
+      >
         <img
-          src="https://img.icons8.com/windows/32/ffffff/user-tag.png"
+          src="https://img.icons8.com/windows/20/000000/user-tag.png"
           alt="avatar"
         />
-      </a>
+      </button>
     );
+  }
+
+  function handleGuestClick() {
+    window.location = "/login";
   }
 
   function GuestGreeting(props) {
     return (
-      <a className={styles.link} href="http://localhost:3000/login">
-        Login
-      </a>
+      <button
+        type="button"
+        onClick={handleGuestClick}
+        className="btn btn-outline-light"
+      >
+        <span>Login</span>
+      </button>
     );
   }
 

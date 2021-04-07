@@ -191,6 +191,11 @@ function Register() {
         </Form.Row>
         <Button variant="dark" className="btn btn-block" type="submit">
           Signup
+          <img
+            src="https://img.icons8.com/pastel-glyph/25/ffffff/add-user-male--v2.png"
+            alt="icon"
+            style={{ marginLeft: "5px" }}
+          />
         </Button>
         <Row>
           <Col xs={12}>

@@ -12,18 +12,15 @@ const multer = require("multer");
 const cookieParser = require("cookie-parser");
 const upload = require("./middleware/upload.single");
 const path = require("path");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const FacebookStrategy = require("passport-facebook").Strategy;
+const usersRoute = require("./routes/users.routes");
+const propertiesRoute = require("./routes/properity.routes");
+const uploadRoutes = require("./middleware/upload.single");
+const { initialize } = require("passport");
+const { dirname } = require("path");
+const uploadPropRoute = require("./middleware/upload.multiple");
+var Rollbar = require("rollbar");
+
 const app = express();
-
-app.use(
-  express.urlencoded({ extended: true, limit: "50mb", parameterLimit: 1000000 })
-);
-app.use(express.json({ extended: true, limit: "50mb" }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(cookieParser());
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -40,26 +37,42 @@ connection.once("open", () => {
 app.use(cors());
 
 app.use(multer({ dest: "./uploads" }).single("avatar"));
-app.use(multer({ dest: "./public/properties" }).array("media"));
+app.use(multer({ dest: "./public" }).array("images", 6));
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "150mb",
+    parameterLimit: 1000000,
+  })
+);
+app.use(express.json({ extended: true, limit: "150mb" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use(cookieParser());
+// include and initialize the rollbar library with your access token
+var rollbar = new Rollbar({
+  accessToken: "634090be731a4d938fa15846ef030400",
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+});
+
+// record a generic message and send it to Rollbar
+rollbar.log("Hello world!");
 // use morgan to log requests to the console
 app.use(morgan("dev"));
 
-const usersRoute = require("./routes/users.routes");
-const propertiesRoute = require("./routes/properity.routes");
-const uploadRoutes = require("./middleware/upload.single");
-const uploadProp = require("./middleware/upload.multiple");
-const { initialize } = require("passport");
-const { dirname } = require("path");
-
 app.use("/users", usersRoute);
 app.use("/upload/avatar", uploadRoutes);
-app.use("/uploads", uploadProp);
 app.use(express.static(path.join(__dirname, "./uploads")));
-app.use(express.static(path.join(__dirname, "./public/properties")));
-
+app.use(express.static(path.join(__dirname, "./public")));
+app.use("/props", uploadPropRoute);
 app.use("/properties", propertiesRoute);
-
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
+});
 app.get("/uploads/:bin", (req, res) => {
   const bin = req.params.bin;
   res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");

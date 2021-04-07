@@ -43,8 +43,8 @@ function UploadRealEstate() {
             src="https://img.icons8.com/emoji/20/000000/check-mark-button-emoji.png"
             alt="green"
           />{" "}
-          Feel free to upload up to 6 images and/or videos to give a better view
-          of your property.
+          Feel free to upload up to 6 images to give a better view of your
+          property.
         </h6>{" "}
         <h6>
           {" "}
@@ -52,7 +52,7 @@ function UploadRealEstate() {
             src="https://img.icons8.com/emoji/20/000000/check-mark-button-emoji.png"
             alt="green"
           />{" "}
-          Total size limit of uploads must not exceed 50MB per upload.
+          Total size limit of uploads must not exceed 150MB.
         </h6>
         <h6>
           {" "}
