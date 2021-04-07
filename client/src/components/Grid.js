@@ -19,30 +19,30 @@ export default function Grid() {
     >
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card link="http://localhost:3000/" title="Lands" img={land}></Card>
+        <Card link="http://localhost:3000/Lands" title="Lands" img={land}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         <Card
-          link="http://localhost:3000/"
+          link="http://localhost:3000/Apartments"
           title="Apartments"
           img={apartment}
         ></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card link="http://localhost:3000/" title="Villas" img={villa}></Card>
+        <Card link="http://localhost:3000/Villas" title="Villas" img={villa}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card link="http://localhost:3000/" title="Roof" img={roof}></Card>
+        <Card link="http://localhost:3000/Roof" title="Roof" img={roof}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card link="http://localhost:3000/" title="Shops" img={shop}></Card>
+        <Card link="http://localhost:3000/Shop" title="shops" img={shop}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card link="http://localhost:3000/" title="Offices" img={office}></Card>
+        <Card link="http://localhost:3000/Office" title="Offices" img={office}></Card>
       </div>
     </div>
   );
