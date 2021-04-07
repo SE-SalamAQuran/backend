@@ -41,7 +41,7 @@
     "method-override": "^3.0.0",
     "moment": "^2.29.1",
     "mongodb": "^3.6.4",
-    "mongoose": "^5.11.15",
+    "mongoose": "^5.12.3",
     "mongoose-encryption": "^2.0.3",
     "mongoose-findorcreate": "^3.0.0",
     "morgan": "^1.10.0",

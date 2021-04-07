@@ -82,7 +82,7 @@ function Greeting(props) {
 
     http://localhost:5000/properties/lands
     useEffect(() => {
-      fetch("http://localhost:5000/properties/lands")
+      fetch("http://localhost:5000/properties/villas")
         .then(res => res.json())
         .then((data)=> setData(data));
 
@@ -101,7 +101,7 @@ function Greeting(props) {
 
   <Container> 
   <Typography color="textPrimary" gutterBottom variant="h2" align="center">
-    Lands
+  Villas
   </Typography>
   <Grid container spacing={3}>
           {data.map((character) => (

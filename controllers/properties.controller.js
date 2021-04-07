@@ -75,6 +75,60 @@ module.exports = {
       }
     );
   },
+  getRoof: async (req, res) => {
+    await Properity.find(
+      { type: "roof", status: "available" },
+      (err, roofs) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(200).send(roofs);
+        }
+      }
+    );
+  },
+  getOfiice: async (req, res) => {
+    await Properity.find(
+      { type: "office", status: "available" },
+      (err, offices) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(200).send(offices);
+        }
+      }
+    );
+  },
+  getShop: async (req, res) => {
+    await Properity.find(
+      { type: "shop", status: "available" },
+      (err, shops) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(200).send(shops);
+        }
+      }
+    );
+  },
+
+  getApartment: async (req, res) => {
+    await Properity.find(
+      { type: "apartment", status: "available" },
+      (err,  apartments) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(200).send(  apartments);
+        }
+      }
+    );
+  },
+
+
+
+
+
   addProperty: async (req, res) => {
     const owner = req.params.id;
 
