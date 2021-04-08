@@ -67,7 +67,8 @@ const propertySchema = new Schema(
       required: true,
     },
     images: {
-      type: [String],
+      type: Schema.Types.ObjectId,
+      ref: "Images",
     },
     imgPath: {
       type: String,

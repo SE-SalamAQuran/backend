@@ -35,9 +35,9 @@ connection.once("open", () => {
 });
 
 app.use(cors());
-
+app.use(multer({ dest: "./uploads" }).single("omg"));
 app.use(multer({ dest: "./uploads" }).single("avatar"));
-app.use(multer({ dest: "./public" }).array("images", 6));
+
 app.use(
   express.urlencoded({
     extended: true,
@@ -52,27 +52,23 @@ app.use(passport.session());
 app.use(cookieParser());
 // include and initialize the rollbar library with your access token
 var rollbar = new Rollbar({
-  accessToken: "634090be731a4d938fa15846ef030400",
+  accessToken: process.env.ROLLBAR_TOKEN,
   captureUncaught: true,
   captureUnhandledRejections: true,
 });
 
 // record a generic message and send it to Rollbar
-rollbar.log("Hello world!");
 // use morgan to log requests to the console
 app.use(morgan("dev"));
-
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
+});
 app.use("/users", usersRoute);
 app.use("/upload/avatar", uploadRoutes);
 app.use(express.static(path.join(__dirname, "./uploads")));
 app.use(express.static(path.join(__dirname, "./public")));
-app.use("/props", uploadPropRoute);
 app.use("/properties", propertiesRoute);
-app.use(function (err, req, res, next) {
-  console.error(err.message);
-  if (!err.statusCode) err.statusCode = 500;
-  res.status(err.statusCode).send(err.message);
-});
+
 app.get("/uploads/:bin", (req, res) => {
   const bin = req.params.bin;
   res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
@@ -88,7 +84,8 @@ app.get("/default/avatar", (req, res) => {
 app.get("/default/path", (req, res) => {
   res.sendFile("./making-offer-house.jpg", { root: __dirname });
 });
-
-app.listen(port, () => {
-  console.log(`Listening on port: ${port}`);
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
 });

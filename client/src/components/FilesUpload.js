@@ -12,45 +12,78 @@ export default function FilesUploadComponent() {
     text: "",
   });
 
-  const [state, setState] = useState({
-    images: null,
-  });
+  const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
+  const [image4, setImage4] = useState(null);
+  const [image5, setImage5] = useState(null);
+  const [image6, setImage6] = useState(null);
 
   function onSubmit(e) {
     e.preventDefault();
-    const formData = new FormData();
+    const formData1 = new FormData();
+    const formData2 = new FormData();
+    const formData3 = new FormData();
+    const formData4 = new FormData();
+    const formData5 = new FormData();
+    const formData6 = new FormData();
     let prop = jsCookie.get("id");
-    for (var i = 0; i < state.images.length; i++) {
-      formData.append("images", state.images[i], state.images[i].name);
-    }
-    
-    axios({
-      method: "patch",
-      url: "http://localhost:5000/props/new/" + prop,
-      body: formData.getAll("images"),
-    })
-      .then(function (response) {
-        //handle success
-        setMessage({
-          type: "alert alert-success",
-          header: "Success",
-          text: "Image uploaded successfully",
-        });
-        setShow(true);
-        console.log(response.data);
-        window.location = "/tprofile";
-      })
-      .catch(function (response) {
-        //handle error
-        setMessage({
-          type: "alert alert-danger",
-          header: "Failed",
-          text: "An error occured, please try again",
-        });
-        setShow(true);
-        console.log(response.data);
+
+    const url = "http://localhost:5000/upload/avatar/prop/" + prop;
+    if (
+      image1 == null &&
+      image2 == null &&
+      image3 == null &&
+      image4 == null &&
+      image5 == null &&
+      image6 == null
+    ) {
+      setMessage({
+        type: "alert alert-danger",
+        header: "You must upload at least one image",
+        text: "If you don't want to upload pictures please click skip",
       });
-    console.log(formData.getAll("images"));
+      setShow(true);
+    } else {
+      formData1.append("omg", image1);
+      formData2.append("omg", image2);
+      formData3.append("omg", image3);
+      formData4.append("omg", image4);
+      formData5.append("omg", image5);
+      formData6.append("omg", image6);
+      axios
+        .all([
+          axios.post(url, formData1),
+          axios.post(url, formData2),
+          axios.post(url, formData3),
+          axios.post(url, formData4),
+          axios.post(url, formData5),
+          axios.post(url, formData6),
+          axios.patch("http://localhost:5000/properties/img_path/" + prop),
+        ])
+
+        .then(function (response) {
+          //handle success
+          setMessage({
+            type: "alert alert-success",
+            header: "Success",
+            text: "Image uploaded successfully",
+          });
+          setShow(true);
+          console.log(response.data);
+          window.location = "/tprofile";
+        })
+        .catch(function (response) {
+          //handle error
+          setMessage({
+            type: "alert alert-warning",
+            header: "You uploaded your images",
+            text: "You uploaded less than 6 images",
+          });
+          setShow(true);
+          window.location = "/tprofile";
+        });
+    }
   }
 
   function handleSkip() {
@@ -67,7 +100,7 @@ export default function FilesUploadComponent() {
     <div className={styles.container}>
       <img
         className={styles.icon}
-        src="https://img.icons8.com/carbon-copy/80/000000/test-account.png"
+        src="https://img.icons8.com/color/80/000000/real-estate.png"
         alt="pic"
       />
       <h1>Upload images of your property</h1>
@@ -77,13 +110,45 @@ export default function FilesUploadComponent() {
             <input
               type="file"
               onChange={(e) => {
-                setState({ images: e.currentTarget.files });
+                setImage1(e.target.files[0]);
               }}
               className="form-control"
-              name="images"
-              multiple
             />
-
+            <input
+              type="file"
+              onChange={(e) => {
+                setImage2(e.target.files[0]);
+              }}
+              className="form-control"
+            />
+            <input
+              type="file"
+              onChange={(e) => {
+                setImage3(e.target.files[0]);
+              }}
+              className="form-control"
+            />
+            <input
+              type="file"
+              onChange={(e) => {
+                setImage4(e.target.files[0]);
+              }}
+              className="form-control"
+            />
+            <input
+              type="file"
+              onChange={(e) => {
+                setImage5(e.target.files[0]);
+              }}
+              className="form-control"
+            />
+            <input
+              type="file"
+              onChange={(e) => {
+                setImage6(e.target.files[0]);
+              }}
+              className="form-control"
+            />
             <input
               type="submit"
               value="Upload Pictures"

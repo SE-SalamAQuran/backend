@@ -6,8 +6,8 @@ const { ResumeToken } = require("mongodb");
 const { MulterError } = require("multer");
 var multer = require("multer");
 const User = require("../models/users.model");
-const Property = require("../models/property.model");
-
+const Images = require("../models/images.cloud.model");
+const Properties = require("../models/property.model");
 const DIR = "../uploads";
 
 const storage = new multer.diskStorage({
@@ -57,34 +57,35 @@ router.patch("/:id", upload.single("avatar"), function (req, res) {
   );
 });
 
-router.patch("/prop/:id", upload.array("images", 6), (req, res) => {
+router.post("/prop/:id", upload.single("omg"), function (req, res) {
   const id = req.params.id;
   const url = req.protocol + "://" + req.get("host") + "/";
 
+  const profileImg = url + "uploads/" + req.file.filename;
   var err;
-  if (err instanceof MulterError || !req.files) {
+  if (err instanceof MulterError || !req.file) {
     res.statusCode(400).send(err);
   }
-
-  Property.find({ _id: id }, (err, result) => {
-    if (err) {
-      res.status(400).send(err);
-    } else {
-      result.images.push(url + "uploads/" + req.file.filename);
-    }
+  if (!req.file) {
+    res.status(400).json({
+      Error: "File may be empty or corrupted",
+      Status: "Failure",
+    });
+  }
+  const pic = new Images({
+    image: profileImg,
+    property: id,
   });
 
-  Property.findOneAndUpdate(
-    { _id: id },
-    { imgPath: url + "uploads/" + req.files[0].filename },
-    (error, result) => {
-      if (error) {
-        res.status(400).send(error);
-      } else {
-        res.status(204).json(result);
-      }
-    }
-  );
+  try {
+    pic.save();
+    res.status(201).send(pic);
+  } catch (error) {
+    return res.status(400).json({
+      Status: "Failed to upload image",
+      Error: `${error}`,
+    });
+  }
 });
 
 module.exports = router;

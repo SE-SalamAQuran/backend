@@ -1,6 +1,6 @@
 const Properity = require("../models/property.model");
 const wishlist = require("../models/wishlist.model");
-
+const Images = require("../models/images.cloud.model");
 module.exports = {
   addNewWishItem: (req, res) => {
     const newWishItem = new wishlist({
@@ -53,13 +53,16 @@ module.exports = {
   },
 
   getLands: async (req, res) => {
-    await Properity.find({ type: "land" }, (err, lands) => {
-      if (err) {
-        res.status(400).send(err);
-      } else {
-        res.json(lands);
+    await Properity.find(
+      { type: "land", status: "available" },
+      (err, lands) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.json(lands);
+        }
       }
-    });
+    );
   },
 
   getVillas: async (req, res) => {
@@ -114,20 +117,28 @@ module.exports = {
   getApartment: async (req, res) => {
     await Properity.find(
       { type: "apartment", status: "available" },
-      (err,  apartments) => {
+      (err, apartments) => {
         if (err) {
           res.status(400).send(err);
         } else {
-          res.status(200).send(  apartments);
+          res.status(200).send(apartments);
         }
       }
     );
   },
 
-
-
-
-
+  getHouse: async (req, res) => {
+    await Properity.find(
+      { type: "house", status: "available" },
+      (err, houses) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          res.status(200).send(houses);
+        }
+      }
+    );
+  },
   addProperty: async (req, res) => {
     const owner = req.params.id;
 
@@ -146,5 +157,31 @@ module.exports = {
       .save()
       .then(() => res.json(newProp))
       .catch((error) => res.status(400).send(error));
+  },
+  updatePath: async (req, res) => {
+    const id = req.params.id;
+    Images.findOne({ property: id }, (err, image) => {
+      if (err) {
+        res.status(404).json({
+          Error: err,
+          Message: "Can't find this image",
+        });
+      } else {
+        Properity.findOneAndUpdate(
+          { _id: id },
+          { imgPath: image.image },
+          (error, result) => {
+            if (error) {
+              res.status(400).send(error);
+            } else {
+              res.json({
+                Status: "Uploaded Image Successfully",
+                Message: `This is the new path ${result.imgPath}`,
+              });
+            }
+          }
+        );
+      }
+    });
   },
 };
