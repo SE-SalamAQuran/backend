@@ -59,7 +59,6 @@ export default function FilesUploadComponent() {
           axios.post(url, formData4),
           axios.post(url, formData5),
           axios.post(url, formData6),
-          axios.patch("http://localhost:5000/properties/img_path/" + prop),
         ])
 
         .then(function (response) {
@@ -71,7 +70,7 @@ export default function FilesUploadComponent() {
           });
           setShow(true);
           console.log(response.data);
-          window.location = "/tprofile";
+          window.location = "/upload/confirm";
         })
         .catch(function (response) {
           //handle error
@@ -81,7 +80,7 @@ export default function FilesUploadComponent() {
             text: "You uploaded less than 6 images",
           });
           setShow(true);
-          window.location = "/tprofile";
+          window.location = "/upload/confirm";
         });
     }
   }

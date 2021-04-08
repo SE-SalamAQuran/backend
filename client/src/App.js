@@ -21,6 +21,7 @@ import Recover from "./components/PasswordRecovery";
 import UploadProfilePic from "./components/FilesUploadComponent";
 import FilesUpload from "./components/FilesUpload";
 import uploadRealEstate from "./components/uploadRealEstate";
+import ConfirmUpload from "./components/ConfirmUpload";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <Route path="/apartments" exact component={Apartments} />
       <Route path="/" exact component={Main} />
       <Route path="/upload/media" component={FilesUpload} />
+      <Route path="/upload/confirm" component={ConfirmUpload} />
       <Route path="/verify/mail" component={MailForm} />
       <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />

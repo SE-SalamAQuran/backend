@@ -6,7 +6,7 @@ router.get("/lands", propertyController.getLands);
 router.get("/villas", propertyController.getVillas);
 router.get("/roofs", propertyController.getRoof);
 router.get("/shops", propertyController.getShop);
-router.get("/offices", propertyController.getOfiice);
+router.get("/offices", propertyController.getOffice);
 router.get("/houses", propertyController.getHouse);
 router.get("/apartments", propertyController.getApartment);
 router.patch("/img_path/:id", propertyController.updatePath);

@@ -50,15 +50,13 @@ function UploadRealEstateRequset() {
     axios
       .post("http://localhost:5000/properties/addWishItem", data)
       .then((res) => {
-        console.log({ data });
-        res.status(200);
         setMessage({
           type: "alert alert-success",
           header: "Success",
           text: "Request Added Successfully",
         });
         setShow(true);
-        window.location = "/tprofile";
+        window.location = "/table";
       })
       .catch(function (response) {
         //handle error
@@ -138,7 +136,7 @@ function UploadRealEstateRequset() {
       )}
       <div style={{ padding: 20 }}></div>
       <div className="container">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputType of properity">Type of property</label>
@@ -198,14 +196,10 @@ function UploadRealEstateRequset() {
               />
             </div>
           </div>
+          <button type="submit" class="btn btn-secondary btn-lg btn-block">
+            Add request{" "}
+          </button>
         </form>
-        <button
-          onClick={handleSubmit}
-          type="button"
-          class="btn btn-secondary btn-lg btn-block"
-        >
-          Add request{" "}
-        </button>
       </div>
       <Row>
         <Col xs={12}>

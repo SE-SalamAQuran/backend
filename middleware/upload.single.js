@@ -35,7 +35,7 @@ var upload = new multer({
   },
 });
 
-router.patch("/:id", upload.single("avatar"), function (req, res) {
+router.patch("/:id", upload.single("omg"), function (req, res) {
   const id = req.params.id;
   const url = req.protocol + "://" + req.get("host") + "/";
 

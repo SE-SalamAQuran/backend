@@ -18,13 +18,11 @@ module.exports = {
   },
 
   deleteWishItem: (req, res) => {
-    console.log(req.params.id);
-    console.log("trying to delete ");
-    wishlist.remove({ _id: req.params.id }, function (err) {
+    wishlist.deleteOne({ _id: req.params.id }, function (err) {
       if (!err) {
-        return res.send("wishlist deleted!");
+        res.status(200).send("Deleted Successfully!");
       } else {
-        return res.send("Error deleting wishList!");
+        res.status(400).send("Error deleting");
       }
     });
   },
@@ -89,7 +87,7 @@ module.exports = {
       }
     );
   },
-  getOfiice: async (req, res) => {
+  getOffice: async (req, res) => {
     await Properity.find(
       { type: "office", status: "available" },
       (err, offices) => {

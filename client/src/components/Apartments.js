@@ -34,7 +34,7 @@ export default function Apartments() {
       <button
         type="button"
         onClick={handleAppointmentClick}
-        className="btn btn-block btn-success"
+        className="btn btn-block btn-secondary"
       >
         Book an appointment
         <img
@@ -50,8 +50,9 @@ export default function Apartments() {
     const isLoggedIn = props.isLoggedIn;
     if (isLoggedIn) {
       return <Mybutton />;
+    } else {
+      return null;
     }
-    return null;
   }
 
   const useStyles = makeStyles({
@@ -93,7 +94,7 @@ export default function Apartments() {
           <Grid item xs={12} sm={4} key={character.id}>
             <Card className={classes.card}>
               <CardMedia className={classes.media} image={character.imgPath} />
-              <CardContent>
+              <CardContent style={{ textAlign: "center" }}>
                 <Typography color="primary" variant="h5">
                   {character.city}
                 </Typography>
@@ -113,7 +114,7 @@ export default function Apartments() {
                   Area : {character.area}
                 </Typography>
                 <CardActions>
-                  <Greeting isLoggedIn={isLogged}></Greeting>
+                  <Greeting isLoggedIn={isLogged()}></Greeting>
                   <br></br>
                   <button
                     type="button"

@@ -17,7 +17,7 @@ export default function FilesUploadComponent() {
 
     e.preventDefault();
     const formData = new FormData();
-    formData.append("avatar", avatar);
+    formData.append("omg", avatar);
 
     axios({
       method: "patch",
