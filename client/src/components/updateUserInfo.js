@@ -1,12 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Form, Button, Col, Row } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
 import axios from "axios";
 import Navbar from "./AppBar";
-
-import { set } from "mongoose";
 
 function Register() {
   let user = JSON.parse(sessionStorage.getItem("user"));

@@ -8,17 +8,15 @@ import Grid from "./Grid";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function TestProfile() {
-  let user = JSON.parse(sessionStorage.getItem("user"));
-
   function uploadNewRealEstatePage(e) {
     e.preventDefault();
     console.log("upload page");
-    window.location = "http://localhost:3000/uploadNewRealEstate";
+    window.location = "/uploadNewRealEstate";
   }
   function uploadNewRealEstatePageRequest(e) {
     e.preventDefault();
     console.log("upload page");
-    window.location = "http://localhost:3000/uploadNewRealEstateRequest";
+    window.location = "/uploadNewRealEstateRequest";
   }
 
   return (

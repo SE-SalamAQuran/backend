@@ -1,8 +1,6 @@
 import { React, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./styles/Forms.module.css";
 import jsCookie from "js-cookie";
-import FilesUpload from "./FilesUpload";
 import { Col, Row, Toast } from "react-bootstrap";
 
 import axios from "axios";
@@ -14,7 +12,18 @@ export default function ConfirmUpload() {
     header: "",
     text: "",
   });
+
   const prop_id = jsCookie.get("id");
+  function handleNo() {
+    setMessage({
+      type: "alert alert-warning",
+      text: "Upload canceled",
+      header: "You just discarded your images upload",
+    });
+    setShow(true);
+
+    window.location = "/tprofile";
+  }
   function handleSubmit(e) {
     e.preventDefault();
     axios
@@ -41,7 +50,7 @@ export default function ConfirmUpload() {
   }
   return (
     <div className="container">
-      <form style={{ marginTop: "3rem" }} onSubmit={handleSubmit}>
+      <div style={{ marginTop: "3rem" }}>
         <img
           src="https://img.icons8.com/fluent/50/000000/checked-radio-button.png"
           alt="tick"
@@ -55,17 +64,22 @@ export default function ConfirmUpload() {
         <h2 style={{ textAlign: "center", marginBottom: "2rem" }}>
           Confirm Upload?
         </h2>
-        <button type="submit" className="btn btn-block btn-outline-success">
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="btn btn-block btn-outline-success"
+        >
           Yes
         </button>
         <button
           style={{ marginTop: "1.5rem" }}
-          type="submit"
+          type="button"
+          onClick={handleNo}
           className="btn btn-block btn-outline-danger"
         >
           No
         </button>
-      </form>
+      </div>
       <Row>
         <Col xs={12}>
           <Toast

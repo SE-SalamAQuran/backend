@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import ProfileHead from "./ProfileHeader";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Col, Row, Toast, Alert, Button } from "react-bootstrap";
+import { Col, Row, Toast, Alert, Button } from "react-bootstrap";
 import Navbar from "./AppBar";
 const axios = require("axios");
 

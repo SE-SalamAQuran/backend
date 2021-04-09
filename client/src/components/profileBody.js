@@ -16,7 +16,6 @@ export default function ProfileBody() {
   }
 
   function _imageEncode(arrayBuffer) {
-    let u8 = new Uint8Array(arrayBuffer);
     let b64encoded = btoa(
       [].reduce.call(
         new Uint8Array(arrayBuffer),
@@ -59,7 +58,7 @@ export default function ProfileBody() {
   return (
     <div
       class="container-fluid bg-3 text-center"
-      style={{ padding: 70, paddingBottom: 70, background: "AliceBlue" }}
+      style={{ padding: 70, paddingBottom: 70 }}
     >
       <div class="row">
         <div class="col-sm-4">

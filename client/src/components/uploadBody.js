@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable default-case */
 /* eslint-disable no-unreachable */
@@ -61,54 +62,56 @@ function UploadBody() {
     setCurrency(e.target.value);
   }
   function selectBedRoom(e) {
-    let descr = description + " |  number of bedrooms = " + e.target.value;
+    let descr = description + " ,  Number of bedrooms: " + e.target.value;
     setDescription(descr);
   }
   function selectBathRoom(e) {
-    let descr = description + " |  number of bathrooms = " + e.target.value;
+    let descr = description + " ,  Number of bathrooms: " + e.target.value;
     setDescription(descr);
   }
 
   function selectBulidingFloor(e) {
-    let descr = description + " |  number of floors = " + e.target.value;
+    let descr = description + " ,  Number of floors: " + e.target.value;
     setDescription(descr);
   }
   function selectapartmentFloor(e) {
-    let descr =
-      description + " |  Apartments in each floor = " + e.target.value;
+    let descr = description + " , Apartments in each floor: " + e.target.value;
     setDescription(descr);
   }
   function selectLandClassification(e) {
     let descr =
-      description + " |  Classification of the Area is  " + e.target.value;
+      description + " , Classification of the Area is: " + e.target.value;
     setDescription(descr);
   }
   function selectUseOfLand(e) {
-    let descr = description + " |  the land is  " + e.target.value;
+    let descr = description + " , The land is: " + e.target.value;
     setDescription(descr);
   }
   function selectAgeOfConstr(e) {
-    let descr = description + " | age of construction " + e.target.value;
+    let descr =
+      description + " , Age of construction: " + e.target.value + "years";
     setDescription(descr);
   }
   function selectServies(e) {
-    let descr = description + " | services available " + e.target.value;
+    let descr = description + " , Services available: " + e.target.value;
     setDescription(descr);
   }
   function selectStatus(e) {
-    let descr = description + " | location is on " + e.target.value;
+    let descr = description + " , Location is on: " + e.target.value;
     setDescription(descr);
   }
   function selectTotalApartments(e) {
-    let descr = description + " | total number of apartments " + e.target.value;
+    let descr =
+      description + " , Total number of apartments: " + e.target.value;
     setDescription(descr);
   }
   function selectPavement(e) {
-    let descr = description + " | " + e.target.value;
+    let descr = description + " , " + e.target.value;
     setDescription(descr);
   }
   function selectStreets(e) {
-    let descr = description + " | number of streets" + e.target.value;
+    let descr = description + " , Number of streets: " + e.target.value;
+    setDescription(descr);
   }
 
   function Describtion(type) {
