@@ -14,6 +14,7 @@ const upload = require("./middleware/upload.single");
 const path = require("path");
 const usersRoute = require("./routes/users.routes");
 const propertiesRoute = require("./routes/properity.routes");
+const appointmentsRoute = require("./routes/appointment.routes");
 const uploadRoutes = require("./middleware/upload.single");
 const { initialize } = require("passport");
 const { dirname } = require("path");
@@ -68,6 +69,7 @@ app.use("/upload/avatar", uploadRoutes);
 app.use(express.static(path.join(__dirname, "./uploads")));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use("/properties", propertiesRoute);
+app.use("/appointments",appointmentsRoute);
 
 app.get("/uploads/:bin", (req, res) => {
   const bin = req.params.bin;

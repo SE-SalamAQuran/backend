@@ -38,6 +38,17 @@ module.exports = {
       }
     });
   },
+  fetcheWishlList1: (req, res) => {
+    console.log("trying to fetching");
+    const id = req.params.id;
+    wishlist.find({}, (err, result) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  },
   fetcheItem: (req, res) => {
     console.log("trying to fetching");
     const id = req.params.id;
@@ -50,6 +61,16 @@ module.exports = {
     });
   },
 
+  getproperty: (req, res) => {
+    const id = req.params.id;
+    Properity.findOne({ _id: id }, (err, result) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  },
   getLands: async (req, res) => {
     await Properity.find(
       { type: "land", status: "available" },

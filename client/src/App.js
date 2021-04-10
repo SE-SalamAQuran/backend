@@ -5,6 +5,8 @@ import Register from "./components/Register";
 import Main from "./components/Main";
 import TestProfile from "./components/testProfile";
 import Table from "./components/table";
+import AppointmentTable from "./components/AppointmentPage";
+import AppointmentTableAdmin from "./components/AllApointment";
 import UploadRealEstateRequest from "./components/notFoundRealestate";
 import updateUserInformation from "./components/updateUserInfo";
 import MailForm from "./components/MailCode";
@@ -19,9 +21,11 @@ import Apartments from "./components/Apartments";
 import Success from "./components/Success";
 import Recover from "./components/PasswordRecovery";
 import UploadProfilePic from "./components/FilesUploadComponent";
-import FilesUpload from "./components/FilesUpload";
+import AdminTable from "./components/AdminTableForRequsted"
 import uploadRealEstate from "./components/uploadRealEstate";
 import ConfirmUpload from "./components/ConfirmUpload";
+import FilesUpload from "./components/FilesUpload";
+
 
 function App() {
   return (
@@ -41,11 +45,11 @@ function App() {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/table" component={Table} />
+      <Route path="/Appointements" component={AppointmentTable} />
+      <Route path="/allAppointements" component={AppointmentTableAdmin} />
+      <Route path="/usersRequsted" component={AdminTable} />
       <Route path="/uploadNewRealEstate" component={uploadRealEstate} />
-      <Route
-        path="/uploadNewRealEstateRequest"
-        component={UploadRealEstateRequest}
-      />
+      <Route path="/uploadNewRealEstateRequest"component={UploadRealEstateRequest}/>
       <Route path="/success" component={Success} />
       <Route path="/newPassword" component={Recover} />
       <Route path="/tprofile" component={TestProfile} />

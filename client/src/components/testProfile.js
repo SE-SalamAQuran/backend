@@ -8,6 +8,9 @@ import Grid from "./Grid";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function TestProfile() {
+  let user = JSON.parse(sessionStorage.getItem("user"));
+  const isAdmin = user.isAdmin ; 
+
   function uploadNewRealEstatePage(e) {
     e.preventDefault();
     console.log("upload page");
@@ -18,39 +21,53 @@ function TestProfile() {
     console.log("upload page");
     window.location = "/uploadNewRealEstateRequest";
   }
+  function profileShow(){
+
+    if (isAdmin){
+      return (
+        <div>
+          <ProfileHead></ProfileHead>
+          <ProfileSecCom></ProfileSecCom>
+          <ProfileBody></ProfileBody>
+          <Grid></Grid>
+          <Footer />
+        </div>
+      );
+    }
+    else{
+
+      return (
+        <div>
+          <ProfileHead></ProfileHead>
+          <ProfileSecCom></ProfileSecCom>
+          <ProfileBody></ProfileBody>
+    
+          <button
+            onClick={uploadNewRealEstatePage}
+            type="button"
+            class="btn btn-secondary btn-lg btn-block"
+          >
+            Upload a new realestate NOW{" "}
+          </button>
+          <button
+            onClick={uploadNewRealEstatePageRequest}
+            type="button"
+            class="btn btn-secondary btn-lg btn-block"
+          >
+            Request a Real estate{" "}
+          </button>
+    
+          <Grid></Grid>
+          <Footer />
+        </div>
+      );
+    }
+
+
+  }
 
   return (
-    <div>
-      <ProfileHead></ProfileHead>
-      <ProfileSecCom></ProfileSecCom>
-      <ProfileBody></ProfileBody>
-      <div class="container">
-        <div class="row">
-          <div class="col-6">
-            {" "}
-            <button
-              onClick={uploadNewRealEstatePage}
-              type="button"
-              className="btn btn-outline-success btn-lg btn-block"
-            >
-              Upload New Real estate{" "}
-            </button>
-          </div>
-          <div class="col-6">
-            <button
-              onClick={uploadNewRealEstatePageRequest}
-              type="button"
-              className="btn btn-outline-info btn-lg btn-block"
-            >
-              Request a Real estate{" "}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <Grid></Grid>
-      <Footer />
-    </div>
+    profileShow() 
   );
 }
 
