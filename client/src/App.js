@@ -21,14 +21,11 @@ import Apartments from "./components/Apartments";
 import Success from "./components/Success";
 import Recover from "./components/PasswordRecovery";
 import UploadProfilePic from "./components/FilesUploadComponent";
-<<<<<<< HEAD
 import AdminTable from "./components/AdminTableForRequsted"
-
-=======
-import FilesUpload from "./components/FilesUpload";
->>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
 import uploadRealEstate from "./components/uploadRealEstate";
 import ConfirmUpload from "./components/ConfirmUpload";
+import FilesUpload from "./components/FilesUpload";
+
 
 function App() {
   return (

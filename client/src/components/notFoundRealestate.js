@@ -49,21 +49,13 @@ function UploadRealEstateRequset() {
     axios
       .post("http://localhost:5000/properties/addWishItem", data)
       .then((res) => {
-<<<<<<< HEAD
-        console.log({ data });
-=======
->>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
         setMessage({
           type: "alert alert-success",
           header: "Success",
           text: "Please fill all fields",
         });
-<<<<<<< HEAD
-        setShow(true);        
-=======
         setShow(true);
         window.location = "/table";
->>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
       })
       .catch((res) => {
         //handle error

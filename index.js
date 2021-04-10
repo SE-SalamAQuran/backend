@@ -49,15 +49,6 @@ app.use(express.json({ extended: true, limit: "150mb" }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-<<<<<<< HEAD
-const usersRoute = require("./routes/users.routes");
-const propertiesRoute = require("./routes/properity.routes");
-const appointmentsRoute = require("./routes/appointment.routes");
-const uploadRoutes = require("./middleware/upload.single");
-const uploadProp = require("./middleware/upload.multiple");
-const { initialize } = require("passport");
-const { dirname } = require("path");
-=======
 app.use(cookieParser());
 // include and initialize the rollbar library with your access token
 var rollbar = new Rollbar({
@@ -65,7 +56,6 @@ var rollbar = new Rollbar({
   captureUncaught: true,
   captureUnhandledRejections: true,
 });
->>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
 
 // record a generic message and send it to Rollbar
 // use morgan to log requests to the console
@@ -79,6 +69,7 @@ app.use(express.static(path.join(__dirname, "./uploads")));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use("/properties", propertiesRoute);
 app.use("/appointments",appointmentsRoute);
+
 app.get("/uploads/:bin", (req, res) => {
   const bin = req.params.bin;
   res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
