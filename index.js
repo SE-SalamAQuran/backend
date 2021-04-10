@@ -14,6 +14,7 @@ const upload = require("./middleware/upload.single");
 const path = require("path");
 const usersRoute = require("./routes/users.routes");
 const propertiesRoute = require("./routes/properity.routes");
+const appointmentsRoute = require("./routes/appointment.routes");
 const uploadRoutes = require("./middleware/upload.single");
 const { initialize } = require("passport");
 const { dirname } = require("path");
