@@ -17,7 +17,6 @@ export default function ProfileBody() {
   }
 
   function _imageEncode(arrayBuffer) {
-    let u8 = new Uint8Array(arrayBuffer);
     let b64encoded = btoa(
       [].reduce.call(
         new Uint8Array(arrayBuffer),
@@ -42,10 +41,8 @@ export default function ProfileBody() {
         setFname(res.data.fname);
         setLname(res.data.lname);
         setPic(res.data.profile);
-        console.log(res.data.profile)
+        console.log(res.data.profile);
       })
-
-      
 
       .catch((err) => console.log(err));
   });
@@ -78,7 +75,7 @@ export default function ProfileBody() {
       return(
       <div
       class="container-fluid bg-3 text-center"
-      style={{ padding: 70, paddingBottom: 70, background: "AliceBlue" }}
+      style={{ padding: 70, paddingBottom: 70 }}
     >
       <div class="row">
         <div class="col-sm-4">
@@ -97,6 +94,11 @@ export default function ProfileBody() {
             onClick={upload}
           >
             Upload New Picture
+            <img
+              style={{ marginLeft: "5px" }}
+              src="https://img.icons8.com/color/25/000000/test-account.png"
+              alt="profile"
+            />
           </button>
         </div>
         <div class="col-sm-4">

@@ -12,18 +12,15 @@ const multer = require("multer");
 const cookieParser = require("cookie-parser");
 const upload = require("./middleware/upload.single");
 const path = require("path");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const FacebookStrategy = require("passport-facebook").Strategy;
+const usersRoute = require("./routes/users.routes");
+const propertiesRoute = require("./routes/properity.routes");
+const uploadRoutes = require("./middleware/upload.single");
+const { initialize } = require("passport");
+const { dirname } = require("path");
+const uploadPropRoute = require("./middleware/upload.multiple");
+var Rollbar = require("rollbar");
+
 const app = express();
-
-app.use(
-  express.urlencoded({ extended: true, limit: "50mb", parameterLimit: 1000000 })
-);
-app.use(express.json({ extended: true, limit: "50mb" }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(cookieParser());
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -38,13 +35,21 @@ connection.once("open", () => {
 });
 
 app.use(cors());
-
+app.use(multer({ dest: "./uploads" }).single("omg"));
 app.use(multer({ dest: "./uploads" }).single("avatar"));
-app.use(multer({ dest: "./public/properties" }).array("media"));
 
-// use morgan to log requests to the console
-app.use(morgan("dev"));
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "150mb",
+    parameterLimit: 1000000,
+  })
+);
+app.use(express.json({ extended: true, limit: "150mb" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
+<<<<<<< HEAD
 const usersRoute = require("./routes/users.routes");
 const propertiesRoute = require("./routes/properity.routes");
 const appointmentsRoute = require("./routes/appointment.routes");
@@ -52,13 +57,26 @@ const uploadRoutes = require("./middleware/upload.single");
 const uploadProp = require("./middleware/upload.multiple");
 const { initialize } = require("passport");
 const { dirname } = require("path");
+=======
+app.use(cookieParser());
+// include and initialize the rollbar library with your access token
+var rollbar = new Rollbar({
+  accessToken: process.env.ROLLBAR_TOKEN,
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+});
+>>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
 
+// record a generic message and send it to Rollbar
+// use morgan to log requests to the console
+app.use(morgan("dev"));
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
+});
 app.use("/users", usersRoute);
 app.use("/upload/avatar", uploadRoutes);
-app.use("/uploads", uploadProp);
 app.use(express.static(path.join(__dirname, "./uploads")));
-app.use(express.static(path.join(__dirname, "./public/properties")));
-
+app.use(express.static(path.join(__dirname, "./public")));
 app.use("/properties", propertiesRoute);
 app.use("/appointments",appointmentsRoute);
 app.get("/uploads/:bin", (req, res) => {
@@ -73,16 +91,11 @@ app.get("/default/avatar", (req, res) => {
   res.sendFile("./profile.png", { root: __dirname });
 });
 
-app.get("/media/:bin", (req, res) => {
-  const bin = req.params.bin;
-  res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
-  var files = "./public/properties/" + bin;
-
-  var file = ".//" + bin;
-  var image = res.sendFile(file, { root: __dirname });
-  return image;
+app.get("/default/path", (req, res) => {
+  res.sendFile("./making-offer-house.jpg", { root: __dirname });
 });
-
-app.listen(port, () => {
-  console.log(`Listening on port: ${port}`);
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
 });

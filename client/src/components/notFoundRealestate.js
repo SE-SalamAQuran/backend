@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import ProfileHead from "./ProfileHeader";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Col, Row, Toast, Alert, Button } from "react-bootstrap";
+import { Col, Row, Toast, Alert, Button } from "react-bootstrap";
 import Navbar from "./AppBar";
 const axios = require("axios");
 
@@ -50,13 +49,21 @@ function UploadRealEstateRequset() {
     axios
       .post("http://localhost:5000/properties/addWishItem", data)
       .then((res) => {
+<<<<<<< HEAD
         console.log({ data });
+=======
+>>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
         setMessage({
           type: "alert alert-success",
           header: "Success",
           text: "Please fill all fields",
         });
+<<<<<<< HEAD
         setShow(true);        
+=======
+        setShow(true);
+        window.location = "/table";
+>>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
       })
       .catch((res) => {
         //handle error
@@ -138,7 +145,7 @@ function UploadRealEstateRequset() {
       )}
       <div style={{ padding: 20 }}></div>
       <div className="container">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputType of properity">Type of property</label>
@@ -201,14 +208,10 @@ function UploadRealEstateRequset() {
               />
             </div>
           </div>
+          <button type="submit" class="btn btn-secondary btn-lg btn-block">
+            Add request{" "}
+          </button>
         </form>
-        <button
-          onClick={handleSubmit}
-          type="button"
-          class="btn btn-secondary btn-lg btn-block"
-        >
-          Add request{" "}
-        </button>
       </div>
       <Row>
         <Col xs={12}>

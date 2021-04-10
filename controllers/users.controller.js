@@ -169,7 +169,7 @@ module.exports = {
       text: `Our valid user,  ${verCode} is the code to your password recovery. Do Not share this code with anyone`, // plain text body
       html: `<h1>Palestinian Estates</h1> <p><em> ${verCode}</em>  is the code to your password recovery, Do Not share this code with anyone</p>`, //html body
     });
-    res.status(200).json({ code: verCode });
+    res.status(201).json({ code: verCode });
   },
 
   forgotPasswordSMS: async (req, res) => {
@@ -191,7 +191,7 @@ module.exports = {
         to: `${destPhone}`,
       })
 
-      .then((message) => res.status(200).json({ code: verCode }))
+      .then((message) => res.status(201).json({ code: verCode }))
       .catch((err) => res.status(400).send(err));
   },
 

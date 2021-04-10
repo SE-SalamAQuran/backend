@@ -3,61 +3,16 @@ import Footer from "./Footer";
 import Navbar from "./AppBar";
 import UploadBody from "./uploadBody";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Alert, Button, Toast, Col, Row } from "react-bootstrap";
-import styles from "./styles/Forms.module.css";
-import axios from "axios";
+import { Alert, Button } from "react-bootstrap";
 
 function UploadRealEstate() {
-  const [Ashow, setAshow] = useState(true);
-  const [state, setState] = useState({
-    selectedFile: null,
-    prop: {},
-  });
-  const [show, setShow] = useState(false);
-  const [message, setMessage] = useState({
-    type: "",
-    header: "",
-    text: "",
-  });
+  const [show, setShow] = useState(true);
 
-  function onSubmit(e) {
-    let user = JSON.parse(sessionStorage.getItem("user"));
-    e.preventDefault();
-    const formData = new FormData();
-    for (var x = 0; x < this.state.selectedFile.length; x++) {
-      formData.append("images", this.state.selectedFile[x]);
-    }
-
-    axios({
-      method: "post",
-      url: "http://localhost:5000/upload/new/property" + user._id,
-      data: formData,
-    })
-      .then(function (response) {
-        //handle success
-        setMessage({
-          type: "alert alert-success",
-          header: "Success",
-          text: "Property Added Successfully",
-        });
-        setShow(true);
-        window.location = "/uploadNewRealEstate";
-      })
-      .catch(function (response) {
-        //handle error
-        setMessage({
-          type: "alert alert-danger",
-          header: "Failed",
-          text: "Please fill all fields",
-        });
-        setShow(true);
-      });
-  }
   return (
     <div>
       <Navbar />
       <Alert
-        Ashow={Ashow}
+        show={show}
         style={{ marginTop: "1rem", textAlign: "center" }}
         variant="dark"
       >
@@ -88,8 +43,8 @@ function UploadRealEstate() {
             src="https://img.icons8.com/emoji/20/000000/check-mark-button-emoji.png"
             alt="green"
           />{" "}
-          Feel free to upload up to 6 images and/or videos to give a better view
-          of your property.
+          Feel free to upload up to 6 images to give a better view of your
+          property.
         </h6>{" "}
         <h6>
           {" "}
@@ -97,7 +52,7 @@ function UploadRealEstate() {
             src="https://img.icons8.com/emoji/20/000000/check-mark-button-emoji.png"
             alt="green"
           />{" "}
-          Total size limit of uploads must not exceed 50MB per upload.
+          Total size limit of uploads must not exceed 150MB.
         </h6>
         <h6>
           {" "}
@@ -122,13 +77,13 @@ function UploadRealEstate() {
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          onClick={() => setAshow(false)}
+          onClick={() => setShow(false)}
           variant="outline-danger"
         >
           X
         </Button>
       </Alert>
-      {!Ashow && (
+      {!show && (
         <Button
           variant="info"
           style={{
@@ -137,55 +92,14 @@ function UploadRealEstate() {
             marginLeft: "auto",
             marginRight: "auto",
           }}
-          onClick={() => setAshow(true)}
+          onClick={() => setShow(true)}
         >
           Our terms of use
         </Button>
       )}
-    
+
       <UploadBody />
-      <div className={styles.container}>
-        <form onSubmit={onSubmit} encType="multipart-form-data">
-          <div className="form-group">
-            <input
-              type="file"
-              onChange={(event) => {
-                setState(event.target.files);
-              }}
-              multiple
-              className="form-control-avatar"
-              name="images"
-            />
-            <input
-              type="submit"
-              value="Upload Picture"
-              className="btn btn-block btn-primary"
-              style={{ marginTop: "2rem" }}
-            />
-          </div>
-        </form>
-      </div>
-      <Row>
-        <Col xs={12}>
-          <Toast
-            onClose={() => setShow(false)}
-            show={show}
-            style={{
-              display: "block",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-            delay={3000}
-            autohide
-          >
-            <div className={message.type}>
-              <strong className="mr-auto">{message.header}</strong>
-              <br></br>
-              <small>{message.text}</small>
-            </div>
-          </Toast>
-        </Col>
-      </Row>
+
       <Footer />
     </div>
   );

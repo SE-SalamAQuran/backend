@@ -1,9 +1,7 @@
 const router = require("express").Router({ mergeParams: true });
 const passport = require("passport");
-const homeController = require("../controllers/home");
 var userController = require("../controllers/users.controller");
 
-router.get("/", homeController.getHome);
 router.put("/update/:id", userController.updateUserData);
 router.get("/user/:id", userController.fetcheUserData);
 router.post("/login", userController.userLogin);

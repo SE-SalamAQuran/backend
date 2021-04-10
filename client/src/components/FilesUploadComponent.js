@@ -17,7 +17,7 @@ export default function FilesUploadComponent() {
 
     e.preventDefault();
     const formData = new FormData();
-    formData.append("avatar", avatar);
+    formData.append("omg", avatar);
 
     axios({
       method: "patch",
@@ -43,6 +43,7 @@ export default function FilesUploadComponent() {
         });
         setShow(true);
       });
+    console.log(formData.get("avatar"));
   }
 
   return (
@@ -54,7 +55,7 @@ export default function FilesUploadComponent() {
       />
       <h1>Upload a new profile picture</h1>
       <div className="row mt-4">
-        <form onSubmit={onSubmit} encType="multipart-form-data">
+        <form onSubmit={onSubmit} encType="multipart/form-data">
           <div className="form-group">
             <input
               type="file"

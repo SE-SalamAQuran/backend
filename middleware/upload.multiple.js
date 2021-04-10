@@ -1,86 +1,24 @@
-let express = require("express"),
-  router = express.Router(),
-  fs = require("fs"),
-  path = require("path");
-const { ResumeToken } = require("mongodb");
-const { MulterError } = require("multer");
 var multer = require("multer");
+var cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const dotenv = require("dotenv").config();
 
-const DIR = "../public/properties";
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_HOST,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + path.extname(file.originalname));
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "properties",
+    format: async () => {
+      "png" || "jpeg" || "jpg";
+    },
+    public_id: (req, file) => file.filename,
   },
 });
 
-var upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (
-      file.mimetype == "image/png" ||
-      file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg" ||
-      file.mimetype == "video/mp4"
-    ) {
-      cb(null, true);
-    } else {
-      cb(null, false);
-      return cb(new Error("Only .png, .mp4, .jpg and .jpeg format allowed!"));
-    }
-  },
-});
-
-const Property = require("../models/property.model");
-
-router.post(
-  "/new/property/:id",
-  upload.array("images", 6),
-  async (req, res) => {
-    const owner = req.params.id;
-    const url = req.protocol + "://" + req.get("host") + "/";
-
-    const {
-      propertyFor,
-      description,
-      type,
-      city,
-      address,
-      price,
-      currency,
-      classification,
-      area,
-    } = req.body;
-    var imgPath = url + "public/properties/" + req.files[0].filename;
-    var images = [];
-    let i;
-    for (i = 0; i < req.files.length; i++) {
-      images.push(url + "public/properties/" + req.files[i].filename);
-    }
-    let newProp = new Property({
-      propertyFor: propertyFor,
-      description: description,
-      type: type,
-      city: city,
-      owner: owner,
-      address: address,
-      price: price,
-      currency: currency,
-      classification: classification,
-      area: area,
-      imgPath: imgPath,
-      images: images,
-    });
-    await newProp
-      .save()
-      .then(res.json(newProp))
-      .catch((error) => {
-        res.status(400).send(error);
-      });
-  }
-);
-
-module.exports = router;
+const parser = multer({ storage: storage });
+module.exports = parser;

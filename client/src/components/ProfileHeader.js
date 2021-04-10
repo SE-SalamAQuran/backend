@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";

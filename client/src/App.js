@@ -11,18 +11,38 @@ import UploadRealEstateRequest from "./components/notFoundRealestate";
 import updateUserInformation from "./components/updateUserInfo";
 import MailForm from "./components/MailCode";
 import SMSForm from "./components/SMSCode";
+import Lands from "./components/Lands";
+import Villas from "./components/Villas";
+import Houses from "./components/Houses";
+import Roofs from "./components/Roofs";
+import Shops from "./components/Shops";
+import Offices from "./components/Offices";
+import Apartments from "./components/Apartments";
 import Success from "./components/Success";
 import Recover from "./components/PasswordRecovery";
 import UploadProfilePic from "./components/FilesUploadComponent";
+<<<<<<< HEAD
 import AdminTable from "./components/AdminTableForRequsted"
 
+=======
+import FilesUpload from "./components/FilesUpload";
+>>>>>>> da7da87b4f2b84148eb59293524961db1e2b76fc
 import uploadRealEstate from "./components/uploadRealEstate";
+import ConfirmUpload from "./components/ConfirmUpload";
 
 function App() {
   return (
     <Router>
+      <Route path="/lands" exact component={Lands} />
+      <Route path="/villas" exact component={Villas} />
+      <Route path="/roofs" exact component={Roofs} />
+      <Route path="/shops" exact component={Shops} />
+      <Route path="/offices" exact component={Offices} />
+      <Route path="/houses" exact component={Houses} />
+      <Route path="/apartments" exact component={Apartments} />
       <Route path="/" exact component={Main} />
-
+      <Route path="/upload/media" component={FilesUpload} />
+      <Route path="/upload/confirm" component={ConfirmUpload} />
       <Route path="/verify/mail" component={MailForm} />
       <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />
@@ -35,8 +55,8 @@ function App() {
       <Route path="/uploadNewRealEstateRequest"component={UploadRealEstateRequest}/>
       <Route path="/success" component={Success} />
       <Route path="/newPassword" component={Recover} />
-      <Route path="/tprofile" exact component={TestProfile} />
-      <Route path="/upload" component={UploadProfilePic} />
+      <Route path="/tprofile" component={TestProfile} />
+      <Route path="/upload" exact component={UploadProfilePic} />
       <Route
         path="/Update user Information"
         component={updateUserInformation}
