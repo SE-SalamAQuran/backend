@@ -48,6 +48,17 @@ console.log(req.params.id)
       }
     });
   },
+  fetcheWishlList1: (req, res) => {
+    console.log("trying to fetching");
+    const id = req.params.id;
+    wishlist.find({}, (err, result) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  },
   fetcheItem: (req, res) => {
     console.log("trying to fetching")
     const id = req.params.id;

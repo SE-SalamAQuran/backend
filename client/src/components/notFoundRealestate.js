@@ -51,17 +51,16 @@ function UploadRealEstateRequset() {
       .post("http://localhost:5000/properties/addWishItem", data)
       .then((res) => {
         console.log({ data });
-        res.status(200);
         setMessage({
           type: "alert alert-success",
           header: "Success",
-          text: "Request Added Successfully",
+          text: "Please fill all fields",
         });
-        setShow(true);
-        window.location = "/tprofile";
+        setShow(true);        
       })
-      .catch(function (response) {
+      .catch((res) => {
         //handle error
+        console.log(res)
         setMessage({
           type: "alert alert-danger",
           header: "Failed",
@@ -69,6 +68,7 @@ function UploadRealEstateRequset() {
         });
         setShow(true);
       });
+
   }
 
   return (

@@ -57,7 +57,12 @@ export default function ProfileBody() {
 
   function goListedWishesPage(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/table";
+    if(user.isAdmin){
+      window.location = "http://localhost:3000/usersRequsted"
+    }else{
+      window.location = "http://localhost:3000/table";
+    }
+   
   }
   function goToMyAppointment(e) {
     e.preventDefault();

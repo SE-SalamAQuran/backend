@@ -4,7 +4,7 @@ import * as ReactBootStrap from "react-bootstrap";
 import axios from "axios";
 import Navbar from "./AppBar";
 import Footer from "./Footer";
-import Alert from '@material-ui/lab/Alert';
+import carousel3 from "./carousel3.jpg";
 
 
 export default function AppointmentTableAdmin() {
@@ -81,9 +81,7 @@ axios
       "content-type": "application/json",
     },
   })
-   
    .then((res) => {
-  
     setOwnerId(res.data.owner);
     setType(res.data.type);
     setTransactionType(res.data.propertyFor);
@@ -94,7 +92,7 @@ axios
     setCurrency(res.data.currency);
     console.log(res)
     axios
-    .get("http://localhost:5000/users/user/602e72703026ee2d0436ecad" , {
+    .get("http://localhost:5000/users/user/606ae265d61cc221dcebdcd5" , {
       headers: {
         "content-type": "application/json",
       },
@@ -103,16 +101,15 @@ axios
       setFname(res.data.fname);
       setLname(res.data.lname);
       console.log(res)
-      alert(res.data.fname )
-      
+      alert("Owner details : \n " + "username : " +res.data.fname +" "+  res.data.lname  + "\n " + "phoneNumber :  "
+      + res.data.phoneNo + " \n" +" address : "+ "  " + res.data.address )      
     })
 
     .catch((err) => console.log(err));
     alert(res.data.type +" for " + " " + res.data.propertyFor + " \n in : " + res.data.address
       + " , " + res.data.city +  " \n Area : " + res.data.area  + " \n" + "price : " 
-      + res.data.price +"  "+ res.data.currency +"\n ownerId : " + res.data.fname )
+      + res.data.price +"  "+ res.data.currency +"\n \n Click Ok to show owner details" )
      
-
   })
   .catch((err) => console.log(err));
 
