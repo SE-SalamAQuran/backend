@@ -87,13 +87,13 @@ export default function Appbar() {
                 Villas
               </Dropdown.Item>
               <Dropdown.Item href="http://localhost:3000/roofs">
-                Roof
+                Roofs
               </Dropdown.Item>
               <Dropdown.Item href="http://localhost:3000/shops">
-                Shop
+                Shops
               </Dropdown.Item>
               <Dropdown.Item href="http://localhost:3000/offices">
-                Office
+                Offices
               </Dropdown.Item>
               <Dropdown.Item href="http://localhost:3000/apartments">
                 Apartments

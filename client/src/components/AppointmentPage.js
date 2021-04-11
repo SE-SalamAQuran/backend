@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as ReactBootStrap from "react-bootstrap";
@@ -10,7 +12,7 @@ export default function AppointmentTable() {
   //5fa5288ca69f5d28b0dde424
   useEffect(() => {
     axios
-      .get("http://localhost:5000/appointments/userAppointment/"+ user._id, {
+      .get("http://localhost:5000/appointments/userAppointment/" + user._id, {
         headers: {
           "content-type": "application/json",
         },
@@ -25,10 +27,9 @@ export default function AppointmentTable() {
   const [appointments, setAppointments] = useState([]);
   const [count, setCount] = useState(0);
 
-  function showPropertyDetails(user){
-    alert("you want to show property")
-}
- 
+  function showPropertyDetails(user) {
+    alert("you want to show property");
+  }
 
   const renderAppointments = (appointments, index) => {
     return (
@@ -54,33 +55,30 @@ export default function AppointmentTable() {
     <div>
       <Navbar></Navbar>
       <div style={{ padding: 20 }}>
-        <div  style={{ textAlign: "center" ,  }}>
-            <h4 >
-              {" "}
-              List of your appintment : (you have {appointments.length} appointment)
-            </h4>
+        <div style={{ textAlign: "center" }}>
+          <h4>
+            {" "}
+            List of your appintment : (you have {appointments.length}{" "}
+            appointment)
+          </h4>
         </div>
-        <br/>
-        <div  style={{width : 650 ,margin:"auto" , textAlign:"center"}}>
-        <ReactBootStrap.Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>place</th>
-              <th>date</th>
-              <th>time</th>
-              <th>properDetails</th>
-            </tr>
-          </thead>
-          <tbody>{appointments.map(renderAppointments)}</tbody>
-        </ReactBootStrap.Table>
+        <br />
+        <div style={{ width: 650, margin: "auto", textAlign: "center" }}>
+          <ReactBootStrap.Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>place</th>
+                <th>date</th>
+                <th>time</th>
+                <th>properDetails</th>
+              </tr>
+            </thead>
+            <tbody>{appointments.map(renderAppointments)}</tbody>
+          </ReactBootStrap.Table>
         </div>
-        </div>
-
-        <Footer />
-
       </div>
-    
+
+      <Footer />
+    </div>
   );
 }
-
-

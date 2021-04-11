@@ -13,6 +13,7 @@ export default function CenteredGrid() {
       <Hero></Hero>
       <Intro />
       <Grid></Grid>
+
       <Footer />
     </div>
   );
