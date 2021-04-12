@@ -1,0 +1,195 @@
+/* eslint-disable no-unused-vars */
+import { React, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Grid from "@material-ui/core/Grid";
+import axios from "axios";
+import { Row, Col, Toast } from "react-bootstrap";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: "8rem",
+  },
+  root: {
+    flexGrow: 1,
+    marginRight: "2rem",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    alignContent: "center",
+    alignItems: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
+
+export default function AppointmentsForm() {
+  const [state, setState] = useState({
+    place: "",
+    time: "",
+    date: "",
+  });
+  const classes = useStyles();
+  const [show, setShow] = useState(false);
+
+  function onChange(e) {
+    const { name, value } = e.target;
+    setState((prev) => {
+      if (name === "date") {
+        return {
+          date: value,
+          time: prev.time,
+          place: prev.place,
+        };
+      } else if (name === "time") {
+        return {
+          date: prev.date,
+          time: value,
+          place: prev.place,
+        };
+      } else if (name === "place") {
+        return {
+          date: prev.date,
+          time: prev.time,
+          place: value,
+        };
+      }
+    });
+  }
+  function onSubmit(e) {
+    e.preventDefault();
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    let prop = localStorage.getItem("id");
+    let data = {
+      date: state.date,
+      time: state.time,
+      place: state.place,
+    };
+    axios
+      .post(
+        "http://localhost:5000/appointments/new/" + user._id + "/" + prop,
+        data
+      )
+      .then((res) => {
+        setMessage({
+          type: "alert alert-success",
+          header: "Success",
+          text: "Appointment added!",
+        });
+        setShow(true);
+        window.location = "/tprofile";
+      })
+      .catch((res) => {
+        //handle error
+        setMessage({
+          type: "alert alert-danger",
+          header: "Failed",
+          text: "Something went wrong",
+        });
+        setShow(true);
+      });
+  }
+
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+  });
+  return (
+    <div className={classes.root}>
+      {" "}
+      <h2 style={{ marginBottom: "1.34rem", textAlign: "center" }}>
+        Booking an appointment
+      </h2>
+      <form onSubmit={onSubmit} className={classes.container}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <TextField
+                id="filled-primary"
+                name="date"
+                value={state.date}
+                onChange={onChange}
+                fullWidth
+                label="Date"
+                type="date"
+                defaultValue="2017-05-24"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              {" "}
+              <TextField
+                id="filled-primary"
+                name="time"
+                value={state.time}
+                onChange={onChange}
+                label="Time"
+                type="time"
+                fullWidth
+                defaultValue="2:30"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <TextField
+                id="filled-primary"
+                label="Place"
+                name="place"
+                fullWidth
+                value={state.place}
+                onChange={onChange}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <button
+          style={{ marginTop: "2rem" }}
+          type="submit"
+          className="btn btn-block btn-success"
+        >
+          Book the appointment
+        </button>
+      </form>
+      <Row>
+        <Col xs={12}>
+          <Toast
+            onClose={() => setShow(false)}
+            show={show}
+            style={{
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            delay={3000}
+            autohide
+          >
+            <div className={message.type}>
+              <strong className="mr-auto">{message.header}</strong>
+              <br></br>
+              <small>{message.text}</small>
+            </div>
+          </Toast>
+        </Col>
+      </Row>
+    </div>
+  );
+}

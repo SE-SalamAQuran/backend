@@ -18,7 +18,7 @@ export default function Villas() {
   });
 
   // eslint-disable-next-line no-unused-vars
-  const classes = useStyles();
+  const classes = useStyles;
 
   const [data, setData] = useState([]);
 

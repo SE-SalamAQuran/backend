@@ -15,7 +15,7 @@ const appointmentsSchema = new Schema(
       ref: "property",
     },
     date: {
-      type: Date,
+      type: String,
       default: Date.now,
     },
     time: {

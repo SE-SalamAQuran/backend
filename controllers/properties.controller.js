@@ -158,6 +158,7 @@ module.exports = {
       }
     );
   },
+
   addProperty: async (req, res) => {
     const owner = req.params.id;
 
@@ -200,6 +201,35 @@ module.exports = {
             }
           }
         );
+      }
+    });
+  },
+  getImages: async (req, res) => {
+    let id = req.params.id;
+
+    await Images.find({ property: id }, (err, result) => {
+      if (err) {
+        res.status(404).json({
+          Error: err,
+          Message: "Not found",
+        });
+      } else {
+        res.status(200).json({
+          images: result,
+        });
+      }
+    });
+  },
+  getDescription: async (req, res) => {
+    const id = req.params.id;
+    await Properity.find({ _id: id }, (err, prop) => {
+      if (err) {
+        res.status(404).json({
+          Error: err,
+          Message: "Not found",
+        });
+      } else {
+        res.status(200).send(prop);
       }
     });
   },
