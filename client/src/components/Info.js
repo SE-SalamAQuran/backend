@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import Gallery from "./Gallery";
+// import Gallery from "./Gallery";
 import axios from "axios";
 
 export default function Info() {
@@ -19,9 +19,5 @@ export default function Info() {
   //     });
   // });
 
-  return (
-    <div>
-      <Gallery />
-    </div>
-  );
+  return <div></div>;
 }
