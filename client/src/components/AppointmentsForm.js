@@ -39,6 +39,12 @@ export default function AppointmentsForm() {
   const classes = useStyles();
   const [show, setShow] = useState(false);
 
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+    duration: 0,
+  });
   function onChange(e) {
     const { name, value } = e.target;
     setState((prev) => {
@@ -82,26 +88,23 @@ export default function AppointmentsForm() {
           type: "alert alert-success",
           header: "Success",
           text: "Appointment added!",
+          duration: 3500,
         });
         setShow(true);
-        window.location = "/tprofile";
       })
-      .catch((res) => {
+      .catch((error) => {
         //handle error
+
         setMessage({
           type: "alert alert-danger",
           header: "Failed",
-          text: "Something went wrong",
+          text: "Appointment reserved or you have an empty field",
+          duration: 4500,
         });
         setShow(true);
       });
   }
 
-  const [message, setMessage] = useState({
-    type: "",
-    header: "",
-    text: "",
-  });
   return (
     <div className={classes.root}>
       {" "}
@@ -179,7 +182,7 @@ export default function AppointmentsForm() {
               marginLeft: "auto",
               marginRight: "auto",
             }}
-            delay={3000}
+            delay={message.duration}
             autohide
           >
             <div className={message.type}>

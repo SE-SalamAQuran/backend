@@ -14,7 +14,6 @@ module.exports = {
     });
   },
   getAllAppointment: (req, res) => {
-    console.log("trying to fetching");
     const id = req.params.id;
     Appointments.find({}, (err, result) => {
       if (err) {
@@ -37,16 +36,25 @@ module.exports = {
       user: user,
     });
 
-    appointment
-      .save()
-      .then(() => {
-        res.status(200).json({
-          Status: "Success",
-          NewAppointment: appointment,
-        });
-      })
-      .catch((err) => {
-        res.status(400).send(err);
-      });
+    await Appointments.exists(
+      { date: date, time: time, property: prop },
+      (err, result) => {
+        if (result) {
+          res.status(403).send("Already exist");
+        } else {
+          appointment
+            .save()
+            .then(() => {
+              res.status(200).json({
+                Status: "Success",
+                NewAppointment: appointment,
+              });
+            })
+            .catch((err) => {
+              res.status(400).send(err);
+            });
+        }
+      }
+    );
   },
 };

@@ -15,10 +15,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PropCard(props) {
+  // eslint-disable-next-line no-unused-vars
   const [state, setState] = useState({
     component: null,
-    title: "",
-    help: "",
   });
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -36,9 +35,6 @@ export default function PropCard(props) {
     setContent("appointment");
     setState({
       component: <AppointmentsForm />,
-      title: "Book an appointment",
-      help:
-        "Please fill the form to the right to add a new appoitment for a tour to the selected Real-Estate",
     });
   }
   function handleInfoClick() {
@@ -47,8 +43,6 @@ export default function PropCard(props) {
     setContent("info");
     setState({
       component: <Info></Info>,
-      title: "More details",
-      help: "Check these details about the Real-Estate",
     });
   }
 
@@ -86,6 +80,20 @@ export default function PropCard(props) {
     );
   }
 
+  function handleSwapToAppointment() {
+    window.localStorage.setItem("id", props.name);
+    setContent("appointment");
+    setState({
+      component: <AppointmentsForm />,
+    });
+  }
+  function handleSwapToDetails() {
+    window.localStorage.setItem("id", props.name);
+    setContent("info");
+    setState({
+      component: <Info />,
+    });
+  }
   function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
     if (isLoggedIn) {
@@ -100,6 +108,17 @@ export default function PropCard(props) {
         <div>
           {" "}
           <AppointmentsForm></AppointmentsForm>
+          <button
+            onClick={handleSwapToDetails}
+            className="btn btn-info"
+            style={{
+              postion: "absolute",
+              marginRight: "2rem",
+              marginTop: "1rem",
+            }}
+          >
+            Back to details
+          </button>
           <button
             onClick={handleClose}
             className="btn btn-danger"
@@ -118,17 +137,36 @@ export default function PropCard(props) {
         <div>
           {" "}
           <Info></Info>
-          <button
-            onClick={handleClose}
-            className="btn btn-success"
-            style={{
-              postion: "absolute",
-              marginRight: "2rem",
-              marginTop: "1rem",
-            }}
-          >
-            Ok
-          </button>
+          <div style={{ marginBottom: "2rem" }} className="container">
+            <div className="row">
+              <div className="col">
+                <button
+                  onClick={handleClose}
+                  className="btn btn-danger btn-md"
+                  style={{
+                    postion: "absolute",
+                    marginRight: "2rem",
+                    marginTop: "1rem",
+                  }}
+                >
+                  Exit
+                </button>
+              </div>
+              <div className="col">
+                <button
+                  onClick={handleSwapToAppointment}
+                  className="btn btn-secondary btn-md"
+                  style={{
+                    postion: "absolute",
+                    marginRight: "2rem",
+                    marginTop: "1rem",
+                  }}
+                >
+                  Book appointment
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       );
     }
@@ -154,11 +192,7 @@ export default function PropCard(props) {
         </Card.Body>
       </Card>
       <Backdrop className={classes.backdrop} open={open}>
-        <Popup
-          title={state.title}
-          component={<Component />}
-          help={state.help}
-        />
+        <Popup component={<Component />} />
       </Backdrop>{" "}
     </div>
   );

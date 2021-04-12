@@ -220,17 +220,4 @@ module.exports = {
       }
     });
   },
-  getDescription: async (req, res) => {
-    const id = req.params.id;
-    await Properity.find({ _id: id }, (err, prop) => {
-      if (err) {
-        res.status(404).json({
-          Error: err,
-          Message: "Not found",
-        });
-      } else {
-        res.status(200).send(prop);
-      }
-    });
-  },
 };
