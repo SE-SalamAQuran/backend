@@ -1,6 +1,7 @@
 const Properity = require("../models/property.model");
 const wishlist = require("../models/wishlist.model");
 const Images = require("../models/images.cloud.model");
+
 module.exports = {
   addNewWishItem: (req, res) => {
     const newWishItem = new wishlist({

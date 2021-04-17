@@ -119,3 +119,24 @@
     flex-direction: column;
   }
 }
+/* 
+#rootDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: "space-around";
+  overflow: hidden;
+} */
+
+@media (max-width: 500) {
+  #rootDiv {
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    justify-content: space-around;
+    overflow: hidden;
+  }
+}
+.myImg :hover {
+  transform: scale(2);
+  width: 900;
+}

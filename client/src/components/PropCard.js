@@ -6,6 +6,7 @@ import Info from "./Info";
 import Backdrop from "@material-ui/core/Backdrop";
 import Popup from "./Popup";
 import { makeStyles } from "@material-ui/core/styles";
+import CurrencyConverter from "./CurrencyConverter";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -45,6 +46,14 @@ export default function PropCard(props) {
       component: <Info></Info>,
     });
   }
+  function handleCurrencyClick() {
+    window.localStorage.setItem("id", props.name);
+    setOpen(!open);
+    setContent("convert");
+    setState({
+      component: <CurrencyConverter />,
+    });
+  }
 
   function Mybutton() {
     return (
@@ -58,6 +67,23 @@ export default function PropCard(props) {
           style={{ marginLeft: "5px" }}
           alt="clock-svg"
           src="https://img.icons8.com/pastel-glyph/20/ffffff/clock.png"
+        />
+      </button>
+    );
+  }
+
+  function CurrencyButton() {
+    return (
+      <button
+        type="button"
+        onClick={handleCurrencyClick}
+        className="btn btn-block btn-warning"
+      >
+        Switch Currency
+        <img
+          style={{ marginLeft: "5px" }}
+          alt="info-svg"
+          src="https://img.icons8.com/carbon-copy/20/ffffff/currency-exchange.png"
         />
       </button>
     );
@@ -78,6 +104,14 @@ export default function PropCard(props) {
         />
       </button>
     );
+  }
+
+  function handleSwapToConverter() {
+    window.localStorage.setItem("id", props.name);
+    setContent("convert");
+    setState({
+      component: <CurrencyConverter />,
+    });
   }
 
   function handleSwapToAppointment() {
@@ -120,6 +154,17 @@ export default function PropCard(props) {
             Back to details
           </button>
           <button
+            onClick={handleSwapToConverter}
+            className="btn btn-warning"
+            style={{
+              postion: "absolute",
+              marginRight: "2rem",
+              marginTop: "1rem",
+            }}
+          >
+            Convert Price
+          </button>
+          <button
             onClick={handleClose}
             className="btn btn-danger"
             style={{
@@ -132,7 +177,7 @@ export default function PropCard(props) {
           </button>
         </div>
       );
-    } else {
+    } else if (content === "info") {
       return (
         <div>
           {" "}
@@ -144,12 +189,23 @@ export default function PropCard(props) {
                   onClick={handleClose}
                   className="btn btn-danger btn-md"
                   style={{
-                    postion: "absolute",
                     marginRight: "2rem",
-                    marginTop: "1rem",
+                    marginTop: "5px",
                   }}
                 >
-                  Exit
+                  X
+                </button>
+              </div>
+              <div className="col">
+                <button
+                  onClick={handleSwapToConverter}
+                  className="btn btn-warning btn-md"
+                  style={{
+                    marginRight: "2rem",
+                    marginTop: "5px",
+                  }}
+                >
+                  Convert Currency
                 </button>
               </div>
               <div className="col">
@@ -157,12 +213,58 @@ export default function PropCard(props) {
                   onClick={handleSwapToAppointment}
                   className="btn btn-secondary btn-md"
                   style={{
-                    postion: "absolute",
                     marginRight: "2rem",
-                    marginTop: "1rem",
+                    marginTop: "5px",
                   }}
                 >
-                  Book appointment
+                  Book an appointment
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {" "}
+          <CurrencyConverter />
+          <div style={{ marginBottom: "2rem" }} className="container">
+            <div className="row">
+              <div className="col">
+                <button
+                  onClick={handleClose}
+                  className="btn btn-danger btn-md"
+                  style={{
+                    marginRight: "2rem",
+                    marginTop: "5px",
+                  }}
+                >
+                  X
+                </button>
+              </div>
+              <div className="col">
+                <button
+                  onClick={handleSwapToAppointment}
+                  className="btn btn-secondary btn-md"
+                  style={{
+                    marginRight: "2rem",
+                    marginTop: "5px",
+                  }}
+                >
+                  Book an appointment
+                </button>
+              </div>
+              <div className="col">
+                <button
+                  onClick={handleSwapToDetails}
+                  className="btn btn-info btn-md"
+                  style={{
+                    marginRight: "2rem",
+                    marginTop: "5px",
+                  }}
+                >
+                  Back to details
                 </button>
               </div>
             </div>
@@ -187,6 +289,7 @@ export default function PropCard(props) {
             <p>Price: {props.li4}</p>
             <p>Currency: {props.li5}</p>
           </Card.Text>
+          <CurrencyButton />
           <Greeting isLoggedIn={isLogged()}></Greeting>
           <InfoButton />
         </Card.Body>
