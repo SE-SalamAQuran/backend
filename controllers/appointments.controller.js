@@ -25,7 +25,7 @@ module.exports = {
   },
 
   deleteAppointment: (req, res) => {
-    appointment.deleteOne({ _id: req.params.id }, function (err) {
+    Appointments.deleteOne({ _id: req.params.id }, function (err) {
       if (!err) {
         res.status(200).send("Deleted Successfully!");
       } else {

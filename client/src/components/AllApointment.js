@@ -145,7 +145,19 @@ export default function AppointmentTableAdmin() {
   }
 
   function deleteAppointmet(appointmet) {
-    alert("you want to delete appointment with id = " + appointmet);
+   
+    const id = appointmet;
+
+    axios
+      .delete("http://localhost:5000/appointments/deleteAppointment/" + id)
+
+      .then((res) => {
+        res.status(200);
+      })
+      .catch((err) => console.error("Error logging in!", err));
+
+    window.location = "http://localhost:3000/allAppointements";
+  
   }
 
   const renderAppointments = (appointments, index) => {
