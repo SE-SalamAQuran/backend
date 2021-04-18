@@ -188,15 +188,26 @@ module.exports = {
       type: req.body.propertyType,
       city: req.body.city,
       owner: owner,
-      address: req.body.location,
+      address: req.body.city,
       price: req.body.price,
       currency: req.body.currency,
       area: req.body.area,
     });
     await newProp
       .save()
+      
       .then(() => res.json(newProp))
       .catch((error) => res.status(400).send(error));
+
+      wishlist.find({ propType: req.body.propertyType }
+        ,{city:req.body.city}
+          , (err, result) => {
+        if (err) {
+          res.status(400).send(err);
+        } else {
+          console.log(result.data.user);
+        }
+      });
   },
   updatePath: async (req, res) => {
     const id = req.params.id;

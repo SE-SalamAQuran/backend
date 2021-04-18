@@ -129,8 +129,8 @@ export default function ProfileBody() {
               </div>
               <br></br> <br></br> <br></br>
               <div>
-                <button type="button" class="btn btn-secondary  btn-lg">
-                  All properties
+                <button  onClick = { goToAllUsers} type="button" class="btn btn-secondary  btn-lg">
+                  All users in app
                 </button>
               </div>
             </div>
@@ -184,8 +184,8 @@ export default function ProfileBody() {
               </div>
               <br></br> <br></br> <br></br>
               <div>
-                <button type="button" class="btn btn-secondary  btn-lg">
-                  My properties
+                <button onClick = {goMyProperties} type="button" class="btn btn-secondary  btn-lg">
+                  My  properties
                 </button>
               </div>
             </div>
