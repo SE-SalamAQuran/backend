@@ -46,8 +46,8 @@ export default function AppointmentTableAdmin() {
       .catch((err) => console.log(err));
   }, []);
 
-  function ShowUserDetail() {
-    var ID = "602e72703026ee2d0436ecad";
+  function ShowUserDetail(ID1) {
+    var ID = ID1;
 
     axios
       .get("http://localhost:5000/users/user/" + ID, {
@@ -77,8 +77,8 @@ export default function AppointmentTableAdmin() {
 
       .catch((err) => console.log(err));
   }
-  function showPropertyDetails() {
-    const ID = "606893cdf8a0b039c41d3ee7";
+  function showPropertyDetails(Pid) {
+    const ID = Pid;
     axios
       .get("http://localhost:5000/properties/property/" + ID, {
         headers: {
@@ -96,7 +96,7 @@ export default function AppointmentTableAdmin() {
         setCurrency(res.data.currency);
         console.log(res);
         axios
-          .get("http://localhost:5000/users/user/606ae265d61cc221dcebdcd5", {
+          .get("http://localhost:5000/users/user/" + res.data.owner, {
             headers: {
               "content-type": "application/json",
             },
@@ -145,7 +145,19 @@ export default function AppointmentTableAdmin() {
   }
 
   function deleteAppointmet(appointmet) {
-    alert("you want to delete appointment with id = " + appointmet);
+   
+    const id = appointmet;
+
+    axios
+      .delete("http://localhost:5000/appointments/deleteAppointment/" + id)
+
+      .then((res) => {
+        res.status(200);
+      })
+      .catch((err) => console.error("Error logging in!", err));
+
+    window.location = "http://localhost:3000/allAppointements";
+  
   }
 
   const renderAppointments = (appointments, index) => {
@@ -156,7 +168,7 @@ export default function AppointmentTableAdmin() {
         <td>{appointments.time}</td>
         <td className="opration">
           <button
-            onClick={() => ShowUserDetail()}
+            onClick={() => ShowUserDetail(appointments.user)}
             type="button"
             class="btn btn-outline-info"
           >
@@ -166,7 +178,7 @@ export default function AppointmentTableAdmin() {
         </td>
         <td className="opration">
           <button
-            onClick={() => showPropertyDetails()}
+            onClick={() => showPropertyDetails(appointments.property)}
             type="button"
             class="btn btn-outline-info"
           >

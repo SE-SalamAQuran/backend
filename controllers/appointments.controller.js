@@ -24,6 +24,16 @@ module.exports = {
     });
   },
 
+  deleteAppointment: (req, res) => {
+    Appointments.deleteOne({ _id: req.params.id }, function (err) {
+      if (!err) {
+        res.status(200).send("Deleted Successfully!");
+      } else {
+        res.status(400).send("Error deleting");
+      }
+    });
+  },
+
   addAppointment: async (req, res) => {
     const user = req.params.id;
     const prop = req.params.prop;
@@ -57,4 +67,7 @@ module.exports = {
       }
     );
   },
+
+  
+    
 };

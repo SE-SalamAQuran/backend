@@ -9,7 +9,6 @@ import Footer from "./Footer";
 
 export default function AppointmentTable() {
   let user = JSON.parse(sessionStorage.getItem("user"));
-  //5fa5288ca69f5d28b0dde424
   useEffect(() => {
     axios
       .get("http://localhost:5000/appointments/userAppointment/" + user._id, {
@@ -27,8 +26,36 @@ export default function AppointmentTable() {
   const [appointments, setAppointments] = useState([]);
   const [count, setCount] = useState(0);
 
-  function showPropertyDetails(user) {
-    alert("you want to show property");
+   function showPropertyDetails(Pid) {
+    const ID = Pid;
+    axios
+      .get("http://localhost:5000/properties/property/" + ID, {
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+      
+        alert(
+          res.data.type +
+            " for " +
+            " " +
+            res.data.propertyFor +
+            " \n in : " +
+            res.data.address +
+            " , " +
+            res.data.city +
+            " \n Area : " +
+            res.data.area +
+            " \n" +
+            "price : " +
+            res.data.price +
+            "  " +
+            res.data.currency +
+            "\n \n Click Ok to show owner details"
+        );
+      })
+      .catch((err) => console.log(err));
   }
 
   const renderAppointments = (appointments, index) => {
