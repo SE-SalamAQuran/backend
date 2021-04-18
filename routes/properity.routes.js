@@ -18,5 +18,5 @@ router.get("/apartments", propertyController.getApartment);
 router.get("/myProperties/:id",propertyController.getuserproperty);
 router.patch("/img_path/:id", propertyController.updatePath);
 router.post("/new/:id", propertyController.addProperty);
-
+router.get("/details/imgs/:id", propertyController.getImages);
 module.exports = router;

@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Main from "./components/Main";
@@ -21,47 +26,57 @@ import Apartments from "./components/Apartments";
 import Success from "./components/Success";
 import Recover from "./components/PasswordRecovery";
 import UploadProfilePic from "./components/FilesUploadComponent";
-import AdminTable from "./components/AdminTableForRequsted"
+import AdminTable from "./components/AdminTableForRequsted";
 import uploadRealEstate from "./components/uploadRealEstate";
 import ConfirmUpload from "./components/ConfirmUpload";
 import FilesUpload from "./components/FilesUpload";
 import myProperties from "./components/MyProperty"
 import AllUsers from "./components/AllUsers"
 
+import NotFound404 from "./components/NotFound404";
 
 function App() {
   return (
     <Router>
-      <Route path="/lands" exact component={Lands} />
-      <Route path="/villas" exact component={Villas} />
-      <Route path="/roofs" exact component={Roofs} />
-      <Route path="/shops" exact component={Shops} />
-      <Route path="/offices" exact component={Offices} />
-      <Route path="/houses" exact component={Houses} />
-      <Route path="/MyProperty" exact component={myProperties} />
-      <Route path="/apartments" exact component={Apartments} />
-      <Route path="/" exact component={Main} />
-      <Route path="/upload/media" component={FilesUpload} />
-      <Route path="/upload/confirm" component={ConfirmUpload} />
-      <Route path="/verify/mail" component={MailForm} />
-      <Route path="/verify/sms" component={SMSForm} />
-      <Route path="/register" component={Register} />
-      <Route path="/login" component={Login} />
-      <Route path="/AllUsers" component={AllUsers} />
-      <Route path="/table" component={Table} />
-      <Route path="/Appointements" component={AppointmentTable} />
-      <Route path="/allAppointements" component={AppointmentTableAdmin} />
-      <Route path="/usersRequsted" component={AdminTable} />
-      <Route path="/uploadNewRealEstate" component={uploadRealEstate} />
-      <Route path="/uploadNewRealEstateRequest"component={UploadRealEstateRequest}/>
-      <Route path="/success" component={Success} />
-      <Route path="/newPassword" component={Recover} />
-      <Route path="/tprofile" component={TestProfile} />
-      <Route path="/upload" exact component={UploadProfilePic} />
-      <Route
-        path="/Update user Information"
-        component={updateUserInformation}
-      />
+      
+      <Switch>
+        <Route path="/lands" exact component={Lands} />
+        <Route path="/villas" exact component={Villas} />
+        <Route path="/roofs" exact component={Roofs} />
+        <Route path="/shops" exact component={Shops} />
+        <Route path="/offices" exact component={Offices} />
+        <Route path="/houses" exact component={Houses} />
+        <Route path="/apartments" exact component={Apartments} />
+        <Route path="/" exact component={Main} />
+        <Route path="/upload/media" component={FilesUpload} />
+        <Route path="/upload/confirm" component={ConfirmUpload} />
+        <Route path="/verify/mail" component={MailForm} />
+        <Route path="/verify/sms" component={SMSForm} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+        <Route path="/table" component={Table} />
+        <Route path="/Appointements" component={AppointmentTable} />
+        <Route path="/allAppointements" component={AppointmentTableAdmin} />
+        <Route path="/usersRequsted" component={AdminTable} />
+        <Route path="/uploadNewRealEstate" component={uploadRealEstate} />
+        <Route
+          path="/uploadNewRealEstateRequest"
+          component={UploadRealEstateRequest}
+        />
+        <Route path="/success" component={Success} />
+        <Route path="/newPassword" component={Recover} />
+        <Route path="/tprofile" component={TestProfile} />
+        <Route path="/AllUsers" component={AllUsers} />
+        <Route path="/upload" exact component={UploadProfilePic} />
+        <Route
+          path="/Update user Information"
+          component={updateUserInformation}
+        />
+              <Route path="/MyProperty" exact component={myProperties} />
+
+        <Route path="/404" component={NotFound404} />
+        <Redirect to="/404" />
+      </Switch>
     </Router>
   );
 }

@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-concat */
+/* eslint-disable no-unused-vars */
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as ReactBootStrap from "react-bootstrap";
@@ -6,10 +8,7 @@ import Navbar from "./AppBar";
 import Footer from "./Footer";
 import carousel3 from "./carousel3.jpg";
 
-
 export default function AppointmentTableAdmin() {
-
-
   let user = JSON.parse(sessionStorage.getItem("user"));
   const [appointments, setAppointments] = useState([]);
   const [count, setCount] = useState(0);
@@ -32,7 +31,6 @@ export default function AppointmentTableAdmin() {
   const [price, setPrice] = useState("");
   const [currency, setCurrency] = useState("");
 
-
   //5fa5288ca69f5d28b0dde424
   useEffect(() => {
     axios
@@ -46,95 +44,109 @@ export default function AppointmentTableAdmin() {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-      
   }, []);
 
-
-
- function ShowUserDetail(appointmentsproperty){
-//var ID = appointmentsproperty ; 
-var ID = "603003946aaa0d27fca19f96"
-axios
-.get("http://localhost:5000/users/user/"+ID , {
-  headers: {
-    "content-type": "application/json",
-  },
-})
-.then((res) => {
-  setFname(res.data.fname);
-  setLname(res.data.lname);
-  setAddress(res.data.address);
-  setPhoneNO(res.data.phoneNo);
-  alert("username  : " +res.data.fname +" "+  res.data.lname  + "\n " + "phoneNumber :  "
-   + res.data.phoneNo + " \n" +" address : "+ "  " + res.data.address )
-  
-})
-
-.catch((err) => console.log(err));
-
- }
- 
-  function showPropertyDetails(appointmentsuser){
-  //var ID = appointmentsuser
-  var ID = "606b2d05097e9826804512f9"
-  axios
-  .get("http://localhost:5000/properties/property/"+ID , {
-    headers: {
-      "content-type": "application/json",
-    },
-  })
-   .then((res) => {
-    setOwnerId(res.data.owner);
-    setType(res.data.type);
-    setTransactionType(res.data.propertyFor);
-    setCity(res.data.city);
-    setLocation(res.data.address);
-    setArea(res.data.area);
-    setPrice(res.data.price);
-    setCurrency(res.data.currency);
-    console.log(res)
-    axios
-    .get("http://localhost:5000/users/user/"+ res.data.owner , {
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-    .then((res) => {
-      setFname(res.data.fname);
-      setLname(res.data.lname);
-      console.log(res)
-      alert("Owner details : \n " + "username : " +res.data.fname +" "+  res.data.lname  + "\n " + "phoneNumber :  "
-      + res.data.phoneNo + " \n" +" address : "+ "  " + res.data.address )      
-    }
-    
-    )
-
-    .catch((err) => console.log(err));
-    alert(res.data.type +" for " + " " + res.data.propertyFor + " \n in : " + res.data.address
-      + " , " + res.data.city +  " \n Area : " + res.data.area  + " \n" + "price : " 
-      + res.data.price +"  "+ res.data.currency +"\n \n Click Ok to show owner details" )
-     
-  })
-  .catch((err) => console.log(err));
-
- }
-
-   function deleteAppointmet(appointmet){
-    
-    const id = appointmet;
+  function ShowUserDetail(ID1) {
+    var ID = ID1;
 
     axios
-      .delete("http://localhost:5000/appointments/deleteAppointment/" + id)
-
-      .then((res) => {
-        res.status(200);
+      .get("http://localhost:5000/users/user/" + ID, {
+        headers: {
+          "content-type": "application/json",
+        },
       })
-      .catch((err) => console.error("Error logging in!", err));
+      .then((res) => {
+        setFname(res.data.fname);
+        setLname(res.data.lname);
+        setAddress(res.data.address);
+        setPhoneNO(res.data.phoneNo);
+        alert(
+          "username  : " +
+            res.data.fname +
+            " " +
+            res.data.lname +
+            "\n " +
+            "phoneNumber :  " +
+            res.data.phoneNo +
+            " \n" +
+            " address : " +
+            "  " +
+            res.data.address
+        );
+      })
 
-    window.location = "http://localhost:3000/allAppointements";
-  
+      .catch((err) => console.log(err));
+  }
+  function showPropertyDetails(Pid) {
+    const ID = Pid;
+    axios
+      .get("http://localhost:5000/properties/property/" + ID, {
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        setOwnerId(res.data.owner);
+        setType(res.data.type);
+        setTransactionType(res.data.propertyFor);
+        setCity(res.data.city);
+        setLocation(res.data.address);
+        setArea(res.data.area);
+        setPrice(res.data.price);
+        setCurrency(res.data.currency);
+        console.log(res);
+        axios
+          .get("http://localhost:5000/users/user/" + res.data.owner, {
+            headers: {
+              "content-type": "application/json",
+            },
+          })
+          .then((res) => {
+            setFname(res.data.fname);
+            setLname(res.data.lname);
+            console.log(res);
+            alert(
+              "Owner details : \n " +
+                "username : " +
+                res.data.fname +
+                " " +
+                res.data.lname +
+                "\n " +
+                "phoneNumber :  " +
+                res.data.phoneNo +
+                " \n" +
+                " address : " +
+                "  " +
+                res.data.address
+            );
+          })
 
-}
+          .catch((err) => console.log(err));
+        alert(
+          res.data.type +
+            " for " +
+            " " +
+            res.data.propertyFor +
+            " \n in : " +
+            res.data.address +
+            " , " +
+            res.data.city +
+            " \n Area : " +
+            res.data.area +
+            " \n" +
+            "price : " +
+            res.data.price +
+            "  " +
+            res.data.currency +
+            "\n \n Click Ok to show owner details"
+        );
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function deleteAppointmet(appointmet) {
+    alert("you want to delete appointment with id = " + appointmet);
+  }
 
   const renderAppointments = (appointments, index) => {
     return (
@@ -162,7 +174,7 @@ axios
             property Details
           </button>
         </td>
-    
+
         <td className="opration">
           <button
             onClick={() => deleteAppointmet(appointments._id)}
@@ -173,54 +185,40 @@ axios
             delete Appointmet
           </button>
         </td>
-
-        
       </tr>
     );
   };
-  function showTableOrUserDetails(){
-
-    
-        return(
-        <div>
-<Navbar></Navbar>
+  function showTableOrUserDetails() {
+    return (
+      <div>
+        <Navbar></Navbar>
 
         <div style={{ padding: 20 }}>
-        <div  style={{ textAlign: "center" ,  }}>
-            <h4 >
-              {" "}
-              List of  appintments : ({appointments.length} appointment)
-            </h4>
-        </div>
-        <br/>
-        <div  style={{margin:"auto" , textAlign:"center"}}>
-        <ReactBootStrap.Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>place</th>
-              <th>date</th>
-              <th>time</th>
-              <th>userDetails</th>
-              <th>propertyDetails</th>
-              <th>deleteAppointmet</th>
-            </tr>
-          </thead>
-          <tbody>{appointments.map(renderAppointments)}</tbody>
-        </ReactBootStrap.Table>
-        </div>
+          <div style={{ textAlign: "center" }}>
+            <h4> List of appintments : ({appointments.length} appointment)</h4>
+          </div>
+          <br />
+          <div style={{ margin: "auto", textAlign: "center" }}>
+            <ReactBootStrap.Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>place</th>
+                  <th>date</th>
+                  <th>time</th>
+                  <th>userDetails</th>
+                  <th>propertyDetails</th>
+                  <th>deleteAppointmet</th>
+                </tr>
+              </thead>
+              <tbody>{appointments.map(renderAppointments)}</tbody>
+            </ReactBootStrap.Table>
+          </div>
         </div>
 
-<Footer /> 
-</div>
-        );
-    
-
+        <Footer />
+      </div>
+    );
   }
 
-  return (
- 
-    showTableOrUserDetails()
-  );
+  return showTableOrUserDetails();
 }
-
-

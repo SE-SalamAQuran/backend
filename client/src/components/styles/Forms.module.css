@@ -49,3 +49,14 @@
   border-radius: 50%;
   border: 16px rgb(80, 199, 235) solid;
 }
+input {
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+:-moz-placeholder {
+  text-align: center;
+}

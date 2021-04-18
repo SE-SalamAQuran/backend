@@ -20,7 +20,7 @@ const { initialize } = require("passport");
 const { dirname } = require("path");
 const uploadPropRoute = require("./middleware/upload.multiple");
 var Rollbar = require("rollbar");
-
+const currencyConvert = require("./middleware/currency.conversion");
 const app = express();
 
 mongoose.connect(uri, {
@@ -38,7 +38,7 @@ connection.once("open", () => {
 app.use(cors());
 app.use(multer({ dest: "./uploads" }).single("omg"));
 app.use(multer({ dest: "./uploads" }).single("avatar"));
-
+app.use("/currencies", currencyConvert);
 app.use(
   express.urlencoded({
     extended: true,
@@ -69,7 +69,7 @@ app.use("/upload/avatar", uploadRoutes);
 app.use(express.static(path.join(__dirname, "./uploads")));
 app.use(express.static(path.join(__dirname, "./public")));
 app.use("/properties", propertiesRoute);
-app.use("/appointments",appointmentsRoute);
+app.use("/appointments", appointmentsRoute);
 
 app.get("/uploads/:bin", (req, res) => {
   const bin = req.params.bin;

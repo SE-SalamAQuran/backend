@@ -6,7 +6,7 @@ import { Image } from "react-bootstrap";
 
 export default function ProfileBody() {
   let user = JSON.parse(sessionStorage.getItem("user"));
-  const isAdmin = user.isAdmin ;
+  const isAdmin = user.isAdmin;
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [pic, setPic] = useState("");
@@ -57,12 +57,11 @@ export default function ProfileBody() {
 
   function goListedWishesPage(e) {
     e.preventDefault();
-    if(user.isAdmin){
-      window.location = "http://localhost:3000/usersRequsted"
-    }else{
+    if (user.isAdmin) {
+      window.location = "http://localhost:3000/usersRequsted";
+    } else {
       window.location = "http://localhost:3000/table";
     }
-   
   }
   function goToMyAppointment(e) {
     e.preventDefault();
@@ -77,124 +76,124 @@ export default function ProfileBody() {
     window.location = "http://localhost:3000/AllUsers";
   }
 
-  function showBody(){
-    if (isAdmin){
-      return(
-      <div
-      class="container-fluid bg-3 text-center"
-      style={{ padding: 70, paddingBottom: 70 ,  background: "AliceBlue" }}
-    >
-      <div class="row">
-        <div class="col-sm-4">
-          <br /> <br /> <br /> <br />
-          <h1>{fname + " " + lname}</h1>
-        </div>
-        <div class="col-sm-4">
-          <Image srcSet={av} alt="avatar" className={styles.avatar} />
+  function showBody() {
+    if (isAdmin) {
+      return (
+        <div
+          class="container-fluid bg-3 text-center"
+          style={{ padding: 70, paddingBottom: 70 }}
+        >
+          <div class="row">
+            <div class="col-sm-4">
+              <br /> <br /> <br /> <br />
+              <h1>{fname + " " + lname}</h1>
+            </div>
+            <div class="col-sm-4">
+              <Image srcSet={av} alt="avatar" className={styles.avatar} />
 
-          <br />
-          <button
-            style={{ marginTop: "2rem" }}
-            id={styles.btnUpload}
-            class="btn btn-secondary btn-block"
-            type="button"
-            onClick={upload}
-          >
-            Upload New Picture
-            <img
-              style={{ marginLeft: "5px" }}
-              src="https://img.icons8.com/color/25/000000/test-account.png"
-              alt="profile"
-            />
-          </button>
+              <br />
+              <button
+                style={{ marginTop: "2rem" }}
+                id={styles.btnUpload}
+                class="btn btn-secondary btn-block"
+                type="button"
+                onClick={upload}
+              >
+                Upload New Picture
+                <img
+                  style={{ marginLeft: "5px" }}
+                  src="https://img.icons8.com/color/25/000000/test-account.png"
+                  alt="profile"
+                />
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                  onClick={goToAllAppointment}
+                >
+                  All appointments
+                </button>
+              </div>
+              <br></br> <br></br> <br></br>
+              <div>
+                <button
+                  onClick={goListedWishesPage}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
+                  All requested list
+                </button>
+              </div>
+              <br></br> <br></br> <br></br>
+              <div>
+                <button type="button" class="btn btn-secondary  btn-lg">
+                  All properties
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-4">
-          <div>
-            <button type="button" class="btn btn-secondary  btn-lg" onClick = {goToAllAppointment}>
-             All appointments
-            </button>
-          </div>
-          <br></br> <br></br> <br></br>
-          <div>
-            <button
-              onClick={goListedWishesPage}
-              type="button"
-              class="btn btn-secondary  btn-lg"
-            >
-              All requested list
-            </button>
-          </div>
-          <br></br> <br></br> <br></br>
-          <div>
-            <button onClick= {goToAllUsers} type="button" class="btn btn-secondary  btn-lg">
-             All Users in app
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>);
+      );
+    } else {
+      return (
+        <div
+          class="container-fluid bg-3 text-center"
+          style={{ padding: 70, paddingBottom: 70 }}
+        >
+          <div class="row">
+            <div class="col-sm-4">
+              <br /> <br /> <br /> <br />
+              <h1>{fname + " " + lname}</h1>
+            </div>
+            <div class="col-sm-4">
+              <Image srcSet={av} alt="avatar" className={styles.avatar} />
 
-    }
-    else{
-      return(
-      <div
-      class="container-fluid bg-3 text-center"
-      style={{ padding: 70, paddingBottom: 70, background: "AliceBlue" }}
-    >
-      <div class="row">
-        <div class="col-sm-4">
-          <br /> <br /> <br /> <br />
-          <h1>{fname + " " + lname}</h1>
-        </div>
-        <div class="col-sm-4">
-          <Image srcSet={av} alt="avatar" className={styles.avatar} />
-
-          <br />
-          <button
-            style={{ marginTop: "2rem" }}
-            id={styles.btnUpload}
-            class="btn btn-secondary btn-block"
-            type="button"
-            onClick={upload}
-          >
-            Upload New Picture
-            <img
-              style={{ marginLeft: "5px" }}
-              src="https://img.icons8.com/color/25/000000/test-account.png"
-              alt="profile"
-            />
-          </button>
-        </div>
-        <div class="col-sm-4">
-          <div>
-            <button type="button" class="btn btn-secondary  btn-lg" onClick = {goToMyAppointment}>
-              My appointments
-            </button>
-          </div>
-          <br></br> <br></br> <br></br>
-          <div>
-            <button
-              onClick={goListedWishesPage}
-              type="button"
-              class="btn btn-secondary  btn-lg"
-            >
-              My requested list
-            </button>
-          </div>
-          <br></br> <br></br> <br></br>
-          <div>
-            <button type="button" class="btn btn-secondary  btn-lg" onClick = {goMyProperties}>
-              My properties
-            </button>
+              <br />
+              <button
+                style={{ marginTop: "2rem" }}
+                id={styles.btnUpload}
+                class="btn btn-secondary btn-block"
+                type="button"
+                onClick={upload}
+              >
+                Upload New Picture
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                  onClick={goToMyAppointment}
+                >
+                  My appointments
+                </button>
+              </div>
+              <br></br> <br></br> <br></br>
+              <div>
+                <button
+                  onClick={goListedWishesPage}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
+                  My requested list
+                </button>
+              </div>
+              <br></br> <br></br> <br></br>
+              <div>
+                <button type="button" class="btn btn-secondary  btn-lg">
+                  My properties
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
       );
     }
   }
 
-  return (
-   showBody()
-  );
+  return showBody();
 }

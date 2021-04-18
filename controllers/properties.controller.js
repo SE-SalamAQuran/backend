@@ -1,6 +1,7 @@
 const Properity = require("../models/property.model");
 const wishlist = require("../models/wishlist.model");
 const Images = require("../models/images.cloud.model");
+
 module.exports = {
   addNewWishItem: (req, res) => {
     const newWishItem = new wishlist({
@@ -177,6 +178,7 @@ module.exports = {
       }
     );
   },
+
   addProperty: async (req, res) => {
     const owner = req.params.id;
 
@@ -219,6 +221,22 @@ module.exports = {
             }
           }
         );
+      }
+    });
+  },
+  getImages: async (req, res) => {
+    let id = req.params.id;
+
+    await Images.find({ property: id }, (err, result) => {
+      if (err) {
+        res.status(404).json({
+          Error: err,
+          Message: "Not found",
+        });
+      } else {
+        res.status(200).json({
+          images: result,
+        });
       }
     });
   },

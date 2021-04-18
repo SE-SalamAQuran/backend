@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-concat */
 import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as ReactBootStrap from "react-bootstrap";
@@ -36,25 +38,33 @@ export default function AdminTable() {
 
     window.location = "http://localhost:3000/usersRequsted";
   }
-  function ShowUserDetail(id){
-    var ID = id ; 
-    
-    axios
-    .get("http://localhost:5000/users/user/"+ID , {
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-    .then((res) => {
-      alert(" username  : " +res.data.fname +" "+  res.data.lname  + "\n " + "phoneNumber :  "
-       + res.data.phoneNo + " \n" +" address : "+ "  " + res.data.address  )
-      
-    })
-    
-    .catch((err) => console.log(err));
-    
-     }
+  function ShowUserDetail(id) {
+    var ID = id;
 
+    axios
+      .get("http://localhost:5000/users/user/" + ID, {
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+      .then((res) => {
+        alert(
+          " username  : " +
+            res.data.fname +
+            " " +
+            res.data.lname +
+            "\n " +
+            "phoneNumber :  " +
+            res.data.phoneNo +
+            " \n" +
+            " address : " +
+            "  " +
+            res.data.address
+        );
+      })
+
+      .catch((err) => console.log(err));
+  }
 
   const renderWishlist = (wishList, index) => {
     return (
@@ -92,8 +102,7 @@ export default function AdminTable() {
       <Navbar></Navbar>
       <div style={{ padding: 20 }}>
         <div className="form-row">
-          <div className="form-group col-md-4">
-          </div>
+          <div className="form-group col-md-4"></div>
           <div className="form-group col-md-4">
             <h4 style={{ textAlign: "center" }}>
               {" "}
@@ -122,5 +131,3 @@ export default function AdminTable() {
     </div>
   );
 }
-
-
