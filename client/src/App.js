@@ -25,6 +25,8 @@ import AdminTable from "./components/AdminTableForRequsted"
 import uploadRealEstate from "./components/uploadRealEstate";
 import ConfirmUpload from "./components/ConfirmUpload";
 import FilesUpload from "./components/FilesUpload";
+import myProperties from "./components/MyProperty"
+import AllUsers from "./components/AllUsers"
 
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
       <Route path="/shops" exact component={Shops} />
       <Route path="/offices" exact component={Offices} />
       <Route path="/houses" exact component={Houses} />
+      <Route path="/MyProperty" exact component={myProperties} />
       <Route path="/apartments" exact component={Apartments} />
       <Route path="/" exact component={Main} />
       <Route path="/upload/media" component={FilesUpload} />
@@ -44,6 +47,7 @@ function App() {
       <Route path="/verify/sms" component={SMSForm} />
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
+      <Route path="/AllUsers" component={AllUsers} />
       <Route path="/table" component={Table} />
       <Route path="/Appointements" component={AppointmentTable} />
       <Route path="/allAppointements" component={AppointmentTableAdmin} />

@@ -51,9 +51,9 @@ export default function AppointmentTableAdmin() {
 
 
 
- function ShowUserDetail(){
-var ID = "602e72703026ee2d0436ecad" ; 
-
+ function ShowUserDetail(appointmentsproperty){
+//var ID = appointmentsproperty ; 
+var ID = "603003946aaa0d27fca19f96"
 axios
 .get("http://localhost:5000/users/user/"+ID , {
   headers: {
@@ -73,8 +73,10 @@ axios
 .catch((err) => console.log(err));
 
  }
-  function showPropertyDetails(){
-  const ID = "606893cdf8a0b039c41d3ee7"
+ 
+  function showPropertyDetails(appointmentsuser){
+  //var ID = appointmentsuser
+  var ID = "606b2d05097e9826804512f9"
   axios
   .get("http://localhost:5000/properties/property/"+ID , {
     headers: {
@@ -92,7 +94,7 @@ axios
     setCurrency(res.data.currency);
     console.log(res)
     axios
-    .get("http://localhost:5000/users/user/606ae265d61cc221dcebdcd5" , {
+    .get("http://localhost:5000/users/user/"+ res.data.owner , {
       headers: {
         "content-type": "application/json",
       },
@@ -103,7 +105,9 @@ axios
       console.log(res)
       alert("Owner details : \n " + "username : " +res.data.fname +" "+  res.data.lname  + "\n " + "phoneNumber :  "
       + res.data.phoneNo + " \n" +" address : "+ "  " + res.data.address )      
-    })
+    }
+    
+    )
 
     .catch((err) => console.log(err));
     alert(res.data.type +" for " + " " + res.data.propertyFor + " \n in : " + res.data.address
@@ -116,7 +120,19 @@ axios
  }
 
    function deleteAppointmet(appointmet){
-    alert("you want to delete appointment with id = " + appointmet)
+    
+    const id = appointmet;
+
+    axios
+      .delete("http://localhost:5000/appointments/deleteAppointment/" + id)
+
+      .then((res) => {
+        res.status(200);
+      })
+      .catch((err) => console.error("Error logging in!", err));
+
+    window.location = "http://localhost:3000/allAppointements";
+  
 
 }
 
@@ -128,7 +144,7 @@ axios
         <td>{appointments.time}</td>
         <td className="opration">
           <button
-            onClick={() => ShowUserDetail()}
+            onClick={() => ShowUserDetail(appointments.user)}
             type="button"
             class="btn btn-outline-info"
           >
@@ -138,7 +154,7 @@ axios
         </td>
         <td className="opration">
           <button
-            onClick={() => showPropertyDetails()}
+            onClick={() => showPropertyDetails(appointments.property)}
             type="button"
             class="btn btn-outline-info"
           >

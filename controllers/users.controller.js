@@ -86,6 +86,16 @@ module.exports = {
       }
     });
   },
+  fetcheAllUserData: (req, res) => {
+
+    Users.find({ }, (err, result) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  },
   updateUserData: (req, res) => {
     console.log(req.params.id);
     const id = req.params.id;
