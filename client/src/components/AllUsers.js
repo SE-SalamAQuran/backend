@@ -8,9 +8,8 @@ import Navbar from "./AppBar";
 import Footer from "./Footer";
 
 function AllUsers() {
- 
-    const [users, setUsers] = useState([]);
-    const [count, setCount] = useState(0);
+  const [users, setUsers] = useState([]);
+  const [count, setCount] = useState(0);
   useEffect(() => {
     axios
       .get("http://localhost:5000/users/users", {
@@ -24,42 +23,40 @@ function AllUsers() {
       .catch((err) => console.log(err));
   }, []);
 
- 
-  
-
   const renderUsers = (users, index) => {
     return (
       <tr key={index}>
-        <td>{users.fname + " " + users.lname }</td>
+        <td>{users.fname + " " + users.lname}</td>
         <td>{users.username}</td>
         <td>{users.address}</td>
         <td>{users.phoneNo}</td>
-        <td >{users.createdAt} </td>
+        <td>{users.createdAt} </td>
       </tr>
     );
   };
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <Navbar></Navbar>
       <div style={{ padding: 20 }}>
-        <div className="form-row">
-          <div className="form-group col-md-4">
-          </div>
-          <div className="form-group col-md-4">
-            <h4 style={{ textAlign: "center" }}>
-              {" "}
-              List of Users: (number of users = {users.length} )
-            </h4>
-          </div>
-          <div className="form-group col-md-4"></div>
+        <div>
+          <h4 style={{ textAlign: "center" }}>
+            {" "}
+            List of Users: (number of users = {users.length} )
+          </h4>
         </div>
 
-        <ReactBootStrap.Table striped bordered hover>
+        <ReactBootStrap.Table responsive striped bordered hover>
+          <thead>
+            <tr></tr>
+          </thead>
+          <tbody></tbody>
+        </ReactBootStrap.Table>
+        <ReactBootStrap.Table striped bordered hover variant="light">
           <thead>
             <tr>
               <th>User Name</th>
-              <th> E_maile</th>
+              <th>Email</th>
               <th>Address</th>
               <th>phoneNo</th>
               <th>Date of joined </th>
@@ -67,11 +64,10 @@ function AllUsers() {
           </thead>
           <tbody>{users.map(renderUsers)}</tbody>
         </ReactBootStrap.Table>
-
         <Footer />
       </div>
     </div>
   );
 }
 
-export default AllUsers ; 
+export default AllUsers;

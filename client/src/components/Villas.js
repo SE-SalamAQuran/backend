@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "./AppBar";
 import Grid from "@material-ui/core/Grid";
+import styles from "./styles/Home.module.css";
+import SearchFilter from "./SearchFilter";
 
 export default function Villas() {
   const useStyles = makeStyles({
@@ -29,9 +31,10 @@ export default function Villas() {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingRight: "0" }} className={styles.container}>
       {" "}
       <AppBar />
+      <SearchFilter type="villa" />
       <Typography color="textPrimary" gutterBottom variant="h2" align="center">
         Villas{" "}
       </Typography>

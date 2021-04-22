@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropCard from "./PropCard";
 import { makeStyles } from "@material-ui/core/styles";
+import styles from "./styles/Home.module.css";
+import SearchFilter from "./SearchFilter";
 
 import Typography from "@material-ui/core/Typography";
 import AppBar from "./AppBar";
@@ -30,9 +32,10 @@ export default function Lands() {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingRight: "0" }} className={styles.container}>
       {" "}
       <AppBar />
+      <SearchFilter type="land" />
       <Typography color="textPrimary" gutterBottom variant="h2" align="center">
         Lands
       </Typography>
