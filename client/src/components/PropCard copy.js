@@ -1,14 +1,12 @@
 import { React, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card } from "react-bootstrap";
-import AppointmentsForm from "./AppointmentsForm";
 import Info from "./Info";
 import Backdrop from "@material-ui/core/Backdrop";
 import Popup from "./Popup";
 import { makeStyles } from "@material-ui/core/styles";
 import CurrencyConverter from "./CurrencyConverter";
 import axios from "axios";
-
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -32,16 +30,8 @@ export default function PropCard(props) {
   function isLogged() {
     return JSON.parse(sessionStorage.getItem("user")) == null ? false : true;
   }
-  function handleAppointmentClick() {
-    window.localStorage.setItem("id", props.name);
-    setOpen(!open);
-    setContent("appointment");
-    setState({
-      component: <AppointmentsForm />,
-    });
-  }
+
   function deleteProperty() {
-    
     axios
       .delete("http://localhost:5000/properties/myProperties/" + props.name)
 
@@ -76,7 +66,7 @@ export default function PropCard(props) {
         onClick={deleteProperty}
         className="btn btn-block btn-danger"
       >
-         delete 
+        delete
       </button>
     );
   }
@@ -123,13 +113,6 @@ export default function PropCard(props) {
     });
   }
 
-  function handleSwapToAppointment() {
-    window.localStorage.setItem("id", props.name);
-    setContent("appointment");
-    setState({
-      component: <AppointmentsForm />,
-    });
-  }
   function handleSwapToDetails() {
     window.localStorage.setItem("id", props.name);
     setContent("info");
@@ -177,8 +160,7 @@ export default function PropCard(props) {
                   Convert Currency
                 </button>
               </div>
-              <div className="col">
-              </div>
+              <div className="col"></div>
             </div>
           </div>
         </div>
@@ -202,9 +184,7 @@ export default function PropCard(props) {
                   X
                 </button>
               </div>
-              <div className="col">
-               
-              </div>
+              <div className="col"></div>
               <div className="col">
                 <button
                   onClick={handleSwapToDetails}
