@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
@@ -31,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AppointmentsForm() {
+  function isLogged() {
+    return JSON.parse(sessionStorage.getItem("user")) == null ? false : true;
+  }
+  const [disable, setDisable] = useState(false);
+
   const [state, setState] = useState({
     place: "",
     time: "",
@@ -45,6 +50,26 @@ export default function AppointmentsForm() {
     text: "",
     duration: 0,
   });
+
+  function buttonChange() {
+    if (!isLogged()) {
+      setMessage({
+        type: "alert alert-danger",
+        header: "Not logged in",
+        text: "You must log in to book an appointment",
+        duration: 5000,
+      });
+      setShow(true);
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }
+
+  useEffect(() => {
+    buttonChange();
+  });
+
   function onChange(e) {
     const { name, value } = e.target;
     setState((prev) => {
@@ -168,6 +193,7 @@ export default function AppointmentsForm() {
           style={{ marginTop: "2rem" }}
           type="submit"
           className="btn btn-block btn-success"
+          disabled={!isLogged()}
         >
           Book the appointment
         </button>
