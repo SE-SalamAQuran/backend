@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropCard from "./PropCard";
 import { makeStyles } from "@material-ui/core/styles";
-
+import styles from "./styles/Home.module.css";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "./AppBar";
 import Grid from "@material-ui/core/Grid";
+import SearchFilter from "./SearchFilter";
 
 export default function Houses() {
   const useStyles = makeStyles({
@@ -30,9 +31,10 @@ export default function Houses() {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingRight: "0" }} className={styles.container}>
       {" "}
       <AppBar />
+      <SearchFilter type="house"/>
       <Typography color="textPrimary" gutterBottom variant="h2" align="center">
         Houses
       </Typography>

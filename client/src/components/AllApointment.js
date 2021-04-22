@@ -145,7 +145,6 @@ export default function AppointmentTableAdmin() {
   }
 
   function deleteAppointmet(appointmet) {
-   
     const id = appointmet;
 
     axios
@@ -157,7 +156,6 @@ export default function AppointmentTableAdmin() {
       .catch((err) => console.error("Error logging in!", err));
 
     window.location = "http://localhost:3000/allAppointements";
-  
   }
 
   const renderAppointments = (appointments, index) => {
@@ -194,7 +192,7 @@ export default function AppointmentTableAdmin() {
             class="btn btn-outline-danger"
           >
             {" "}
-            delete Appointmet
+            delete Appointment
           </button>
         </td>
       </tr>

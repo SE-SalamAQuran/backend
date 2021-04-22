@@ -1,13 +1,12 @@
-
 import React, { useState, useEffect } from "react";
 import PropCard from "./PropCard copy";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "./AppBar";
 import Grid from "@material-ui/core/Grid";
+import styles from "./styles/Home.module.css";
 
 export default function MyProperties() {
-
   let user = JSON.parse(sessionStorage.getItem("user"));
 
   const useStyles = makeStyles({
@@ -30,14 +29,14 @@ export default function MyProperties() {
     fetch("http://localhost:5000/properties/myProperties/" + user._id)
       .then((res) => res.json())
       .then((data) => setData(data));
-  }, []);
+  }, [user._id]);
 
   return (
-    <div>
+    <div style={{ paddingRight: "0" }} className={styles.container}>
       {" "}
       <AppBar />
       <Typography color="textPrimary" gutterBottom variant="h2" align="center">
-        My Propertys {" "}
+        My Properties{" "}
       </Typography>
       <Grid style={{ marginLeft: "2rem" }} container spacing={3}>
         {data.map((character) => (
@@ -46,7 +45,7 @@ export default function MyProperties() {
               name={character._id}
               src={character.imgPath}
               title={character.city}
-              li1={character.type + " " + " " +  character.propertyFor}
+              li1={character.type + " " + character.propertyFor}
               li2={character.address}
               li3={character.area}
               li4={character.price}
@@ -58,4 +57,3 @@ export default function MyProperties() {
     </div>
   );
 }
-
