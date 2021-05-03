@@ -205,7 +205,7 @@ export default function AppointmentTableAdmin() {
 
         <div style={{ padding: 20 }}>
           <div style={{ textAlign: "center" }}>
-            <h4> List of appintments : ({appointments.length} appointment)</h4>
+            <h4> List of appointments : ({appointments.length} appointment)</h4>
           </div>
           <br />
           <div style={{ margin: "auto", textAlign: "center" }}>

@@ -27,7 +27,7 @@ module.exports = {
       }
     });
   },
-  deletemyProperties : (req, res) => {
+  deletemyProperties: (req, res) => {
     Properity.deleteOne({ _id: req.params.id }, function (err) {
       if (!err) {
         res.status(200).send("Deleted Successfully!");
@@ -83,7 +83,7 @@ module.exports = {
   },
   getuserproperty: (req, res) => {
     const id = req.params.id;
-    Properity.find({owner:id }, (err, result) => {
+    Properity.find({ owner: id }, (err, result) => {
       if (err) {
         res.status(400).send(err);
       } else {
@@ -195,19 +195,21 @@ module.exports = {
     });
     await newProp
       .save()
-      
+
       .then(() => res.json(newProp))
       .catch((error) => res.status(400).send(error));
 
-      wishlist.find({ propType: req.body.propertyType }
-        ,{city:req.body.city}
-          , (err, result) => {
+    wishlist.find(
+      { propType: req.body.propertyType },
+      { city: req.body.city },
+      (err, result) => {
         if (err) {
           res.status(400).send(err);
         } else {
           console.log(result.data.user);
         }
-      });
+      }
+    );
   },
   updatePath: async (req, res) => {
     const id = req.params.id;
@@ -250,5 +252,26 @@ module.exports = {
         });
       }
     });
+  },
+  getFilteredProps: async (req, res) => {
+    await Properity.find({
+      status: "available",
+      type: req.params.type,
+      city: req.params.location,
+      propertyFor: req.params.transactionType,
+    })
+      .where("area")
+      .gte(req.params.minArea)
+      .lte(req.params.maxArea)
+      .where("price")
+      .gte(req.params.minPrice)
+      .lte(req.params.maxPrice)
+      .exec((err, result) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.status(200).json({ Props: result });
+        }
+      });
   },
 };

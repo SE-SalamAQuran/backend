@@ -30,15 +30,14 @@ import AdminTable from "./components/AdminTableForRequsted";
 import uploadRealEstate from "./components/uploadRealEstate";
 import ConfirmUpload from "./components/ConfirmUpload";
 import FilesUpload from "./components/FilesUpload";
-import myProperties from "./components/MyProperty"
-import AllUsers from "./components/AllUsers"
+import myProperties from "./components/MyProperty";
+import AllUsers from "./components/AllUsers";
 
 import NotFound404 from "./components/NotFound404";
 
 function App() {
   return (
     <Router>
-      
       <Switch>
         <Route path="/lands" exact component={Lands} />
         <Route path="/villas" exact component={Villas} />
@@ -72,7 +71,7 @@ function App() {
           path="/Update user Information"
           component={updateUserInformation}
         />
-              <Route path="/MyProperty" exact component={myProperties} />
+        <Route path="/MyProperty" exact component={myProperties} />
 
         <Route path="/404" component={NotFound404} />
         <Redirect to="/404" />
