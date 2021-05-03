@@ -122,6 +122,7 @@ export default function AppointmentTableAdmin() {
           })
 
           .catch((err) => console.log(err));
+          
         alert(
           res.data.type +
             " for " +
