@@ -75,8 +75,13 @@ export default function ProfileBody() {
     e.preventDefault();
     window.location = "http://localhost:3000/AllUsers";
   }
-
+  function uploadNewRealEstatePage(e) {
+    e.preventDefault();
+    console.log("upload page");
+    window.location = "/uploadNewRealEstate";
+  }
   function showBody() {
+    // admin profile interface 
     if (isAdmin) {
       return (
         <div
@@ -108,6 +113,12 @@ export default function ProfileBody() {
               </button>
             </div>
             <div class="col-sm-4">
+            <div>
+                <button  onClick = { uploadNewRealEstatePage} type="button" class="btn btn-secondary  btn-lg">
+                  upload a realestate
+                </button>
+              </div>
+              <br></br> <br></br> <br></br>
               <div>
                 <button
                   type="button"
@@ -132,12 +143,21 @@ export default function ProfileBody() {
                 <button  onClick = { goToAllUsers} type="button" class="btn btn-secondary  btn-lg">
                   All users in app
                 </button>
+            
+              <br></br> <br></br> <br></br>
+              <div>
+                <button  onClick = { goMyProperties} type="button" class="btn btn-secondary  btn-lg">
+                 my property
+                </button>
+              </div>
               </div>
             </div>
           </div>
         </div>
       );
-    } else {
+    } 
+    //user profile interface
+    else {
       return (
         <div
           class="container-fluid bg-3 text-center"

@@ -8,6 +8,8 @@ import { Alert, Form, Toast, Col, Row } from "react-bootstrap";
 import styles from "./styles/Forms.module.css";
 import axios from "axios";
 import jsCookie from "js-cookie";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 function UploadBody() {
   const [show, setShow] = useState(false);
@@ -26,18 +28,19 @@ function UploadBody() {
   const [area, setArea] = useState(0);
   const [price, setPrice] = useState(0);
   const [currency, setCurrency] = useState("USD");
-  const [bedRoom, setBedRoom] = useState("1");
-  const [bathRoom, setBathRoom] = useState("1");
-  const [bulidingFloors, setBulidingFloors] = useState("1");
-  const [apartmentFloor, setapartmentFloor] = useState("1");
-  const [classification, setClassification] = useState("A");
-  const [useability, setUseability] = useState("Agricultural Land");
-  const [ageOfConstr, setAgeOfConstr] = useState("less than 1 year");
-  const [locationStatus, setLocationStatus] = useState("main street");
-  const [services, setServices] = useState("Water and Electricity");
-  const [pavement, setPavement] = useState("There is pavement");
-  const [totalApartments, setTotalApartments] = useState("10");
-  const [numberOfStreets, setNumberOfStreet] = useState("1");
+  const [bedRoom, setBedRoom] = useState("");
+  const [bathRoom, setBathRoom] = useState("");
+  const [tapartmentFloo,  settapartmentFloor] = useState("");
+  const [bulidingFloors, setBulidingFloors] = useState("");
+  const [apartmentFloor, setapartmentFloor] = useState("");
+  const [classification, setClassification] = useState("");
+  const [useability, setUseability] = useState("");
+  const [ageOfConstr, setAgeOfConstr] = useState("");
+  const [locationStatus, setLocationStatus] = useState("");
+  const [services, setServices] = useState("");
+  const [pavement, setPavement] = useState("  ");
+  const [totalApartments, setTotalApartments] = useState("");
+  const [numberOfStreets, setNumberOfStreet] = useState("");
 
   function selectType(e) {
     setType(e.target.value);
@@ -61,58 +64,61 @@ function UploadBody() {
   function selectCurrncy(e) {
     setCurrency(e.target.value);
   }
+  //selectBedRoom
   function selectBedRoom(e) {
-    let descr = description + " ,  Number of bedrooms: " + e.target.value;
-    setDescription(descr);
+    setBedRoom(" ,  Number of bedrooms: " + e.target.value)
+    
   }
   function selectBathRoom(e) {
-    let descr = description + " ,  Number of bathrooms: " + e.target.value;
-    setDescription(descr);
+    setBathRoom(" ,  Number of bathrooms: " + e.target.value)
+    
   }
 
   function selectBulidingFloor(e) {
-    let descr = description + " ,  Number of floors: " + e.target.value;
-    setDescription(descr);
+  setBulidingFloors( " ,  Number of floors: " + e.target.value)
+    
+}
+  function selectapartmentFloor(e) {
+   settapartmentFloor (" , Apartments in each floor: " + e.target.value)
+   
   }
   function selectapartmentFloor(e) {
-    let descr = description + " , Apartments in each floor: " + e.target.value;
-    setDescription(descr);
+    setapartmentFloor (" , Apartments in each floor: " + e.target.value)
+   
   }
   function selectLandClassification(e) {
-    let descr =
-      description + " , Classification of the Area is: " + e.target.value;
-    setDescription(descr);
+    setClassification( " , Classification of the Area is: " + e.target.value)
+    
   }
   function selectUseOfLand(e) {
-    let descr = description + " , The land is: " + e.target.value;
-    setDescription(descr);
+   setUseability( " , The land is: " + e.target.value )
+  
   }
   function selectAgeOfConstr(e) {
-    let descr =
-      description + " , Age of construction: " + e.target.value + "years";
-    setDescription(descr);
+    setAgeOfConstr( " , Age of construction: " + e.target.value + "years")
+   
   }
   function selectServies(e) {
-    let descr = description + " , Services available: " + e.target.value;
-    setDescription(descr);
+    setServices( " , Services available: " + e.target.value)
+   
   }
   function selectStatus(e) {
-    let descr = description + " , Location is on: " + e.target.value;
-    setDescription(descr);
+    setLocationStatus( " , Location is on: " + e.target.value)
+   ;
   }
   function selectTotalApartments(e) {
-    let descr =
-      description + " , Total number of apartments: " + e.target.value;
-    setDescription(descr);
+    setTotalApartments( " , Total number of apartments: " + e.target.value)
+  ;
   }
   function selectPavement(e) {
-    let descr = description + " , " + e.target.value;
-    setDescription(descr);
+   setPavement( " , " + e.target.value)
+  ;
   }
   function selectStreets(e) {
-    let descr = description + " , Number of streets: " + e.target.value;
-    setDescription(descr);
-  }
+  setNumberOfStreet(" , Number of streets: " + e.target.value)
+ }
+
+   
 
   function Describtion(type) {
     switch (type) {
@@ -133,6 +139,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectBedRoom}
                   >
+                    <option >select bedRoom number</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -153,6 +160,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectBathRoom}
                   >
+                     <option>select bathroom number</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -161,7 +169,8 @@ function UploadBody() {
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputType floors">Number of floors</label>
-                  <select class="form-control" id="sel1">
+                  <select onChange = {selectBulidingFloor} class="form-control" id="sel1">
+                  <option >select number of floors</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -177,6 +186,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectAgeOfConstr}
                   >
+                    <option>select age Of construction</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -214,7 +224,7 @@ function UploadBody() {
                       class="form-control"
                       id="sel1"
                       onChange={selectAgeOfConstr}
-                    >
+                    ><option>select age Of construction</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -236,6 +246,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectBedRoom}
                     >
+                       <option >select bedRoom number</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -255,7 +266,7 @@ function UploadBody() {
                       class="form-control"
                       id="sel1"
                       onChange={selectBathRoom}
-                    >
+                    > <option>select bathroom number</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -266,7 +277,8 @@ function UploadBody() {
                   </div>
                   <div class="form-group col-md-6">
                     <label for="inputType floors">Number of floors</label>
-                    <select class="form-control" id="sel1">
+                    <select class="form-control" id="sel1" onChange = {selectBulidingFloor}>
+                    <option>Number of floors</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -295,7 +307,8 @@ function UploadBody() {
                       class="form-control"
                       id="sel1"
                       onChange={selectServies}
-                    >
+                    >                      
+                    <option>select services </option>
                       <option value="Electricity only">Electricity only</option>
                       <option value="Water only">Water only</option>
                       <option value="Water and Electricity">
@@ -309,7 +322,7 @@ function UploadBody() {
                       class="form-control"
                       id="sel1"
                       onChange={selectPavement}
-                    >
+                    ><option >select Pavement </option>
                       <option value="There is pavement">
                         Located on a paved street
                       </option>
@@ -325,6 +338,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectStreets}
                     >
+                      <option >select number of street</option>
                       <option value="1">One street</option>
                       <option value="2">Two streets</option>
                       <option value="more than 2">More than streets</option>
@@ -337,6 +351,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectLandClassification}
                     >
+                      <option value="1">Classification</option>
                       <option value="A">A</option>
                       <option value="B">B</option>
                       <option value="C">C</option>
@@ -349,6 +364,9 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectUseOfLand}
                     >
+                      <option value="Agricultural Land">
+                       select Land usage
+                      </option>
                       <option value="Agricultural Land">
                         Agricultural Land
                       </option>
@@ -383,6 +401,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectAgeOfConstr}
                     >
+                      <option>select age Of construction</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -406,6 +425,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectTotalApartments}
                     >
+                      <option>Total number of apartments  = </option>
                       <option value="8">8</option>
                       <option value="10">10</option>
                       <option value="12">12</option>
@@ -423,6 +443,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectBedRoom}
                     >
+                      <option >select bedRoom number</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -443,6 +464,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectBathRoom}
                     >
+                       <option>select bathroom number</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -457,7 +479,7 @@ function UploadBody() {
                       class="form-control"
                       id="sel1"
                       onChange={selectBulidingFloor}
-                    >
+                    ><option >Number of floors</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -485,6 +507,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectapartmentFloor}
                     >
+                      <option>apartment floor number</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -528,6 +551,7 @@ function UploadBody() {
                       id="sel1"
                       onChange={selectStatus}
                     >
+                      <option > Location Status</option>
                       <option value="On a main street">On a main street</option>
                       <option value="On a side street">On a side street</option>
 
@@ -544,7 +568,7 @@ function UploadBody() {
                       class="form-control"
                       id="sel1"
                       onChange={selectAgeOfConstr}
-                    >
+                    ><option>select age Of construction</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -583,6 +607,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectStatus}
                   >
+                     <option> Location Status</option>
                     <option value="On a main street">On a main street</option>
                     <option value="On a side street">On a side street</option>
 
@@ -600,6 +625,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectAgeOfConstr}
                   >
+                    <option>select age Of construction</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -637,6 +663,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectAgeOfConstr}
                   >
+                    <option>select age Of construction</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -660,6 +687,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectTotalApartments}
                   >
+                    <option > Total number of apartments</option>
                     <option value="8">8</option>
                     <option value="10">10</option>
                     <option value="12">12</option>
@@ -677,6 +705,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectBedRoom}
                   >
+                     <option >select bedRoom number</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -695,8 +724,8 @@ function UploadBody() {
                   <select
                     class="form-control"
                     id="sel1"
-                    onChange={selectBathRoom}
-                  >
+                    onChange={selectBathRoom} >
+                    <option>select bathroom number</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -712,6 +741,7 @@ function UploadBody() {
                     id="sel1"
                     onChange={selectBulidingFloor}
                   >
+                   <option >Number of floors</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -736,7 +766,7 @@ function UploadBody() {
                     class="form-control"
                     id="sel1"
                     onChange={selectapartmentFloor}
-                  >
+                  > <option >apartment floor number</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -772,11 +802,15 @@ function UploadBody() {
       city: city,
       location: location,
       transactionType: transactionType,
-      description: description,
+      description: bedRoom + bathRoom+tapartmentFloo +bulidingFloors
+      +apartmentFloor+classification+useability+
+      ageOfConstr+locationStatus+services + 
+      pavement+totalApartments +numberOfStreets,
       area: area,
       price: price,
       currency: currency,
     };
+    console.log(data);
 
     axios({
       method: "post",
