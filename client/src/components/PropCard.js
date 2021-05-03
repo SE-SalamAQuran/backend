@@ -78,6 +78,7 @@ export default function PropCard(props) {
         type="button"
         onClick={handleCurrencyClick}
         className="btn btn-block btn-warning"
+        style={{ color: "#fff" }}
       >
         Switch Currency
         <img

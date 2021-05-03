@@ -146,7 +146,6 @@ export default function AppointmentTableAdmin() {
   }
 
   function deleteAppointmet(appointmet) {
-   
     const id = appointmet;
 
     axios
@@ -158,7 +157,6 @@ export default function AppointmentTableAdmin() {
       .catch((err) => console.error("Error logging in!", err));
 
     window.location = "http://localhost:3000/allAppointements";
-  
   }
 
   const renderAppointments = (appointments, index) => {
@@ -195,7 +193,7 @@ export default function AppointmentTableAdmin() {
             class="btn btn-outline-danger"
           >
             {" "}
-            delete Appointmet
+            delete Appointment
           </button>
         </td>
       </tr>
@@ -208,7 +206,7 @@ export default function AppointmentTableAdmin() {
 
         <div style={{ padding: 20 }}>
           <div style={{ textAlign: "center" }}>
-            <h4> List of appintments : ({appointments.length} appointment)</h4>
+            <h4> List of appointments : ({appointments.length} appointment)</h4>
           </div>
           <br />
           <div style={{ margin: "auto", textAlign: "center" }}>
