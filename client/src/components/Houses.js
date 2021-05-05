@@ -37,7 +37,6 @@ export default function Houses() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-
     setShow(false);
     setFilter(true);
   }

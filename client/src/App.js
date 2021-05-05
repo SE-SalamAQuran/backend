@@ -32,13 +32,14 @@ import ConfirmUpload from "./components/ConfirmUpload";
 import FilesUpload from "./components/FilesUpload";
 import myProperties from "./components/MyProperty";
 import AllUsers from "./components/AllUsers";
-
+import Test from "./components/Test";
 import NotFound404 from "./components/NotFound404";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/testing" component={Test} />
         <Route path="/lands" exact component={Lands} />
         <Route path="/villas" exact component={Villas} />
         <Route path="/roofs" exact component={Roofs} />
@@ -62,6 +63,7 @@ function App() {
           path="/uploadNewRealEstateRequest"
           component={UploadRealEstateRequest}
         />
+
         <Route path="/success" component={Success} />
         <Route path="/newPassword" component={Recover} />
         <Route path="/tprofile" component={TestProfile} />
