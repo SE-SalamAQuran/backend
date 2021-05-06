@@ -32,7 +32,6 @@ import ConfirmUpload from "./components/ConfirmUpload";
 import FilesUpload from "./components/FilesUpload";
 import myProperties from "./components/MyProperty";
 import AllUsers from "./components/AllUsers";
-
 import NotFound404 from "./components/NotFound404";
 
 function App() {
@@ -62,6 +61,7 @@ function App() {
           path="/uploadNewRealEstateRequest"
           component={UploadRealEstateRequest}
         />
+
         <Route path="/success" component={Success} />
         <Route path="/newPassword" component={Recover} />
         <Route path="/tprofile" component={TestProfile} />
