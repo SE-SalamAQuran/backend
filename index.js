@@ -18,6 +18,7 @@ const appointmentsRoute = require("./routes/appointment.routes");
 const uploadRoutes = require("./middleware/upload.single");
 const { initialize } = require("passport");
 const { dirname } = require("path");
+const fs = require("fs");
 const uploadPropRoute = require("./middleware/upload.multiple");
 var Rollbar = require("rollbar");
 const currencyConvert = require("./middleware/currency.conversion");
@@ -77,6 +78,17 @@ app.get("/uploads/:bin", (req, res) => {
   var file = "./uploads/" + bin;
   var image = res.sendFile(file, { root: __dirname });
   return image;
+});
+
+app.delete("/uploads/:bin", (req, res) => {
+  const bin = req.params.bin;
+  try {
+    fs.unlinkSync("./uploads/" + bin);
+    res.status(200).send("Deleted");
+  } catch (err) {
+    console.error(err);
+    res.status(400).send(err);
+  }
 });
 
 app.get("/default/avatar", (req, res) => {

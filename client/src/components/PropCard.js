@@ -20,6 +20,7 @@ export default function PropCard(props) {
   const [state, setState] = useState({
     component: null,
   });
+  const [disable, setDisable] = useState(true);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState("");
@@ -38,6 +39,7 @@ export default function PropCard(props) {
       component: <AppointmentsForm />,
     });
   }
+
   function handleInfoClick() {
     window.localStorage.setItem("id", props.name);
     setOpen(!open);
@@ -129,6 +131,10 @@ export default function PropCard(props) {
       component: <Info />,
     });
   }
+
+  function disableBtn() {
+    isLogged() ? setDisable(false) : setDisable(true);
+  }
   function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
     if (isLoggedIn) {
@@ -179,6 +185,8 @@ export default function PropCard(props) {
         </div>
       );
     } else if (content === "info") {
+      disableBtn();
+
       return (
         <div>
           {" "}
@@ -213,6 +221,7 @@ export default function PropCard(props) {
                 <button
                   onClick={handleSwapToAppointment}
                   className="btn btn-secondary btn-md"
+                  disabled={disable}
                   style={{
                     marginRight: "2rem",
                     marginTop: "5px",
@@ -226,6 +235,8 @@ export default function PropCard(props) {
         </div>
       );
     } else {
+      disableBtn();
+
       return (
         <div>
           {" "}
@@ -248,6 +259,7 @@ export default function PropCard(props) {
                 <button
                   onClick={handleSwapToAppointment}
                   className="btn btn-secondary btn-md"
+                  disabled={disable}
                   style={{
                     marginRight: "2rem",
                     marginTop: "5px",

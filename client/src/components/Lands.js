@@ -200,7 +200,7 @@ export default function Lands() {
             location={location}
           />
         ) : (
-          <NormalProps type="lands" />
+          <NormalProps type="land" />
         )}
       </div>
     </div>

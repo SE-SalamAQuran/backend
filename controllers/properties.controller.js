@@ -1,6 +1,7 @@
 const Properity = require("../models/property.model");
 const wishlist = require("../models/wishlist.model");
 const Images = require("../models/images.cloud.model");
+const fs = require("fs");
 
 module.exports = {
   addNewWishItem: (req, res) => {
@@ -90,93 +91,6 @@ module.exports = {
         res.json(result);
       }
     });
-  },
-  getLands: async (req, res) => {
-    await Properity.find(
-      { type: "land", status: "available" },
-      (err, lands) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.json(lands);
-        }
-      }
-    );
-  },
-
-  getVillas: async (req, res) => {
-    await Properity.find(
-      { type: "villa", status: "available" },
-      (err, villas) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(villas);
-        }
-      }
-    );
-  },
-  getRoof: async (req, res) => {
-    await Properity.find(
-      { type: "roof", status: "available" },
-      (err, roofs) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(roofs);
-        }
-      }
-    );
-  },
-  getOffice: async (req, res) => {
-    await Properity.find(
-      { type: "office", status: "available" },
-      (err, offices) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(offices);
-        }
-      }
-    );
-  },
-  getShop: async (req, res) => {
-    await Properity.find(
-      { type: "shop", status: "available" },
-      (err, shops) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(shops);
-        }
-      }
-    );
-  },
-
-  getApartment: async (req, res) => {
-    await Properity.find(
-      { type: "apartment", status: "available" },
-      (err, apartments) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(apartments);
-        }
-      }
-    );
-  },
-
-  getHouse: async (req, res) => {
-    await Properity.find(
-      { type: "house", status: "available" },
-      (err, houses) => {
-        if (err) {
-          res.status(400).send(err);
-        } else {
-          res.status(200).send(houses);
-        }
-      }
-    );
   },
 
   addProperty: async (req, res) => {
@@ -273,5 +187,42 @@ module.exports = {
           res.status(200).send(result);
         }
       });
+  },
+
+  cleanStorage: async (req, res) => {
+    const id = req.params.id;
+    Images.deleteMany({ property: id }, (err, img) => {
+      if (err) {
+        res.status(404).json({
+          Error: err,
+          Message: "Can't find this image",
+        });
+      } else {
+        Properity.findOneAndUpdate(
+          { _id: id },
+          { imgPath: "http://localhost:5000/default/path" },
+          (error, result) => {
+            if (error) {
+              res.status(400).send(error);
+            } else {
+              res.json({
+                Status: "Deleted Image Successfully",
+              });
+            }
+          }
+        );
+      }
+    });
+  },
+
+  getByType: async (req, res) => {
+    const type = req.params.type;
+    await Properity.find({ status: "available", type: type }, (err, result) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(200).send(result);
+      }
+    });
   },
 };

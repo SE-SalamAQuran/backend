@@ -200,7 +200,7 @@ export default function Roofs() {
             location={location}
           />
         ) : (
-          <NormalProps type="roofs" />
+          <NormalProps type="roof" />
         )}
       </div>
     </div>

@@ -199,7 +199,7 @@ export default function Houses() {
             location={location}
           />
         ) : (
-          <NormalProps type="houses" />
+          <NormalProps type="house" />
         )}
       </div>
     </div>

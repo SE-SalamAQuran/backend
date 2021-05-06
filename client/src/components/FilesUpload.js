@@ -72,7 +72,7 @@ export default function FilesUploadComponent() {
           console.log(response.data);
           window.location = "/upload/confirm";
         })
-        .catch(function (response) {
+        .catch(function (err) {
           //handle error
           setMessage({
             type: "alert alert-warning",
@@ -80,6 +80,7 @@ export default function FilesUploadComponent() {
             text: "You uploaded less than 6 images",
           });
           setShow(true);
+          console.error(err);
           window.location = "/upload/confirm";
         });
     }

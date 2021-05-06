@@ -15,6 +15,10 @@ export default function ConfirmUpload() {
 
   const prop_id = jsCookie.get("id");
   function handleNo() {
+    axios
+      .delete("http://localhost:5000/properties/clear/" + prop_id)
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
     setMessage({
       type: "alert alert-warning",
       text: "Upload canceled",

@@ -79,7 +79,7 @@ router.post("/prop/:id", upload.single("omg"), function (req, res) {
 
   try {
     pic.save();
-    res.status(201).send(pic);
+    res.status(201).send(req.file.filename);
   } catch (error) {
     return res.status(400).json({
       Status: "Failed to upload image",

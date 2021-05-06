@@ -200,7 +200,7 @@ export default function Apartments() {
             location={location}
           />
         ) : (
-          <NormalProps type="apartments" />
+          <NormalProps type="apartment" />
         )}
       </div>
     </div>

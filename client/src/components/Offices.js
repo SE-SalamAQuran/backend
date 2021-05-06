@@ -200,7 +200,7 @@ export default function Offices() {
             location={location}
           />
         ) : (
-          <NormalProps type="offices" />
+          <NormalProps type="office" />
         )}
       </div>
     </div>

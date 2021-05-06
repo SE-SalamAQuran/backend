@@ -7,6 +7,7 @@ import { Row, Col, Toast } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -35,7 +36,7 @@ export default function AppointmentsForm() {
     return JSON.parse(sessionStorage.getItem("user")) == null ? false : true;
   }
   const [disable, setDisable] = useState(false);
-
+  const [owner, setOwner] = useState("");
   const [state, setState] = useState({
     place: "",
     time: "",
@@ -43,7 +44,6 @@ export default function AppointmentsForm() {
   });
   const classes = useStyles();
   const [show, setShow] = useState(false);
-
   const [message, setMessage] = useState({
     type: "",
     header: "",
@@ -51,24 +51,17 @@ export default function AppointmentsForm() {
     duration: 0,
   });
 
-  function buttonChange() {
-    if (!isLogged()) {
-      setMessage({
-        type: "alert alert-danger",
-        header: "Not logged in",
-        text: "You must log in to book an appointment",
-        duration: 5000,
-      });
-      setShow(true);
-      setDisable(true);
-    } else {
-      setDisable(false);
-    }
-  }
-
   useEffect(() => {
-    buttonChange();
-  });
+    let thisUser = JSON.parse(sessionStorage.getItem("user"));
+    axios
+      .get(
+        "http://localhost:5000/properties/property/" +
+          window.localStorage.getItem("id")
+      )
+      .then((res) => setOwner(res.data.owner))
+      .catch((err) => console.error(err));
+    thisUser._id === owner ? setDisable(true) : setDisable(false);
+  }, [owner]);
 
   function onChange(e) {
     const { name, value } = e.target;
@@ -193,7 +186,7 @@ export default function AppointmentsForm() {
           style={{ marginTop: "2rem" }}
           type="submit"
           className="btn btn-block btn-success"
-          disabled={!isLogged()}
+          disabled={disable}
         >
           Book the appointment
         </button>

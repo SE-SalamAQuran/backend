@@ -200,7 +200,7 @@ export default function Shops() {
             location={location}
           />
         ) : (
-          <NormalProps type="shops" />
+          <NormalProps type="shop" />
         )}
       </div>
     </div>
