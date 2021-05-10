@@ -7,6 +7,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Popup from "./Popup";
 import { makeStyles } from "@material-ui/core/styles";
 import CurrencyConverter from "./CurrencyConverter";
+import { Row, Col, Toast } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -27,6 +28,13 @@ export default function PropCard(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+    duration: 0,
+  });
 
   function isLogged() {
     return JSON.parse(sessionStorage.getItem("user")) == null ? false : true;
@@ -119,10 +127,24 @@ export default function PropCard(props) {
 
   function handleSwapToAppointment() {
     window.localStorage.setItem("id", props.name);
-    setContent("appointment");
-    setState({
-      component: <AppointmentsForm />,
-    });
+    if (isLogged()) {
+      setDisable(false);
+
+      setContent("appointment");
+
+      setState({
+        component: <AppointmentsForm />,
+      });
+    } else {
+      setDisable(true);
+      setMessage({
+        header: "Action not allowed",
+        text: "You must login to book an appointment",
+        duration: 4000,
+        type: "alert alert-info",
+      });
+      setShow(true);
+    }
   }
   function handleSwapToDetails() {
     window.localStorage.setItem("id", props.name);
@@ -141,6 +163,32 @@ export default function PropCard(props) {
       return <Mybutton />;
     }
     return null;
+  }
+
+  function ToastMessage() {
+    return (
+      <Row>
+        <Col xs={12}>
+          <Toast
+            onClose={() => setShow(false)}
+            show={show}
+            style={{
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+            delay={message.duration}
+            autohide
+          >
+            <div className={message.type}>
+              <strong className="mr-auto">{message.header}</strong>
+              <br></br>
+              <small>{message.text}</small>
+            </div>
+          </Toast>
+        </Col>
+      </Row>
+    );
   }
 
   function Component() {
@@ -309,6 +357,7 @@ export default function PropCard(props) {
       </Card>
       <Backdrop className={classes.backdrop} open={open}>
         <Popup component={<Component />} />
+        <ToastMessage />
       </Backdrop>{" "}
     </div>
   );

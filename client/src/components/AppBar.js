@@ -11,28 +11,49 @@ export default function Appbar() {
   function handleUserClick() {
     window.location = "/tprofile";
   }
-
+  function logOut(e) {
+    e.preventDefault();
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    window.location = "http://localhost:3000";
+  }
   function UserGreeting(props) {
     return (
-      <button
-        type="button"
-        className="btn btn-light"
-        style={{
-          width: "30px",
-          height: "30px",
-          padding: "6px 0px",
-          borderRadius: "15px",
-          textAlign: "center",
-          fontSize: "12px",
-          lineHeight: "1.42857",
-        }}
-        onClick={handleUserClick}
-      >
-        <img
-          src="https://img.icons8.com/windows/20/000000/user-tag.png"
-          alt="avatar"
-        />
-      </button>
+      <div>
+        <button
+          onClick={logOut}
+          style={{ marginRight: "7px" }}
+          type="button"
+          class="btn btn-sm btn-outline-danger"
+          aria-label="logout"
+        >
+          <img
+            src="https://img.icons8.com/android/24/ffffff/logout-rounded-left.png"
+            alt="logout"
+            style={{ marginRight: "6px" }}
+          />
+          Logout
+        </button>
+        <button
+          type="button"
+          className="btn btn-light"
+          style={{
+            width: "30px",
+            height: "30px",
+            padding: "6px 0px",
+            borderRadius: "15px",
+            textAlign: "center",
+            fontSize: "12px",
+            lineHeight: "1.42857",
+          }}
+          onClick={handleUserClick}
+        >
+          <img
+            src="https://img.icons8.com/windows/20/000000/user-tag.png"
+            alt="avatar"
+          />
+        </button>
+      </div>
     );
   }
 
@@ -109,7 +130,7 @@ export default function Appbar() {
           </Nav.Link>
           <Nav.Link
             className={styles.link}
-            href="http://localhost:3000/#contact"
+            href="http://localhost:3000/contact"
           >
             Contact Us
           </Nav.Link>

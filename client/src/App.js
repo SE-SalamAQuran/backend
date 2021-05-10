@@ -33,6 +33,8 @@ import FilesUpload from "./components/FilesUpload";
 import myProperties from "./components/MyProperty";
 import AllUsers from "./components/AllUsers";
 import NotFound404 from "./components/NotFound404";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -61,6 +63,8 @@ function App() {
           path="/uploadNewRealEstateRequest"
           component={UploadRealEstateRequest}
         />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
 
         <Route path="/success" component={Success} />
         <Route path="/newPassword" component={Recover} />
