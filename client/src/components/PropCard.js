@@ -137,13 +137,6 @@ export default function PropCard(props) {
       });
     } else {
       setDisable(true);
-      setMessage({
-        header: "Action not allowed",
-        text: "You must login to book an appointment",
-        duration: 4000,
-        type: "alert alert-info",
-      });
-      setShow(true);
     }
   }
   function handleSwapToDetails() {
@@ -156,6 +149,13 @@ export default function PropCard(props) {
 
   function disableBtn() {
     isLogged() ? setDisable(false) : setDisable(true);
+    setMessage({
+      header: "Action not allowed",
+      text: "You must login to book an appointment",
+      duration: 4000,
+      type: "alert alert-info",
+    });
+    setShow(true);
   }
   function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
@@ -280,6 +280,7 @@ export default function PropCard(props) {
               </div>
             </div>
           </div>
+          <ToastMessage/>
         </div>
       );
     } else {
@@ -330,6 +331,7 @@ export default function PropCard(props) {
               </div>
             </div>
           </div>
+          <ToastMessage />
         </div>
       );
     }
@@ -357,7 +359,6 @@ export default function PropCard(props) {
       </Card>
       <Backdrop className={classes.backdrop} open={open}>
         <Popup component={<Component />} />
-        <ToastMessage />
       </Backdrop>{" "}
     </div>
   );
