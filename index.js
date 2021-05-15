@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const uri = process.env.URI;
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5013;
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const session = require("express-session");
@@ -62,9 +62,7 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 // use morgan to log requests to the console
 app.use(morgan("dev"));
-app.listen(port, () => {
-  console.log(`Listening on port: ${port}`);
-});
+
 app.use("/users", usersRoute);
 app.use("/upload/avatar", uploadRoutes);
 app.use(express.static(path.join(__dirname, "./uploads")));
@@ -102,4 +100,12 @@ app.use(function (err, req, res, next) {
   console.error(err.message);
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
+});
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("./client/build"));
+}
+
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
 });
