@@ -84,7 +84,7 @@ export default function Appbar() {
   return (
     <div id={styles.appBar}>
       <Navbar expand="xl" bg="dark" variant="dark">
-        <Navbar.Brand href="https://palestinian-estates.herokuapp.com/">
+        <Navbar.Brand href="http://localhost:3000/">
           <img
             src="https://img.icons8.com/wired/50/ffffff/real-estate.png"
             alt="logo"

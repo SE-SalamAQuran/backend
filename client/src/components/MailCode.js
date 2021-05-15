@@ -124,14 +124,12 @@ export default function PasswordRecovery() {
           {" "}
           <a
             style={{ marginBottom: "1rem" }}
-            href="https://palestinian-estates.herokuapp.com/verify/sms"
+            href="http://localhost:3000/verify/sms"
           >
             Verify using SMS instead?
           </a>
           <br></br>
-          <a href="https://palestinian-estates.herokuapp.com/login">
-            Try to login again
-          </a>
+          <a href="http://localhost:3000/login">Try to login again</a>
         </div>{" "}
       </Form>
 

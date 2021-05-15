@@ -58,24 +58,22 @@ export default function ProfileBody() {
   function goListedWishesPage(e) {
     e.preventDefault();
     if (user.isAdmin) {
-      window.location =
-        "https://palestinian-estates.herokuapp.com/usersRequsted";
+      window.location = "http://localhost:3000/usersRequsted";
     } else {
-      window.location = "https://palestinian-estates.herokuapp.com/table";
+      window.location = "http://localhost:3000/table";
     }
   }
   function goToMyAppointment(e) {
     e.preventDefault();
-    window.location = "https://palestinian-estates.herokuapp.com/Appointements";
+    window.location = "http://localhost:3000/Appointements";
   }
   function goToAllAppointment(e) {
     e.preventDefault();
-    window.location =
-      "https://palestinian-estates.herokuapp.com/allAppointements";
+    window.location = "http://localhost:3000/allAppointements";
   }
   function goToAllUsers(e) {
     e.preventDefault();
-    window.location = "https://palestinian-estates.herokuapp.com/AllUsers";
+    window.location = "http://localhost:3000/AllUsers";
   }
   function uploadNewRealEstatePage(e) {
     e.preventDefault();

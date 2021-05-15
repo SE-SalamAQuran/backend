@@ -45,14 +45,14 @@ export default function ButtonAppBar() {
           <Link
             className={classes.links}
             color="inherit"
-            href="https://palestinian-estates.herokuapp.com/login"
+            href="http://localhost:3000/login"
           >
             Login
           </Link>
           <Link
             className={classes.links}
             color="inherit"
-            href="https://palestinian-estates.herokuapp.com/register"
+            href="http://localhost:3000/register"
           >
             Sign up
           </Link>

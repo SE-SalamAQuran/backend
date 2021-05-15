@@ -7,17 +7,16 @@ function ProfileSecCom() {
     e.preventDefault();
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    window.location = "https://palestinian-estates.herokuapp.com/";
+    window.location = "http://localhost:3000/";
   }
   function backHome(e) {
     e.preventDefault();
-    window.location = "https://palestinian-estates.herokuapp.com/";
+    window.location = "http://localhost:3000/";
   }
 
   function updateUserInformation(e) {
     e.preventDefault();
-    window.location =
-      "https://palestinian-estates.herokuapp.com/Update user Information";
+    window.location = "http://localhost:3000/Update user Information";
   }
 
   return (

@@ -40,7 +40,7 @@ export default function PropCard(props) {
       })
       .catch((err) => console.error("Error logging in!", err));
 
-    window.location = "https://palestinian-estates.herokuapp.com/myProperty";
+    window.location = "http://localhost:3000/myProperty";
   }
   function handleInfoClick() {
     window.localStorage.setItem("id", props.name);

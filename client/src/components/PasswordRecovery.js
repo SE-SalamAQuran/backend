@@ -138,10 +138,7 @@ function PasswordRecovery() {
         </Row>
       </Form>
 
-      <a
-        href="https://palestinian-estates.herokuapp.com/register"
-        className={styles.link}
-      >
+      <a href="http://localhost:3000/register" className={styles.link}>
         New user? Sign up for an account here
       </a>
       <Footer />

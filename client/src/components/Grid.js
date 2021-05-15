@@ -23,7 +23,7 @@ export default function Grid() {
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card
-          link="https://palestinian-estates.herokuapp.com/lands"
+          link="http://localhost:3000/lands"
           title="Lands"
           img={land}
         ></Card>
@@ -31,14 +31,14 @@ export default function Grid() {
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card
-          link="https://palestinian-estates.herokuapp.com/houses"
+          link="http://localhost:3000/houses"
           title="Houses"
           img={house}
         ></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         <Card
-          link="https://palestinian-estates.herokuapp.com/apartments"
+          link="http://localhost:3000/apartments"
           title="Apartments"
           img={apartment}
         ></Card>
@@ -46,23 +46,19 @@ export default function Grid() {
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card
-          link="https://palestinian-estates.herokuapp.com/villas"
+          link="http://localhost:3000/villas"
           title="Villas"
           img={villa}
         ></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="https://palestinian-estates.herokuapp.com/roofs"
-          title="Roof"
-          img={roof}
-        ></Card>
+        <Card link="http://localhost:3000/roofs" title="Roof" img={roof}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card
-          link="https://palestinian-estates.herokuapp.com/shops"
+          link="http://localhost:3000/shops"
           title="Shops"
           img={shop}
         ></Card>
@@ -70,7 +66,7 @@ export default function Grid() {
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card
-          link="https://palestinian-estates.herokuapp.com/offices"
+          link="http://localhost:3000/offices"
           title="Offices"
           img={office}
         ></Card>
@@ -78,7 +74,7 @@ export default function Grid() {
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card
-          link="https://palestinian-estates.herokuapp.com/"
+          link="http://localhost:3000/"
           title="3D virtual tours"
           img={comingSoon}
         ></Card>
@@ -86,7 +82,7 @@ export default function Grid() {
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card
-          link="https://palestinian-estates.herokuapp.com/"
+          link="http://localhost:3000/"
           title="Online video tours"
           img={live}
         ></Card>
