@@ -36,11 +36,12 @@ function Table() {
       })
       .catch((err) => console.error("Error logging in!", err));
 
-    window.location = "http://localhost:3000/table";
+    window.location = "https://palestinian-estates.herokuapp.com/table";
   }
   function goListedWishesPage(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/uploadNewRealEstateRequest";
+    window.location =
+      "https://palestinian-estates.herokuapp.com/uploadNewRealEstateRequest";
   }
 
   const renderWishlist = (wishList, index) => {

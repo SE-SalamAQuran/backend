@@ -127,10 +127,13 @@ function Login() {
         </Row>
       </Form>
 
-      <Nav.Link href="http://localhost:3000/verify/mail">
+      <Nav.Link href="https://palestinian-estates.herokuapp.com/verify/mail">
         Forgot your password ?
       </Nav.Link>
-      <a href="http://localhost:3000/register" className={styles.link}>
+      <a
+        href="https://palestinian-estates.herokuapp.com/register"
+        className={styles.link}
+      >
         New user? Sign up for an account here
       </a>
       <Footer />

@@ -29,7 +29,7 @@ export default function ProfileHeader() {
 
   return (
     <Navbar variant="dark" bg="dark">
-      <Navbar.Brand href="http://localhost:3000/">
+      <Navbar.Brand href="https://palestinian-estates.herokuapp.com/">
         <img
           src="https://img.icons8.com/wired/50/ffffff/real-estate.png"
           alt="logo"

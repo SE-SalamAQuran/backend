@@ -114,12 +114,14 @@ export default function SMSCode() {
           {" "}
           <a
             style={{ marginBottom: "1rem" }}
-            href="http://localhost:3000/verify/mail"
+            href="https://palestinian-estates.herokuapp.com/verify/mail"
           >
             Verify using Email instead?
           </a>
           <br></br>
-          <a href="http://localhost:3000/login">Try to login again</a>
+          <a href="https://palestinian-estates.herokuapp.com/login">
+            Try to login again
+          </a>
         </div>
       </Form>
 

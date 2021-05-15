@@ -36,7 +36,7 @@ export default function AdminTable() {
       })
       .catch((err) => console.error("Error !", err));
 
-    window.location = "http://localhost:3000/usersRequsted";
+    window.location = "/usersRequsted";
   }
   function ShowUserDetail(id) {
     var ID = id;

@@ -15,7 +15,7 @@ export default function ProfileBody() {
   function upload() {
     window.location = "/upload";
   }
-  function goMyProperties(){
+  function goMyProperties() {
     window.location = "/MyProperty";
   }
 
@@ -58,22 +58,24 @@ export default function ProfileBody() {
   function goListedWishesPage(e) {
     e.preventDefault();
     if (user.isAdmin) {
-      window.location = "http://localhost:3000/usersRequsted";
+      window.location =
+        "https://palestinian-estates.herokuapp.com/usersRequsted";
     } else {
-      window.location = "http://localhost:3000/table";
+      window.location = "https://palestinian-estates.herokuapp.com/table";
     }
   }
   function goToMyAppointment(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/Appointements";
+    window.location = "https://palestinian-estates.herokuapp.com/Appointements";
   }
   function goToAllAppointment(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/allAppointements";
+    window.location =
+      "https://palestinian-estates.herokuapp.com/allAppointements";
   }
   function goToAllUsers(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/AllUsers";
+    window.location = "https://palestinian-estates.herokuapp.com/AllUsers";
   }
   function uploadNewRealEstatePage(e) {
     e.preventDefault();
@@ -81,7 +83,7 @@ export default function ProfileBody() {
     window.location = "/uploadNewRealEstate";
   }
   function showBody() {
-    // admin profile interface 
+    // admin profile interface
     if (isAdmin) {
       return (
         <div
@@ -113,8 +115,12 @@ export default function ProfileBody() {
               </button>
             </div>
             <div class="col-sm-4">
-            <div>
-                <button  onClick = { uploadNewRealEstatePage} type="button" class="btn btn-secondary  btn-lg">
+              <div>
+                <button
+                  onClick={uploadNewRealEstatePage}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
                   upload a realestate
                 </button>
               </div>
@@ -140,22 +146,29 @@ export default function ProfileBody() {
               </div>
               <br></br> <br></br> <br></br>
               <div>
-                <button  onClick = { goToAllUsers} type="button" class="btn btn-secondary  btn-lg">
+                <button
+                  onClick={goToAllUsers}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
                   All users in app
                 </button>
-            
-              <br></br> <br></br> <br></br>
-              <div>
-                <button  onClick = { goMyProperties} type="button" class="btn btn-secondary  btn-lg">
-                 my property
-                </button>
-              </div>
+                <br></br> <br></br> <br></br>
+                <div>
+                  <button
+                    onClick={goMyProperties}
+                    type="button"
+                    class="btn btn-secondary  btn-lg"
+                  >
+                    my property
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       );
-    } 
+    }
     //user profile interface
     else {
       return (
@@ -204,8 +217,12 @@ export default function ProfileBody() {
               </div>
               <br></br> <br></br> <br></br>
               <div>
-                <button onClick = {goMyProperties} type="button" class="btn btn-secondary  btn-lg">
-                  My  properties
+                <button
+                  onClick={goMyProperties}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
+                  My properties
                 </button>
               </div>
             </div>

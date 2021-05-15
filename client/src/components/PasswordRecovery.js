@@ -11,12 +11,12 @@ function PasswordRecovery() {
     passConf: "",
     username: "",
   });
-   const [show, setShow] = useState(false);
-   const [message, setMessage] = useState({
-     type: "",
-     header: "",
-     text: "",
-   });
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+  });
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -138,7 +138,10 @@ function PasswordRecovery() {
         </Row>
       </Form>
 
-      <a href="http://localhost:3000/register" className={styles.link}>
+      <a
+        href="https://palestinian-estates.herokuapp.com/register"
+        className={styles.link}
+      >
         New user? Sign up for an account here
       </a>
       <Footer />

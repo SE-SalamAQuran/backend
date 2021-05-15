@@ -220,7 +220,10 @@ function Register() {
         </Row>
       </Form>
 
-      <a href="http://localhost:3000/login" className={styles.link}>
+      <a
+        href="https://palestinian-estates.herokuapp.com/login"
+        className={styles.link}
+      >
         Already have an account? Login here
       </a>
       <Footer />

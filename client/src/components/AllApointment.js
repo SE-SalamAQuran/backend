@@ -122,7 +122,7 @@ export default function AppointmentTableAdmin() {
           })
 
           .catch((err) => console.log(err));
-          
+
         alert(
           res.data.type +
             " for " +
@@ -156,7 +156,7 @@ export default function AppointmentTableAdmin() {
       })
       .catch((err) => console.error("Error logging in!", err));
 
-    window.location = "http://localhost:3000/allAppointements";
+    window.location = "/allAppointements";
   }
 
   const renderAppointments = (appointments, index) => {
