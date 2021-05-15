@@ -1,7 +1,9 @@
 import React from "react";
-
 import AppBar from "./AppBar";
 import Footer from "./Footer";
+
+import who from "../images/unnamed.jpg";
+import how from "../images/download.png";
 
 function About() {
   return (
@@ -10,14 +12,17 @@ function About() {
 
       <div class="container">
         <div class="row align-items-center my-5">
-          <div class="col-lg-7">
+          <div style={{ marginBottom: "5rem" }} class="col-lg-6">
             <img
               class="img-fluid rounded mb-4 mb-lg-0"
-              src="https://gfx4arab.com/wp-content/uploads/2019/02/real-estate-logo-template_1156-724.jpg"
-              alt=""
+              src={who}
+              alt="real-estates"
             />
           </div>
-          <div class="col-lg-5">
+          <div
+            style={{ marginBottom: "5rem", textAlign: "center" }}
+            class="col-lg-6"
+          >
             <h1 class="font-Dark-light">About us </h1>
 
             <p>
@@ -28,6 +33,36 @@ function About() {
               construction of the site protects all the information stored and
               displays all the real estate that users offer to sell their
               properties
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <img
+              class="img-fluid rounded mb-4 mb-lg-0"
+              src={how}
+              alt="real-estates"
+            />
+          </div>
+          <div style={{ textAlign: "center" }} class="col-lg-6">
+            <h1 class="font-Dark-light">How it all works </h1>
+
+            <p>
+              <ul>
+                <li>
+                  You can browse our website for as long as you want and compare
+                  real estate prices in all of the areas and multiple
+                  currencies.
+                </li>{" "}
+                <li>
+                  If you like a specific offer, you must register an account or
+                  login to an existing account in order for you to book an
+                  appointment to go on a tour to see that estate.
+                </li>
+                <li>
+                  If you wish to contact one of the admins directly, you can
+                  find the list of admins in the{" "}
+                  <a href="/contact">Contact page</a>.
+                </li>
+              </ul>
             </p>
           </div>
         </div>

@@ -15,7 +15,7 @@ export default function Appbar() {
     e.preventDefault();
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    window.location = "http://localhost:3000";
+    window.location = "/";
   }
   function UserGreeting(props) {
     return (
@@ -72,6 +72,9 @@ export default function Appbar() {
       </button>
     );
   }
+  function handleClick() {
+    window.location = "/";
+  }
 
   function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
@@ -84,7 +87,7 @@ export default function Appbar() {
   return (
     <div id={styles.appBar}>
       <Navbar expand="xl" bg="dark" variant="dark">
-        <Navbar.Brand href="http://localhost:3000/">
+        <Navbar.Brand onClick={handleClick}>
           <img
             src="https://img.icons8.com/wired/50/ffffff/real-estate.png"
             alt="logo"
@@ -101,37 +104,20 @@ export default function Appbar() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="http://localhost:3000/lands">
-                Lands
-              </Dropdown.Item>
-              <Dropdown.Item href="http://localhost:3000/villas">
-                Villas
-              </Dropdown.Item>
-              <Dropdown.Item href="http://localhost:3000/roofs">
-                Roofs
-              </Dropdown.Item>
-              <Dropdown.Item href="http://localhost:3000/shops">
-                Shops
-              </Dropdown.Item>
-              <Dropdown.Item href="http://localhost:3000/offices">
-                Offices
-              </Dropdown.Item>
-              <Dropdown.Item href="http://localhost:3000/apartments">
-                Apartments
-              </Dropdown.Item>
-              <Dropdown.Item href="http://localhost:3000/houses">
-                Houses
-              </Dropdown.Item>
+              <Dropdown.Item href="/lands">Lands</Dropdown.Item>
+              <Dropdown.Item href="/villas">Villas</Dropdown.Item>
+              <Dropdown.Item href="/roofs">Roofs</Dropdown.Item>
+              <Dropdown.Item href="/shops">Shops</Dropdown.Item>
+              <Dropdown.Item href="/offices">Offices</Dropdown.Item>
+              <Dropdown.Item href="/apartments">Apartments</Dropdown.Item>
+              <Dropdown.Item href="/houses">Houses</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
-          <Nav.Link className={styles.link} href="http://localhost:3000/about">
+          <Nav.Link className={styles.link} href="/about">
             About
           </Nav.Link>
-          <Nav.Link
-            className={styles.link}
-            href="http://localhost:3000/contact"
-          >
+          <Nav.Link className={styles.link} href="/contact">
             Contact Us
           </Nav.Link>
           <Navbar.Text>

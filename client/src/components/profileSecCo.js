@@ -7,11 +7,11 @@ function ProfileSecCom() {
     e.preventDefault();
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    window.location = "http://localhost:3000";
+    window.location = "http://localhost:3000/";
   }
   function backHome(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000";
+    window.location = "http://localhost:3000/";
   }
 
   function updateUserInformation(e) {

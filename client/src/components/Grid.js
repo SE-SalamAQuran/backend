@@ -22,70 +22,38 @@ export default function Grid() {
     >
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="http://localhost:3000/lands"
-          title="Lands"
-          img={land}
-        ></Card>
+        <Card link="/lands" title="Lands" img={land}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="http://localhost:3000/houses"
-          title="Houses"
-          img={house}
-        ></Card>
+        <Card link="/houses" title="Houses" img={house}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
-        <Card
-          link="http://localhost:3000/apartments"
-          title="Apartments"
-          img={apartment}
-        ></Card>
+        <Card link="/apartments" title="Apartments" img={apartment}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="http://localhost:3000/villas"
-          title="Villas"
-          img={villa}
-        ></Card>
+        <Card link="/villas" title="Villas" img={villa}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card link="http://localhost:3000/roofs" title="Roof" img={roof}></Card>
+        <Card link="/roofs" title="Roof" img={roof}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="http://localhost:3000/shops"
-          title="Shops"
-          img={shop}
-        ></Card>
+        <Card link="/shops" title="Shops" img={shop}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="http://localhost:3000/offices"
-          title="Offices"
-          img={office}
-        ></Card>
+        <Card link="/offices" title="Offices" img={office}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="http://localhost:3000/"
-          title="3D virtual tours"
-          img={comingSoon}
-        ></Card>
+        <Card link="/" title="3D virtual tours" img={comingSoon}></Card>
       </div>
       <div class="col-lg-4 col-md-6">
         {" "}
-        <Card
-          link="http://localhost:3000/"
-          title="Online video tours"
-          img={live}
-        ></Card>
+        <Card link="/" title="Online video tours" img={live}></Card>
       </div>
     </div>
   );

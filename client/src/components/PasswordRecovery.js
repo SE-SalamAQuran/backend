@@ -11,12 +11,12 @@ function PasswordRecovery() {
     passConf: "",
     username: "",
   });
-   const [show, setShow] = useState(false);
-   const [message, setMessage] = useState({
-     type: "",
-     header: "",
-     text: "",
-   });
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState({
+    type: "",
+    header: "",
+    text: "",
+  });
 
   function handleChange(event) {
     const { name, value } = event.target;

@@ -15,7 +15,7 @@ export default function ProfileBody() {
   function upload() {
     window.location = "/upload";
   }
-  function goMyProperties(){
+  function goMyProperties() {
     window.location = "/MyProperty";
   }
 
@@ -81,7 +81,7 @@ export default function ProfileBody() {
     window.location = "/uploadNewRealEstate";
   }
   function showBody() {
-    // admin profile interface 
+    // admin profile interface
     if (isAdmin) {
       return (
         <div
@@ -113,8 +113,12 @@ export default function ProfileBody() {
               </button>
             </div>
             <div class="col-sm-4">
-            <div>
-                <button  onClick = { uploadNewRealEstatePage} type="button" class="btn btn-secondary  btn-lg">
+              <div>
+                <button
+                  onClick={uploadNewRealEstatePage}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
                   upload a realestate
                 </button>
               </div>
@@ -140,22 +144,29 @@ export default function ProfileBody() {
               </div>
               <br></br> <br></br> <br></br>
               <div>
-                <button  onClick = { goToAllUsers} type="button" class="btn btn-secondary  btn-lg">
+                <button
+                  onClick={goToAllUsers}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
                   All users in app
                 </button>
-            
-              <br></br> <br></br> <br></br>
-              <div>
-                <button  onClick = { goMyProperties} type="button" class="btn btn-secondary  btn-lg">
-                 my property
-                </button>
-              </div>
+                <br></br> <br></br> <br></br>
+                <div>
+                  <button
+                    onClick={goMyProperties}
+                    type="button"
+                    class="btn btn-secondary  btn-lg"
+                  >
+                    my property
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       );
-    } 
+    }
     //user profile interface
     else {
       return (
@@ -204,8 +215,12 @@ export default function ProfileBody() {
               </div>
               <br></br> <br></br> <br></br>
               <div>
-                <button onClick = {goMyProperties} type="button" class="btn btn-secondary  btn-lg">
-                  My  properties
+                <button
+                  onClick={goMyProperties}
+                  type="button"
+                  class="btn btn-secondary  btn-lg"
+                >
+                  My properties
                 </button>
               </div>
             </div>
