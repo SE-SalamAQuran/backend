@@ -72,6 +72,9 @@ export default function Appbar() {
       </button>
     );
   }
+  function handleClick() {
+    window.location = "/";
+  }
 
   function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
@@ -84,7 +87,7 @@ export default function Appbar() {
   return (
     <div id={styles.appBar}>
       <Navbar expand="xl" bg="dark" variant="dark">
-        <Navbar.Brand href="/">
+        <Navbar.Brand onClick={handleClick}>
           <img
             src="https://img.icons8.com/wired/50/ffffff/real-estate.png"
             alt="logo"
