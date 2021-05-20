@@ -112,6 +112,9 @@ function Register() {
         setShow(true);
       });
   }
+  function handleSwitch() {
+    window.location = "/login";
+  }
 
   return (
     <div className={styles.container}>
@@ -220,9 +223,9 @@ function Register() {
         </Row>
       </Form>
 
-      <a href="http://localhost:3000/login" className={styles.link}>
+      <button onClick={handleSwitch} className="btn btn-md btn-secondary">
         Already have an account? Login here
-      </a>
+      </button>
       <Footer />
     </div>
   );

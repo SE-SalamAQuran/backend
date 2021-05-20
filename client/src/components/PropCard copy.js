@@ -40,7 +40,7 @@ export default function PropCard(props) {
       })
       .catch((err) => console.error("Error logging in!", err));
 
-    window.location = "http://localhost:3000/myProperty";
+    window.location = "/myProperty";
   }
   function handleInfoClick() {
     window.localStorage.setItem("id", props.name);

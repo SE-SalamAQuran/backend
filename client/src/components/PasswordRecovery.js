@@ -71,7 +71,9 @@ function PasswordRecovery() {
         setShow(true);
       });
   }
-
+  function handleSwitch() {
+    window.location = "/register";
+  }
   return (
     <div className={styles.container}>
       <img
@@ -138,9 +140,9 @@ function PasswordRecovery() {
         </Row>
       </Form>
 
-      <a href="http://localhost:3000/register" className={styles.link}>
+      <button onClick={handleSwitch} className="btn btn-md btn-secondary">
         New user? Sign up for an account here
-      </a>
+      </button>
       <Footer />
     </div>
   );

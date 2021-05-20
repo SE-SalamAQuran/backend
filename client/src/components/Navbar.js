@@ -24,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function switchToLogin() {
+  window.location = "/login";
+}
+
+function switchToRegister() {
+  window.location = "/register";
+}
+
 export default function ButtonAppBar() {
   const classes = useStyles();
 
@@ -45,14 +53,14 @@ export default function ButtonAppBar() {
           <Link
             className={classes.links}
             color="inherit"
-            href="http://localhost:3000/login"
+            onClick={switchToLogin}
           >
             Login
           </Link>
           <Link
             className={classes.links}
             color="inherit"
-            href="http://localhost:3000/register"
+            onClick={switchToRegister}
           >
             Sign up
           </Link>

@@ -58,22 +58,22 @@ export default function ProfileBody() {
   function goListedWishesPage(e) {
     e.preventDefault();
     if (user.isAdmin) {
-      window.location = "http://localhost:3000/usersRequsted";
+      window.location = "/usersRequsted";
     } else {
-      window.location = "http://localhost:3000/table";
+      window.location = "/table";
     }
   }
   function goToMyAppointment(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/Appointements";
+    window.location = "/Appointements";
   }
   function goToAllAppointment(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/allAppointements";
+    window.location = "/allAppointements";
   }
   function goToAllUsers(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/AllUsers";
+    window.location = "/AllUsers";
   }
   function uploadNewRealEstatePage(e) {
     e.preventDefault();

@@ -7,16 +7,16 @@ function ProfileSecCom() {
     e.preventDefault();
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    window.location = "http://localhost:3000/";
+    window.location = "/";
   }
   function backHome(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/";
+    window.location = "/";
   }
 
   function updateUserInformation(e) {
     e.preventDefault();
-    window.location = "http://localhost:3000/Update user Information";
+    window.location = "/Update user Information";
   }
 
   return (

@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Form, Button, Nav } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./styles/Forms.module.css";
 import Footer from "./Footer";
@@ -35,6 +35,12 @@ function Login() {
     });
   }
 
+  function handleForgot() {
+    window.location = "/verify/mail";
+  }
+  function handleSwitch() {
+    window.location = "/register";
+  }
   function handleSubmit(event) {
     event.preventDefault();
     const cred = {
@@ -127,12 +133,12 @@ function Login() {
         </Row>
       </Form>
 
-      <Nav.Link href="http://localhost:3000/verify/mail">
+      <button onClick={handleForgot} className="btn btn-md btn-secondary">
         Forgot your password ?
-      </Nav.Link>
-      <a href="http://localhost:3000/register" className={styles.link}>
+      </button>
+      <button onClick={handleSwitch} className="btn btn-md btn-secondary">
         New user? Sign up for an account here
-      </a>
+      </button>
       <Footer />
     </div>
   );

@@ -37,6 +37,12 @@ export default function PasswordRecovery() {
     });
   }
 
+  function handleSwitchToSMS() {
+    window.location = "/verify/sms";
+  }
+  function handleBackToLogin() {
+    window.location = "/login";
+  }
   function handleSubmit(event) {
     event.preventDefault();
     const cred = {
@@ -122,14 +128,19 @@ export default function PasswordRecovery() {
         </Form.Group>
         <div style={{ marginBottom: "2rem" }}>
           {" "}
-          <a
-            style={{ marginBottom: "1rem" }}
-            href="http://localhost:3000/verify/sms"
+          <button
+            onClick={handleSwitchToSMS}
+            className="btn btn-md btn-block btn-secondary"
           >
-            Verify using SMS instead?
-          </a>
+            Verify using SMS instead ?{" "}
+          </button>
           <br></br>
-          <a href="http://localhost:3000/login">Try to login again</a>
+          <button
+            onClick={handleBackToLogin}
+            className="btn btn-md btn-block btn-secondary"
+          >
+            Try to login again
+          </button>
         </div>{" "}
       </Form>
 

@@ -58,6 +58,12 @@ export default function SMSCode() {
         setShow(true);
       });
   }
+  function handleSwitchToMail() {
+    window.location = "/verify/mail";
+  }
+  function handleBackToLogin() {
+    window.location = "/login";
+  }
   return (
     <div className={styles.container}>
       <h5>Password Recovery by SMS</h5>
@@ -112,14 +118,19 @@ export default function SMSCode() {
         </Form.Group>
         <div style={{ marginBottom: "2rem" }}>
           {" "}
-          <a
-            style={{ marginBottom: "1rem" }}
-            href="http://localhost:3000/verify/mail"
+          <button
+            onClick={handleSwitchToMail}
+            className="btn btn-md btn-block btn-secondary"
           >
-            Verify using Email instead?
-          </a>
+            Verify using Mail instead ?{" "}
+          </button>
           <br></br>
-          <a href="http://localhost:3000/login">Try to login again</a>
+          <button
+            onClick={handleBackToLogin}
+            className="btn btn-md btn-block btn-secondary"
+          >
+            Try to login again
+          </button>
         </div>
       </Form>
 

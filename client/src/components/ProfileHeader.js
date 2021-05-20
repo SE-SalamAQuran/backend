@@ -27,9 +27,12 @@ export default function ProfileHeader() {
       .catch((err) => console.log(err));
   }, []);
 
+  function backToMainPage() {
+    window.location = "/";
+  }
   return (
     <Navbar variant="dark" bg="dark">
-      <Navbar.Brand href="http://localhost:3000/">
+      <Navbar.Brand onClick={backToMainPage}>
         <img
           src="https://img.icons8.com/wired/50/ffffff/real-estate.png"
           alt="logo"
