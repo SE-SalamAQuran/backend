@@ -1,6 +1,5 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./styles/Layout.module.css";
 import Card from "./MyCard";
 import land from "../images/Land.jpg";
 import shop from "../images/Shop.jpg";
@@ -14,12 +13,7 @@ import live from "../images/live.png";
 
 export default function Grid() {
   return (
-    <div
-      id="estates"
-      className={styles.grid}
-      style={{ marginRight: "", padding: "5rem" }}
-      class="row"
-    >
+    <div id="estates" style={{ marginRight: "1rem" }} className="row">
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card link="/lands" title="Lands" img={land}></Card>
