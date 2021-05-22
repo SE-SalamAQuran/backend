@@ -32,7 +32,7 @@ function About() {
               of buying and selling in a short time, as the team supervising the
               construction of the site protects all the information stored and
               displays all the real estate that users offer to sell their
-              properties
+              properties.
             </p>
           </div>
           <div class="col-lg-6">
