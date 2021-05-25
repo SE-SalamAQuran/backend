@@ -188,6 +188,7 @@ export default function Offices() {
           </button>
         )}
       </div>
+      <h1 style={{ textAlign: "center", margin: "2rem" }}>Offices</h1>
       <div>
         {filter ? (
           <FilteredProps

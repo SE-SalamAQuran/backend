@@ -35,7 +35,12 @@ export default function FilteredProps(props) {
 
   return (
     <div className="container" style={{ marginTop: "1.43rem" }}>
-      <div className="row">
+      <div
+        className="row"
+        style={{
+          padding: "5rem",
+        }}
+      >
         {data.map((character) => {
           return (
             <div className="col-lg-4 col-md-6">

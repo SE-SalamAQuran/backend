@@ -188,6 +188,7 @@ export default function Villas() {
           </button>
         )}
       </div>
+      <h1 style={{ textAlign: "center", margin: "2rem" }}>Villas</h1>
       <div>
         {filter ? (
           <FilteredProps

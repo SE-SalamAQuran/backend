@@ -187,6 +187,7 @@ export default function Houses() {
           </button>
         )}
       </div>
+      <h1 style={{ textAlign: "center", margin: "2rem" }}>Houses</h1>
       <div>
         {filter ? (
           <FilteredProps

@@ -13,7 +13,13 @@ import live from "../images/live.png";
 
 export default function Grid() {
   return (
-    <div id="estates" style={{ marginRight: "1rem" }} className="row">
+    <div
+      id="estates"
+      style={{
+        padding: "5rem",
+      }}
+      className="row"
+    >
       <div class="col-lg-4 col-md-6">
         {" "}
         <Card link="/lands" title="Lands" img={land}></Card>

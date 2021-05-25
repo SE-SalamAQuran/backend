@@ -188,6 +188,7 @@ export default function Lands() {
           </button>
         )}
       </div>
+      <h1 style={{ textAlign: "center", margin: "2rem" }}>Lands</h1>
       <div>
         {filter ? (
           <FilteredProps

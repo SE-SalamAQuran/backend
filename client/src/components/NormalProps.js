@@ -12,8 +12,13 @@ export default function NormalProps(props) {
   }, [props.type]);
 
   return (
-    <div className="container" style={{ marginTop: "1.43rem" }}>
-      <div className="row">
+    <div style={{ marginTop: "1.43rem" }}>
+      <div
+        className="row"
+        style={{
+          padding: "5rem",
+        }}
+      >
         {data.map((character) => {
           return (
             <div className="col-lg-4 col-md-6">

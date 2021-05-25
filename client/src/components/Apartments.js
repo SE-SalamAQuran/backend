@@ -188,6 +188,7 @@ export default function Apartments() {
           </button>
         )}
       </div>
+      <h1 style={{ textAlign: "center", margin: "2rem" }}>Apartments</h1>
       <div>
         {filter ? (
           <FilteredProps

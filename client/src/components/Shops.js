@@ -188,6 +188,7 @@ export default function Shops() {
           </button>
         )}
       </div>
+      <h1 style={{ textAlign: "center", margin: "2rem" }}>Shops</h1>
       <div>
         {filter ? (
           <FilteredProps
