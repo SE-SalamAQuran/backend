@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "An express server for our real estate agency web application.",
   "main": "index.js",
-    "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node index.js",
     "client": "cd client && npm start",
-    "dev": "concurrently -n 'backend,client' -c 'red,green'  \"nodemon index.js\" \"npm run client\""
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon index.js\" \"npm run client\""
   },
   "repository": {
     "type": "",
