@@ -4,7 +4,7 @@ var userController = require("../controllers/users.controller");
 
 router.put("/update/:id", userController.updateUserData);
 router.get("/user/:id", userController.fetcheUserData);
-router.get("/users", userController.fetcheAllUserData);
+router.get("/all/:id", userController.fetcheAllUserData);
 router.post("/login", userController.userLogin);
 router.post("/sendmail", userController.forgotPasswordMail);
 router.post("/sendSMS", userController.forgotPasswordSMS);

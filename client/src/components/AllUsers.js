@@ -10,9 +10,11 @@ import Footer from "./Footer";
 function AllUsers() {
   const [users, setUsers] = useState([]);
   const [count, setCount] = useState(0);
+  let user = JSON.parse(sessionStorage.getItem("user"));
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users/users", {
+      .get("http://localhost:5000/users/all/" + user._id, {
         headers: {
           "content-type": "application/json",
         },

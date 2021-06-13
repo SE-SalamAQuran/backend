@@ -15,9 +15,9 @@ export default function Grid() {
   return (
     <div
       id="estates"
-      style={{
-        padding: "5rem",
-      }}
+      // style={{
+      //   padding: "5rem",
+      // }}
       className="row"
     >
       <div class="col-lg-4 col-md-6">

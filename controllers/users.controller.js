@@ -86,13 +86,20 @@ module.exports = {
       }
     });
   },
-  fetcheAllUserData: (req, res) => {
 
-    Users.find({ }, (err, result) => {
-      if (err) {
-        res.status(400).send(err);
+  fetcheAllUserData: async (req, res) => {
+    const id = req.params.id;
+    Users.findOne({ _id: id }, (err, result) => {
+      if (err || result.isAdmin === false) {
+        res.status(403).send(err);
       } else {
-        res.json(result);
+        Users.find({ isAdmin: false }, (error, users) => {
+          if (err) {
+            res.status(400).send(error);
+          } else {
+            res.json(users);
+          }
+        });
       }
     });
   },
@@ -146,6 +153,7 @@ module.exports = {
       charset: "alphanumeric",
       readable: true,
     });
+
     var mailConfig;
     if (process.env.NODE_ENV === "production") {
       // all emails are delivered to destination
@@ -188,21 +196,28 @@ module.exports = {
     const client = require("twilio")(accountSid, authToken);
     const sender = process.env.TWILIO_PHONE_NUM;
     const destPhone = req.body.emailPhone;
-    let verCode = randomString.generate({
-      length: 8,
-      charset: "alphanumeric",
-      readable: true,
+
+    Users.findOne({ phoneNo: destPhone }, (err, found) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        let verCode = randomString.generate({
+          length: 8,
+          charset: "alphanumeric",
+          readable: true,
+        });
+
+        client.messages
+          .create({
+            body: `${verCode} is the verification code for your account`,
+            from: `${sender}`,
+            to: `${destPhone}`,
+          })
+
+          .then((message) => res.status(201).json({ code: verCode }))
+          .catch((err) => res.status(400).send(err));
+      }
     });
-
-    client.messages
-      .create({
-        body: `${verCode} is the verification code for your account`,
-        from: `${sender}`,
-        to: `${destPhone}`,
-      })
-
-      .then((message) => res.status(201).json({ code: verCode }))
-      .catch((err) => res.status(400).send(err));
   },
 
   changePassword: async (req, res) => {
