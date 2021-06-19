@@ -1,4 +1,3 @@
-const { time } = require("faker");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
