@@ -102,7 +102,7 @@ module.exports = {
       type: req.body.propertyType,
       city: req.body.city,
       owner: owner,
-      address: req.body.city,
+      address: req.body.location,
       price: req.body.price,
       currency: req.body.currency,
       area: req.body.area,
